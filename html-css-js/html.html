@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <!-- 此处设置全局格式 -->
+        <meta charset="utf-8"><!-- 提供HTML文档的meta标记 -->
+        <meta name="keywords" content="HTML,笔记">
+        <meta name="description" content="html的笔记">
+        <meta name="author" content="秦始皇">
+        <meta http-equiv="refresh" content="30"><!-- 每30秒刷新页面 -->
+        <title>test学习html</title>
+        <link rel="shortcut icon" href="scr/uncharted.jpeg"><!-- 显示logo -->
+        <base href="C:\Users\heyiyang\Desktop\笔记\html-css-js\">
+        <style>
+            body {background-color: aqua;}
+            p {color: rgb(148, 130, 108);}
+            h1 {color: rgb(42, 161, 165);
+            text-align: center;}
+        </style>
+    </head>
+    <body>
+        <header>
+            页眉部分
+            <hr>
+        </header>
+        <H1>目录</H1>
+        <p style="text-align: center;">
+        <a href="html.html#C1">标题和段落</a>
+        <br>
+        <a href="html.html#C2">添加元素</a>
+        <br>
+        <a href="html.html#C3">设置文本格式</a>
+        <br>
+        <a href="html.html#C4">CSS样式</a>
+        <br>
+        <a href="html.html#C5">表格</a>
+        <br>
+        <a href="html.html#C6">列表</a>
+        <br>
+        <a href="html.html#C7">HTML布局</a>
+        <br>
+        <a href="html.html#C8">HTML表单</a>
+        <br>
+        <a href="html.html#C9">HTML框架</a>
+        <br>
+        <a href="html.html#C10">HTML脚本</a>
+        <br>
+        <b>以下是网站runoob上的查询资料：</b><br>
+        <a href="https://www.runoob.com/html/html-entities.html" target="_blank">HTML字符实体（预留字符等不能直接打出来的字符）</a>
+        <br>
+        <a href="https://www.runoob.com/html/html-url.html" target="_blank">HTML的URL</a>
+        <br>
+        <a href="https://www.runoob.com/html/html-quicklist.html" target="_blank">HTML速查列表</a>
+        <br>
+        <a href="https://www.runoob.com/html/html-tag-name.html" target="_blank">HTML 标签简写及全称</a>
+        <br>
+        <a href="https://www.runoob.com/tags/html-reference.html" target="_blank">HTML 参考手册</a>
+        
+        </p>
+
+        <!-- 这是一个注释 -->
+        <br>
+        <h1><a id="C1">标题和段落</a></h1>
+        <h1>大标题1</h1>
+        <p>段落</p>
+        <h2>中标题2</h2>
+        <h3>小标题3</h3>
+        <h4>很小标题4</h4>
+        <h5>极小标题5</h5>
+        <h6>非常小标题6</h6>
+        <br>
+        <br>
+        <h1 id="C2">添加元素</h1>
+        <h2>添加横线：</h2>
+        <hr>
+        <br>
+        <h2>添加链接：</h2>
+        <a href="http://www.baidu.com">百度的链接</a><br>
+        <a href="#C2">此章节头部</a><br>
+        <a href="http://www.baidu.com" target="_blank">在新标签打开百度</a>
+        <a href="http://www.baidu.com" target="_top">在此标签打开百度</a>
+        <br>
+        <h2>添加图片：</h2>
+        <p>
+        <img src="scr/uncharted.jpeg" height="200"/>
+        img是一个只有属性的元素
+        <img src="scr/lm.gif" alt="灵梦" height="200" style="float: right;">
+        </p>
+        <br>
+        <br>
+
+
+        <br>
+        <h1 id="C3">设置文本格式</h1>
+        <b>加粗文本</b>
+        <i>斜体文本</i>
+        <del>删除文本</del>
+        <ins>下划线文本</ins>
+        <sub>下标</sub>
+        <sup>上标</sup>
+        <br>
+        <strong>重点</strong>
+        <em>另一种重点</em>
+        <br>
+        <big>放大字体</big>
+        正常字体
+        <small>缩小字体</small>
+        <br>
+        <h2>控制空行和空格：</h2>
+        <pre>直接在代码中      空格或者
+
+空行（注意tab键也会被算在内）
+        </pre>
+        <br>
+        <h2>计算机文本（用于显示代码）</h2>
+        <code>电脑文本</code>
+        <kbd>键盘文本</kbd>
+        <tt>打字机文本</tt>
+        <samp>样本文本</samp>
+        <var>变量文本</var>
+        <h2>缩写：</h2>
+        <abbr title="World Wide Web">www</abbr>
+        <br>
+        <acronym title="另一种缩写">another</acronym>
+        <br>
+        <h2>显示方向</h2>
+        <p><bdo dir="rtl">从右到左显示</bdo></p>
+        <br>
+        <h2>特殊文本</h2>
+        <q>引用的文本</q>
+        <blockquote>一------------
+            段-------------
+            长-------------
+            的-------------
+            引-------------
+            用-------------
+            文-------------
+            本-------------
+            （此处会自动换行以及缩进）</blockquote>
+        <cite>引用以及引证</cite>
+        <br>
+        <dfn>一个定义的文本</dfn>
+        <br>
+        <h1 id="C4">CSS样式</h1>
+        <p style="background-color:saddlebrown">CSS通过style来设置样式</p>
+        <p style="
+        background-color: rgb(151, 177, 199);
+        font-family: 华文行楷;
+        color: blue;
+        font-size: 20pt;
+        text-align: center;">CSS还可以设置字体</p>
+
+        <br>
+        <br>
+        <h1 id="C5">表格</h1>
+        <table border="1" style="text-align: center;" cellpadding=10pt cellspacing=5pt>
+            <caption>表格标题</caption>
+            <tr>
+                <th></th>
+                <th>表头1</th>
+                <th>表头2</th>
+                <th>表头3</th>
+            </tr>
+            <tr>
+                <th rowspan="2">表头4</th>
+                <td>100</td>
+                <td>200</td>
+                <td>300</td>
+            </tr>
+            <tr>
+                <td>400</td>
+                <td colspan="2">500</td>
+            </tr>
+        </table>
+        <br>
+        <br>
+
+
+        <h1 id="C6">列表</h1>
+        <h2>有序列表</h2>
+        <ol start="20" type="I">
+            <li>第一</li>
+            <li>第二</li>
+            <li>第三</li>
+        </ol>
+        <h2>无序列表</h2>
+        <ul style="list-style-type:square;">
+            <li>AAAA</li>
+            <li>BBBB
+                <ol type="i">
+                    <li>第一</li>
+                    <li>第二</li>
+                </ol>
+            </li>
+            <li>CCCC</li>
+        </ul>
+        <h2>自定义列表</h2>
+        <dl>
+            <dt>AA</dt>
+            <dd>-aaaa</dd>
+            <dd>-aabb</dd>
+            <dt>BB</dt>
+            <dd>-bbaa</dd>
+            <dd>-bbbb</dd>
+            <dd>-bbcc</dd>
+            <dt>CC</dt>
+        </dl>
+        <br>
+        <br>
+
+
+        <h1 id="C7">HTML布局div</h1>
+        <div id="container" style="width: 100%;">
+            <div id="header" style="background-color: aquamarine;">
+                <h1 style="margin-bottom: 0;color: black;">大标题</h1>
+            </div>
+            <div id="menu" style="background-color: rgba(185, 167, 61, 0.692);width: 13%;height: 250px;float: left;">
+                <h2 style="text-align: center;">菜单</h2>
+                <ul>
+                    <li>AAA</li>
+                    <li>BBB</li>
+                    <li>CCC</li>
+                </ul>
+            </div>
+            <div id="content" style="background-color: floralwhite;width: 87%;height: 250px;float: left;text-align: center;">
+                内容部分
+            </div>
+            <div id="footer" style="background-color: darkorchid;width: 100%;text-align: center;clear: both;">
+                版权©abcdefg
+            </div>
+        </div>
+        
+        <br>
+        <br>
+        <br>
+
+        <h1 id="C8">HTML表单</h1>
+        <form name="input" action="html_form_action.php" method="get">
+            Account: <input type="text" name="account"><br>
+            Password: <input type="password" name="password"><br>
+            <input type="radio" name="sex" value="male">男<br>
+            <input type="radio" name="sex" value="female">女<br>
+            <input type="checkbox" name="study" value="math">数学<br>
+            <input type="checkbox" name="study" value="phisics">物理<br>
+            <input type="checkbox" name="study" value="quantum">量子力学<br>
+            <input type="submit" value="Submit">
+        </form>
+
+        <h1 id="C9">HTML框架</h1>
+        <iframe src="scr/scr.html" width="80%" height="300pt" frameborder="5"></iframe><br>
+        链接显示在框架中：<br>
+        <a href="html.html" target="iframe_a">html.html</a><br>
+        <iframe src="scr/scr.html" loading="lazy" frameborder="0" name="iframe_a" width="80%" height="300pt"></iframe>
+        <br><br><br>
+
+
+        <h1 id="C10">HTML脚本</h1>
+        <script>
+            document.write("Hello 你好！")
+        </script>
+        <br><br><br>
+        <noscript>抱歉，你的浏览器不支持 JavaScript!</noscript><!-- 不支持JavaScript 的浏览器会用此替代。 -->
+        <b id="demo">利用按钮触发JavaScript脚本写的事件</b>
+        <script>
+            function myFunc()
+            {
+                x=document.getElementById("demo")
+                x.innerHTML="Hello!已点击按钮";
+            }
+            function myFunc2()
+            {
+                x=document.getElementById("demo")
+                x.style.color="#ff0000";
+                x.innerHTML="检测到双击按键"
+            }
+        </script>
+        <button type="button" onclick="myFunc()" ondblclick="myFunc2()">点此触发JavaScript脚本写的事件</button>
+        <br><br><br>
+
+        <h1 id="C11">URL</h1>
+
+    </body>
+</html>

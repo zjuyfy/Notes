@@ -1,0 +1,42 @@
+\documentclass{report}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\newcommand{\xkuo}[1]{\left(#1\right)}
+\newcommand{\dkuo}[1]{\left\lbrace#1\right\rbrace}
+\newcommand{\akuo}[1]{\left[#1\right]}
+\newcommand{\abs}[1]{\left|#1\right|}
+\newcommand{\piandao}[2][]{\frac{\partial #1}{\partial #2}}
+\newcommand{\dao}[2][]{\frac{d#1}{d#2}}
+\usepackage{ctex}
+\setCJKfamilyfont{hwxk}{STXingkai} 
+\newcommand{\huawenxingkai}{\CJKfamily{hwxk}}
+
+\begin{document}
+	\huawenxingkai
+	$ f\xkuo{x,y}=\begin{cases}
+	\frac{1}{A}&\xkuo{x,y}\in D\\
+	0&\text{其它}
+	\end{cases} $（A是D的面积）\\
+	X的\textit{k}阶（原点）矩：\(\mu_k=E\xkuo{X^k}\)\\
+	X的\textit{k}阶中心矩：\(\nu_kj=E\akuo{\xkuo{X-E\xkuo{X}}^k}\)\\
+	X和Y的\textit{k+l}阶混合（原点）矩：\(E\xkuo{X^kY^l}\)\\
+	X和Y的\textit{k+l}阶混合中心矩：\(E\akuo{\xkuo{X-E\xkuo{X}}^k\xkuo{Y-E\xkuo{Y}}^k}\)\\
+	X的上$\alpha$分位数$ x_\alpha $满足\(1-F\xkuo{x_\alpha}=\int_{x_\alpha}^{+\infty}f\xkuo{x}dx=\alpha\)\\
+	设\(\tilde{x}=\begin{pmatrix}
+	x_1\\x_2\\\vdots\\x_n
+	\end{pmatrix}, \tilde{\mu}=\begin{pmatrix}
+	E\xkuo{X_1}\\E\xkuo{X_2}\\\vdots\\E\xkuo{X_n}
+	\end{pmatrix}\)，协方差矩阵\(C=Cov\xkuo{X_i,Y_j}\)，\\
+	则对于n元正太随机变量\(\tilde{X}=\begin{pmatrix}
+	X_1\\X_2\\\vdots\\X_3
+	\end{pmatrix}\)，其密度函数为\[f\xkuo{x_1,x_2,\cdots,x_n}=\frac{1}{\xkuo{2\pi}^{\frac{n}{2}}\abs{C}^{\frac12}}\exp\dkuo{-\frac12\xkuo{\tilde{x}-\tilde{\mu}}^TC^{-1}\xkuo{\tilde{x}-\tilde{\mu}}}\]
+	n元随机变量\(\tilde{X}\)服从n元正太分布\(\Leftrightarrow X_1,X_2,\cdots ,X_n\)的任意线性组合\(l^T_{1\times n}\tilde{X}=l_1X_1+l_2X_2+\cdots\)为一元正太分布\(l^TX\sim N\xkuo{l^T\tilde{\mu},l^TCl}\)\\
+	设n元随机变量\(\tilde{X}_{n\times 1}\)服从n元正太分布，则\(\tilde{Y}_{m\times 1}=B_{m\times n}\tilde{X}\sim N\xkuo{B\tilde{\mu},BCB^T}\)
+	\section{概率论中的不等式和近似}
+	在这里测试\[\left(\begin{array}{c} \frac{R\, {\sin\!\left(a\right)}^2}{\sqrt{{\sin\!\left(a\right)}^4 - {\sin\!\left(a\right)}^2 + 1} - 1}\\ -\frac{R\, {\sin\!\left(a\right)}^2}{\sqrt{{\sin\!\left(a\right)}^4 - {\sin\!\left(a\right)}^2 + 1} + 1} \end{array}\right)\]
+	\\
+	设\(\dkuo{Y_n, n\geq 1}\)为一随机变量序列，c为一常数. 若对任意的\(\epsilon >0\)，都有\[\lim\limits_{n\rightarrow +\infty}P\dkuo{\abs{Y_n-c}\geq\epsilon}=0\]，则称\(\dkuo{Y_n, n\geq 1}\)依概率收敛\textit{convergence in probability}于c，记为\(Y_n\xrightarrow{P}c\)，当\(n\rightarrow +\infty\)\\
+	\(P\dkuo{\abs{Y}\geqslant\epsilon}\leqslant\frac{E\xkuo{\abs{Y}^k}}{\epsilon^k}\)
+	\(P\dkuo{\abs{X-\mu}\geqslant\epsilon}\leqslant\frac{\sigma^2}{\epsilon^2}\)\\
+	设\(n_A\)为事件A在n重伯努利试验中事件A发生的次数，p为事件A发生概率，则对任意的\(\epsilon >0\)，有\(\lim\limits_{n\rightarrow+\infty}P\dkuo{\abs{\frac{n_A}{n}-p}\geqslant\epsilon}=0\)
+\end{document}

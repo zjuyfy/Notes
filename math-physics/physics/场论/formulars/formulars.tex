@@ -1,0 +1,33 @@
+\documentclass{report}
+\usepackage{ctex}
+\setCJKfamilyfont{hwxk}{STXingkai} 
+\newcommand{\huawenxingkai}{\CJKfamily{hwxk}}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage{graphicx}
+\newcommand{\xkuo}[1]{\left(#1\right)}
+\newcommand{\dkuo}[1]{\left\lbrace#1\right\rbrace}
+\newcommand{\zkuo}[1]{\left[#1\right]}
+\newcommand{\piandao}[2][]{\frac{\partial #1}{\partial #2}}
+\newcommand{\dao}[2][]{\frac{d#1}{d#2}}
+
+\begin{document}
+	\[\frac{8\, x^2 - 20\, x + 8}{3\, x^{\frac{1}{3}}}, \frac{  40\, x^2 - 40\, x - 8}{9\, x^{\frac{4}{3}}}\]
+	\[\left(\begin{array}{c} \frac{1}{2} - \frac{3\, \sqrt{5}}{10}\\ \frac{3\, \sqrt{5}}{10} + \frac{1}{2} \end{array}\right)\]
+	\huawenxingkai\small
+	\section{引力场}
+	\subsection{能量动量张量}
+	对于从$ x^i $到$ x'^i=x^i+\xi^i $的变换，有：$ g'^{ik}=g^{ik}+\delta g^{ik},\delta g^{ik}=\xi^{i;k}+\xi^{k;i} $
+	\subsection{爱因斯坦场方程}
+	换行\\
+	引力场作用量：$ \delta S_g=C\cdot\delta \int R\sqrt{-g}d\Omega=C\cdot\int\xkuo{R_{ik}-\frac{1}{2}g_{ik}R}\delta g^{ik}\sqrt{-g}d\Omega$，$ C=-\frac{c^3}{16 \pi k} $\\
+	与从$ S_g=C\cdot\int G\sqrt{-g}d\Omega $出发的变分（和对能量动量张量的变分差不多）比较，可得$$ R_{ik}-\frac{1}{2}g_{ik}R=\frac{1}{\sqrt{-g}}\dkuo{\piandao[\xkuo{G\sqrt{-g}}]{g^{ik}}-\piandao{x^l}\piandao[\xkuo{G\sqrt{-g}}]{\piandao[g^{ik}]{x^l}}} $$
+	最小作用量：$\delta \xkuo{S_m+S_g}=0\Rightarrow-\frac{c^3}{16 \pi k}\int\xkuo{R_{ik}-\frac{1}{2}g_{ik}R-\frac{8\pi k}{c^4}T_{ik}}\delta g^{ik}\sqrt{-g}d\Omega=0 $\\
+	由于$ \delta g^{ik} $的任意性，由上式得到引力场方程，即爱因斯坦场方程：$$ R_{ik}-\frac{1}{2}g_{ik}R=\frac{8\pi k}{c^4}T_{ik} \text{，或用混合指标表示：}R^i_{k}-\frac{1}{2}\delta^i_kR=\frac{8\pi k}{c^4}T^i_k $$
+	或者由此式对两个指标缩并得到$ R=-\frac{8\pi k}{c^4}T $代入得$ R_{ik}=\frac{8\pi k}{c^4}\xkuo{T_{ik}-\frac{1}{2}g_{ik}T} $
+	\subsubsection{性质}
+	真空中，$ T_{ik}=0 $，所以有$ R_{ik}=0 $，但$ R_{iklm} $不一定为0，所以空间不一定平直\\
+	由于对电磁场有$ T^i_i=0 $所以代入可知在仅有电磁场时R=0.
+\end{document}

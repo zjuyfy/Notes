@@ -1,0 +1,404 @@
+%导言区
+\documentclass[10pt]{ctexart}%还有book，report，letter类；设置默认字体大小为10pt
+%ctrl+T快速注释，ctrl+U快速取消注释
+\bibliographystyle{plain}
+
+\usepackage{ctex}%查看宏包帮助
+\usepackage{xltxtra}%针对XeTeX的改进
+\usepackage{texnames}%一些logo
+\usepackage{mflogo}
+\usepackage{graphicx}%图片
+\usepackage{booktabs}%表格增加功能
+\usepackage{longtable}%长表格功能
+\usepackage{tabu}%综合表格功能
+\usepackage{caption}%浮动体标题
+\usepackage{bicaption}%同上
+%\usepackage{subcaption}%同上
+\usepackage{subfig}%子浮动体
+\usepackage{floatrow}%
+\usepackage{picinpar}%绕排
+\usepackage{wrapfig}%同上
+\usepackage{amsmath}
+\usepackage{amssymb}
+\graphicspath{{figure/},{pic/}}
+
+\newcommand{\degree}{^\circ}%定义新的命令
+\newcommand{\adots}{\mkern2mu\raisebox{0.1em}{.}\mkern2mu\raisebox{0.4em}{.}\mkern2mu\raisebox{0.7em}{.}\mkern1mu}%右斜点列
+\newcommand{\shangbiao}[2]{$#1^{#2}$}
+\newcommand{\biao}[3][^]{$#2#1#3$}
+%\renewcommand{cmd}{def}重新定义已有命令
+%\renewcommand{\abstractname}{内容简介}
+\newenvironment{myabstract}[1][摘要]
+{\small 
+\begin{center}
+	\bfseries #1
+\end{center} 
+\begin{quotation}}{\end{quotation}}
+
+
+
+\title{test 1st\\\heiti 测试一}
+\author{wave\\\kaishu 秦始皇}
+\date{\today}%设置编辑时间
+
+\ctexset{
+}
+
+
+%正文区（文稿区）
+\begin{document}
+	\maketitle
+	\tableofcontents%目录
+	\section{函数、环境测试区}
+	\shangbiao{3}{ae}
+	\biao{2}{3}
+	\biao[_]{2}{3}
+	\begin{myabstract}[abb]
+		内容...
+	\end{myabstract}
+    $\mathrm{S}$
+%	\begin{abstract}
+%		简介
+%	\end{abstract}
+a\[ab\]
+
+
+
+	\section{引言}
+	\subsection{字体}
+	\subsubsection{字体族设置}
+	
+	罗马字体\textrm{Roman Family}，
+	还有无衬线字体\textsf{Sans Serif Family}和打印机字体\texttt{Typewriter Family}或者
+	\rmfamily%后面均为罗马字体
+	Roman
+	\sffamily
+	Sans Serif
+	\ttfamily
+	Typerwriter
+	
+	\subsubsection{字体系列设置}
+	
+	\rmfamily
+	\textmd{中等Medium}
+	\textbf{粗体Boldface}
+	{\mdseries Medium}{\bfseries Boldface}%只在在括号内影响
+	
+	\subsubsection{字体形状设置}
+	
+	\textup{直立Up Right}
+	\textit{斜体Italy}
+	\textsl{伪斜体Slanded}
+	\textsc{小型大写Small Caps}
+	当然也有\upshape upright shape
+	
+	\subsubsection{中文字体}
+	
+	{\songti 宋体}\quad{\heiti 黑体}\quad{\fangsong 仿宋}\quad{\kaishu 楷书}%quad类似于空格
+	
+	\subsubsection{字体大小（相较于默认大小）}
+	
+	{\tiny H1H}{\scriptsize H2H}{\footnotesize H3H}{\small H4H}{\normalsize H5H}{\large H6H}{\Large H7H}{\LARGE H8H}{\huge H9H}{\Huge H0H}
+	
+	\subsubsection{中文字体字号}
+	
+	{\zihao{0}初号}{\zihao{-2}小二号}{\zihao{-6}小六号}{\zihao{8}八号}
+	\\
+	\\
+	\subsection{符号}
+	\subsubsection{空格}
+	空格\\
+	小的空\thinspace 格\\
+	小的空\ 格\\
+	小的空\, 格\\
+	半个空\enspace 格\\
+	一个空\quad 格\\
+	两个空\qquad 格\\
+	硬空~格\\
+	指定宽度的空\kern 1pc 格\\%1pc=12pt=4.128mm
+	指定宽度的空\kern 1mm 格\\	
+	指定宽度的空\kern 1pt 格\\
+	指定宽度的空\kern -1em 格\\
+	指定宽度的空格\\
+	指定宽度的空\hskip 1em 格\\
+	指定宽度的空\hskip 1cm 格\\
+	指定宽度的空\hspace{20pt}格\\
+	指定占位的空\hphantom{xxx}格\\%根据括号内字符占据宽度
+	指定占位的空\hphantom{空格xx}格\\
+	弹性长度（撑满\hfill 空间）的空格\\
+	\subsubsection{特殊符号}
+	被调用符号\\
+	\# \$ \% \{\} \{ abc\} \~{a} \~{} \_{} \_{2} \^{a} \^{} \textbackslash \&
+	
+	排版符号\\
+	\S \P \dag \ddag \copyright \pounds 
+	
+	标志符号\\
+	\TeX{} \LaTeX{} \LaTeXe
+	
+	引号\\
+	` ' `` ''
+	
+	连字符\\
+	- -- ---
+	
+	非英文字符\\
+	\oe \OE \ae \AE \aa \AA \o \O \l \L \ss	!` ?`
+	
+	重音符号\\
+	\`o \'o \^o \''o \~o \.o \=o \u{o} \v{a} \H{o} \r{a} \t{o} \b{a} \c{o} \d{o}
+	
+	
+	\subsection{图片}
+	灵梦：
+	
+	\includegraphics[scale=0.1]{lm}
+	\includegraphics[height=2cm]{lm}\\
+	\includegraphics[width=10cm]{lm}\\
+	\includegraphics[height=0.5\textheight]{lm}\\%一页文本高度的一般
+	\includegraphics[width=\linewidth]{lm}\\%一行宽度
+	一\hfill 行\\
+	\includegraphics[height=2em]{lm}%测试用
+	\includegraphics[height=3cm,angle=52]{lm}
+	
+	\subsection{表格}
+	\begin{tabular}{l||c c c| p{1.5cm}}%l左对齐,c居中,r右对齐,p指定列宽度
+		姓名 & 出生 & 事业 & 成就 & 备注\\
+		\hline
+		under & 很早 & 物理 & 太空 & 不用吃饭\\
+		physics & 较晚 & 人类 & 有序 & 喜欢\\
+		\hline \hline
+		结束 & 很晚 & 结束 & 虚无 & 无需一切东西\\
+	\end{tabular}\\
+    \subsection{浮动体}%管理图片表格
+    图片浮动体\\
+    
+    灵梦见图\ref{lm}
+    \begin{figure}[h]%h:here,b:bottom,t:top,p:page
+    	\centering%居中
+    	\includegraphics[height=3cm]{lm}
+    	\caption{灵梦}
+    	\label{lm}
+    \end{figure}
+
+    各类浮动体\\
+    
+    表格浮动体与图片基本一致：\\
+    \begin{table}[h]
+    \caption{梦想}
+    \centering
+    	    \begin{tabular}{l||c c c| p{1.5cm}}%l左对齐,c居中,r右对齐,p指定列宽度
+    		姓名 & 出生 & 事业 & 成就 & 备注\\
+    		\hline
+    		under & 很早 & 物理 & 太空 & 不用吃饭\\
+    		physics & 较晚 & 人类 & 有序 & 喜欢\\
+    		\hline \hline
+    		结束 & 很晚 & 结束 & 虚无 & 无需一切东西\\
+    	\end{tabular}
+    \end{table}
+
+
+
+
+	\section{正文}
+	Hello world!\\你好！
+	
+	Let $f(x)$ be defined by the formula
+	$$f(x)={3x_{1}^{2}+x_{1}-1}/{x\sqrt{x}}$$%
+	 which is a polynomial of degree 2.
+	
+	勾股定理：\par %分段
+	设直角三角形 \(ABC\) ，其中$\angle C=90\degree $%行内公式
+	，则有：
+	\begin{equation}
+		AB^2 = BC^2 + AC^2
+	\end{equation}%产生带编号的公式
+	
+	当然也有余弦定理\begin{math}
+		c^2=a^2+b^2-2abcos(C)
+	\end{math}%行内
+	\subsection{数学符号}
+	乘号(叉乘)：$a \times b$
+	\subsection{上下标}
+	上标：$x^2+x^{2^2}$
+	
+	下标：$a_0+a_1$
+	
+	\subsection{希腊字母}
+	alpha$\alpha$, beta$\beta$，omega$\Omega$ , omega$\omega$......
+	\subsection{函数}
+	$y=\arcsin x arcsin x$
+	
+	$z=\log_2 x$
+	
+	$f=\sqrt{x^3+y^2}$
+	
+	$f(x)=\sqrt[n]{x^4}$
+	\subsection{分式}
+	$3/4$或$\frac{x^2t}{x_0}$
+	
+	$\frac{1}{1+\frac{1}{x}}$
+	
+	$\sqrt{1-\frac{v^2}{c^2}}$
+	\subsection{行内行间公式}
+	行$x\sin x$内
+	
+	行\(x\cos x\)内
+	
+	行间$$\frac{x}{\sin x}$$公式。
+	
+	行间\[\sqrt{1-\sin^2 x}\]公式。
+	
+	行间
+	\begin{displaymath}
+		x*\sin x*\cosh x.
+		\text{\large \heiti 数学模式中临时切换到文本模式}\\
+		\mbox{第二种插入文本方式}
+		x+1=xx
+	\end{displaymath}
+	环境。
+	
+	行间自动编号
+	\begin{equation}
+		g_{ik;l}=-g^{ik}_{;l}
+		\label{度规}
+	\end{equation}
+	环境(用快捷键ctrl+shift+N)
+
+	行间不自动编号
+	\begin{equation*}
+		a+b=b+a
+		\label{abel}
+	\end{equation*}
+	环境
+	
+	\subsection{矩阵}
+	$
+	\begin{matrix}
+		1&2&3\\
+		4&5&6\\
+		7&8&9
+	\end{matrix}
+	\begin{pmatrix}
+        1&2&3\\
+        4&5&6
+	\end{pmatrix}
+	\begin{bmatrix}
+	    1&2&3\\
+	    4&x&y
+	\end{bmatrix}
+	\begin{Bmatrix}
+	    a_{11}&a_{12}\\
+	    a_{21}&a_{22}
+	\end{Bmatrix}
+	\begin{vmatrix}
+        a&ab\\
+        ba&b
+	\end{vmatrix}
+	\begin{Vmatrix}
+	    aa&cc\\
+	    bb&dd
+	\end{Vmatrix}
+	\begin{pmatrix}
+	    a_{11}&\dots &a_{1n}\\
+	    \vdots&\ddots&\vdots\\
+	    a_{n1}&\dots &a_{nn}
+	\end{pmatrix}
+	$
+	
+	$
+	\begin{pmatrix}
+	    a_{11}&       &\multicolumn{2}{c}{\raisebox{-1ex}[0 pt]{\large 0}}\\
+	    \hdotsfor{4}\\%跨列省略号
+	          &a_{22} &         &       \\
+	          &       &\ddots   &       \\
+	   \multicolumn{2}{c}{\raisebox{1ex}[0 pt]{\large 0}}&    &a_{nn}       
+	\end{pmatrix}%合并多列
+	$
+	
+	以及行内小矩阵\(\left(\begin{smallmatrix}
+	a&b\\
+	c&d
+	\end{smallmatrix}\right)\)
+	
+	\[\begin{array}{|r|r|}%格式与表格同
+	\frac{a}{b} &0\\
+	\hline
+	a\frac{b}{c}&0
+	\end{array}\]
+	
+	复杂矩阵：
+	\[
+	\begin{array}{c@{\hspace{-3mm}}l}%@内容不计数，只计空格
+	   \left(
+	   \begin{array}{ccc|ccc}
+	      a&\cdots&a&b&\cdots&b\\
+	      &\ddots&\vdots&\vdots&\adots&\\
+	      &&a&b&&\\
+	      \hline
+	      &&&c&\cdots&c\\
+	      \multicolumn{3}{c|}{\raisebox{0em}{\Huge 0}}&\vdots&&\vdots\\%raisebox向上抬
+	      &&&c&\cdots&c
+	   \end{array}
+	   \right)
+	   &
+	   \begin{array}{l}
+	   \left.\rule{0mm}{2em}\right\}p\\
+	   \\
+	   \left.\rule{0mm}{2em}\right\}p
+	   \end{array}
+	   \\[-5pt]%行距
+	   \begin{array}{c@{\hspace{5mm}}c}
+	   \underbrace{\rule{4em}{0mm}}_m&%underbrace下括号,rule尺码
+	   \underbrace{\rule{4em}{0mm}}_m
+	   \end{array}
+	   &
+	\end{array}
+	\]
+	$
+	\raisebox{0.1em}{.}\raisebox{0.4em}{.}\raisebox{0.7em}{.}
+	$
+	\subsection{多行公式排版}
+	\begin{gather}%gather*不带编号
+		a+b=b+a\\
+		3a+2b=7\\
+		41ab+c^2=\mathcal{L} \notag%阻止编号
+	\end{gather}
+	
+	公式对齐：
+	\begin{align}%align*不带编号
+		xx+a_{12}&=0\\
+		y&=x^2+1
+	\end{align}
+	
+	多行公式对应一个指标：
+	\begin{equation}
+		\begin{split}
+		\sin^2x +\cos^2x &=1\\
+		1+\tan^2x &=\sec^2x
+		\end{split}
+	\end{equation}
+	
+	分段函数：
+	\begin{equation}
+		D(x)=\begin{cases}
+		1&x\in \mathbb{Q}\\
+		0&\text{其它}
+		\end{cases}
+	\end{equation}
+    \begin{equation}
+    	\left(\begin{array}{c} - \mathrm{log}\!\left(\frac{\sqrt{4\, L^2\, g^2\, t^2 - 4\, L^2\, v^2 - g^2\, t^4\, v^2 + 4\, g\, h\, t^2\, v^2 - 4\, h^2\, v^2}\, \mathrm{i} + L\, g\, t\, 2\, \mathrm{i}}{v\, \left(\mathrm{i}\, g\, t^2 + 2\, L - h\, 2\, \mathrm{i}\right)}\right)\, \mathrm{i}\\ - \mathrm{log}\!\left(-\frac{\sqrt{4\, L^2\, g^2\, t^2 - 4\, L^2\, v^2 - g^2\, t^4\, v^2 + 4\, g\, h\, t^2\, v^2 - 4\, h^2\, v^2}\, \mathrm{i} - L\, g\, t\, 2\, \mathrm{i}}{v\, \left(\mathrm{i}\, g\, t^2 + 2\, L - h\, 2\, \mathrm{i}\right)}\right)\, \mathrm{i} \end{array}\right)
+    \end{equation}
+    \section{参考文献}
+    引用了\cite{me}以及\cite{sci}还有\cite{lit}
+    \begin{thebibliography}{99}
+    	\bibitem{me}何逸阳.\emph{学习}[J].计算机.2020.11
+    	\bibitem{sci}刘慈欣.\emph{三体\_死神永生}cc,bb,2020
+	    \bibitem{lit}托尔斯泰.\emph{安娜$\bullet$卡列尼娜}.\texttt{www.baidu.com}
+	    
+    \end{thebibliography}
+    \bibliography{landau}%编译参考文献文件
+    \cite{mitt}%引用文献文件（文件可以从google学术搜索里点击“引用”或从zotero、从知网上获取）
+\end{document}
+
+

@@ -1,0 +1,94 @@
+\documentclass{report}
+\usepackage{ctex}
+\setCJKfamilyfont{hwxk}{华光行楷_CNKI} 
+\newcommand{\huawenxingkai}{\CJKfamily{hwxk}}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{amsthm}
+\usepackage{mathrsfs}
+\usepackage{graphicx}
+\newcommand{\xkuo}[1]{\left(#1\right)}
+\newcommand{\dkuo}[1]{\left\lbrace#1\right\rbrace}
+\newcommand{\akuo}[1]{\left[#1\right]}
+\newcommand{\buqi}[1]{#1}
+\newcommand{\tensors}[1][V]{\mathscr{T}_{#1}}
+\newcommand{\utensors}[2][\cdots]{#2^{#1}_{#1}}
+\newcommand{\ctensors}[1][M]{\mathscr{F}_{#1}}
+\newcommand{\piandao}[2][]{\frac{\partial #1}{\partial #2}}
+\newcommand{\dao}[2][]{\frac{d#1}{d#2}}
+\newcommand{\duiyi}{\xkuo{\nabla_a\nabla_b-\nabla_b\nabla_a}}
+\begin{document}
+%	$\mathcal{T}$
+%	$ \mathbb{T} $
+$$ \dao{x}\xkuo{\arcsin x}=\frac{1}{\sqrt{1-x^2}} $$
+\[\dao{x}\xkuo{\arccos x}=-\frac{1}{\sqrt{1+x^2}}\]
+\[\dao{x}\xkuo{\arctan x}=\frac{1}{1+x^2}\]
+
+\section{张量场}
+\subsection{张量}
+测试、截图用\(\epsilon'\)\\
+\huawenxingkai \small 用$\mathscr{T}_{V}\left(k,l\right)$表示V上全体\(\left(k,l\right)\)型张量的集合，于是\(V=\mathscr{T}_{V}\left(1,0\right), V^{*}=\mathscr{T}_{V}\left(0,1\right)\)\\
+n维空间中的\(\mathscr{T}_{V}\)：dim\(\mathscr{T}_V\left(k,l\right)=n^{k+l}\)\\例如，二维$\left(2,1\right)$张量\(T=T^{\mu\nu}_{\sigma}e_{\mu}\otimes e_{\nu}\otimes e^{\sigma^{*}}\)其中\(T^{\mu\nu}_{\sigma}=T(e^{\mu^{*}},e^{\nu^{*}},e_{\sigma})\)\\
+\subsection{张量运算}
+\subsubsection{缩并}
+\(T\in \mathscr{T}_{V}\left(k,l\right)\)的第i个上标与第j个下标的缩并定义为\\
+\(C^i_jT\triangleq T\left(\cdots,e^{\mu^{*}},\cdots;\cdots,e_{\mu},\dots\right)\in \mathscr{T}_{V}\left(k-1,l-1\right))\left(C^i_jT\right)^{\cdots}_{\cdots}=T^{\cdot \cdot \mu \cdot}_{\cdot \mu \cdot \cdot}\)（需对$\mu$求和）\\
+\(\left(b\right)C^1_2\left(T\otimes v\right)=T\left(\bullet,v\right)\),\hskip 2em \(\forall v\in V,T\in \mathscr{T}_{V}\left(0,2\right)\)\\
+$\xkuo{c}$\(C^2_2\left(T\otimes \omega\right)=T\left(\bullet,\omega;\bullet\right)\),\hskip 2em \(\forall \omega\in V^{*},T\in \tensors\left(2,1\right)\)\\
+\subsubsection{流形上的张量场}
+流形中p点切空间\(V_p\)的$\left(k,l\right)$型张量记为$\tensors[V_p]$（以矢量和对偶矢量的卡式积为基底）\\
+在流形M上每点指定一个$\left(k,l\right)$型张量，就得到M上的一个$\xkuo{k,l}$型张量场。而张量场称为光滑的，如果$\forall \text{k个光滑对偶矢量场和l个矢量场有}T\left(\left\lbrace \omega\right\rbrace ;\left\lbrace v\right\rbrace \right)\in \mathscr{F}_M$\\
+两个坐标系中$\xkuo{k,l}$型张量的张量变换律：
+\(T'^{\mu_1 \cdots \mu_k}_{\nu_1 \cdots \nu_l}=\frac{\partial x'^{\mu_1}}{\partial x^{\rho_1}}\cdots \frac{\partial x^{\sigma_1}}{\partial x'^{\nu_1}}T^{\rho_1 \cdots \rho_k}_{\sigma_1 \cdots \sigma_l}\)\\
+\subsubsection{度规张量场}
+\(v\in V\)的长度$\left(lenth\right)$或大小$\left(magnitude\right)$定义：\(|v|\triangleq \sqrt{|g\left(v,v\right)}\)\\若\(g\left(v,u\right)=0\)，v,u称作是正交的\textit{orthognal}。\\若V的基底的内积\(g\left(e_\mu,e_\nu\right)=\pm \delta^\mu_\nu\)，称其为正交归一的\textit{orthonormal}\\
+借助坐标系计算线长：引入记号\(ds^2\equiv g_{\mu \nu}dx^\mu dx^\nu\)，则\(l=\int\sqrt{|ds^2|}\)\\
+设$\dkuo{x^\mu}$是$\mathbb{R}^n$的自然坐标，在$ \mathbb{R}^n $上定义度规张量场$ \delta $：\\
+\(\delta \triangleq\delta_{\mu \nu}dx^\mu\otimes dx^\nu\)\\
+则称$\xkuo{\mathbb{R}^n,\delta}$为n维欧式空间，$ \delta $称为欧式度规\\
+满足$ \delta\xkuo{\partial /\partial x^\alpha, \partial /\partial x^\beta}=\delta_{\alpha \beta} $的坐标系叫笛卡尔坐标系或直角坐标系\\
+满足$ \eta\xkuo{\partial /\partial x^\alpha, \partial /\partial x^\beta}=\eta_{\alpha \beta} $的坐标系叫伪笛卡尔坐标系或洛伦兹坐标系\\
+张量$ T_{a_1\cdots a_n} $对称部分$ T_{\xkuo{a_1\cdots a_n}}\triangleq \frac{1}{n!}\sum_{\pi}^{}T_{a_{\pi\xkuo{1}}\cdots a_{\pi\xkuo{n}}} $反对称部分$ T_{\akuo{a_1\cdots a_n}}\triangleq \frac{1}{n!}\sum_{\pi}^{}\delta_\pi T_{a_{\pi\xkuo{1}}\cdots a_{\pi\xkuo{n}}} $其中$\sum_{\pi}$表示对全排列求和$\delta_\pi$表示偶排列取+1，奇排列取-1
+\section{黎曼（内禀）曲率张量}
+\subsection{导数算符}
+以$ \mathscr{F}_M\xkuo{k,l} $代表M中全体$ C^\infty $的$ \xkuo{k,l} $型张量的集合\\
+定义M上的（无挠）导数算符\textit{derivative operator}为映射
+$ \nabla:\ctensors\xkuo{k,l}\rightarrow\ctensors\xkuo{k,l+1}s.t.: $
+\[\xkuo{a}\text{线性性：}\nabla_a\xkuo{\alpha\utensors{T}+\beta\utensors{S}}
+=\alpha\nabla_a\utensors{T}+\beta\nabla_a\utensors{S},\forall T,S\in\ctensors\xkuo{k,l}\]
+\[\xkuo{b}\text{莱布尼兹律：}\nabla_a\xkuo{\utensors{T}\utensors{S}}
+=\utensors{T}\nabla_a\utensors{S}+\utensors{S}\nabla_a\utensors{T},\forall T,S\in\ctensors\xkuo{k,l}\]
+\begin{center}
+	$ \xkuo{c} $与缩并可交换顺序
+\end{center}
+\[\xkuo{d}v\xkuo{f}=v^a\nabla_af,\forall f\in\ctensors,v\in\ctensors\xkuo{1,0}\]
+\[\xkuo{e}\text{无挠性\textit{tortion free}：}\nabla_a\nabla_bf=\nabla_b\nabla_af,f\in\ctensors\]
+设$\partial_a\text{是}\xkuo{M,\nabla_a}$上任给的坐标系的普通导数算符，则决定$\partial_a$和$\nabla_a$的差异的$ C^c_{ab} $称为$\nabla_a$在该坐标系的克氏符（即克里斯托夫符号或联络系数）\textit{Christoffel symbol}，记作$\Gamma^c_{ab}$\\
+记$ v^\nu_{;\mu}= \nabla_a v^b\xkuo{\piandao{x^\mu}}^a\xkuo{dx^\nu}_b $为协变导数（的坐标分量）
+\subsection{沿曲线的导数和平移}
+\subsubsection{沿曲线平移}
+设$ \dkuo{x^\mu} $域内曲线$ C\xkuo{t} $的参数式为$ x^\mu\xkuo{t} $，记$ T^a\equiv\xkuo{\piandao{t}}^a $则对于沿C的矢量场v有：
+\[T^a\nabla_av^b=\xkuo{\piandao{x^\mu}}^a\xkuo{\dao[x^\mu]{t}+\Gamma^\mu_{\nu\sigma}T^\nu v^\sigma}\]
+$\left. \dao[\vec{v}]{t}\right| _p\triangleq \lim\limits_{\Delta t\rightarrow 0}\frac{1}{\Delta t}\xkuo{\vec{v}'-\vec{v}}=T^b\partial_bv^a$其中$\vec{v}'$是$\vec{v}$平移$\Delta t$的结果，$T^b$是$C\xkuo{t}$的切矢，\\$\partial_b$是笛卡尔系的普通导数算符。\\
+\subsubsection{测地线}
+\(\xkuo{M,\nabla_a}\)上的曲线\(\gamma\xkuo{t}\)称为测地线，如果其切矢T满足：\(T^b\nabla_bT^a=0\)（测地线方程）\\
+（注：若M上有度规场\(\xkuo{M,g_{ab}}\)，则测地线的定义使用与度规\(g_{ab}\)相适配的导数算符\(\nabla_a\)）
+\[\frac{d^2x^\mu}{dt^2}+\Gamma^\mu_{\nu\sigma}\dao[x^\nu]{t}\dao[x^\sigma]{t}\]
+\(\exp_p\xkuo{v^a}:V_p\rightarrow M\triangleq \gamma\xkuo{1}\)，其中\(\gamma\xkuo{t}\text{为}\xkuo{p,v^a}\)唯一确定的测地线。\\
+注：指数映射的定义域不一定是全体\(V_p\)而可能是其子集，由于\(\gamma\xkuo{1}\)可能不在流形M中。\\
+N为p点满足\(V_p\)中存在子集\(\hat{V_p}\)使得\(\exp_p: \hat{V_p}\rightarrow N\)为微分同胚映射
+\subsubsection{黎曼曲率张量}
+\(\forall f\in\mathscr{F}, \omega_a\in\mathscr{F}\xkuo{0,1}, \text{有}\xkuo{\nabla_a\nabla_b-\nabla_b\nabla_a}\xkuo{f\omega_a}=f\xkuo{\nabla_a\nabla_b-\nabla_b\nabla_a}\omega_a\)\\
+\(\forall\omega_c,\omega_c'\in\mathscr{F}\xkuo{0,1} s.t.\omega_c|_p=\omega_c'|_p, \text{则}\akuo{\duiyi\omega_c}|_p=\akuo{\duiyi\omega_c'}|_p\)\\
+p点的黎曼曲率张量\(R_{abc}^d\)是从\(\mathscr{F}\xkuo{0,1}\)到\(\mathscr{F}\xkuo{0,3}\)的映射，满足\(R_{abc}^d\omega_d=\duiyi\omega_c\)\\
+\(R_{abc}^d=-R_{bac}^d, R_{\akuo{abc}}^d=0, \nabla_{\left[a\right.}R_{\left. bc\right]d}^e=0, \xkuo{R_{abcd}=g_{de}R_{abc}^e}, R_{abcd}=-R_{abdc},****** R_{abcd}=R_{cdab}\)\(R_{abc}^d\)有\(n^2\xkuo{n^2-1}/12\)个独立变量\\\(R_{ac}=g^{bd}R_{abcd}, R=g^{ac}R_{ac}\)称为标量曲率\\
+\(C_{abcd}\triangleq R_{abcd}-\frac{2}{n-2}\xkuo{g_{a\left[ c\right.}R_{\left. d\right] b}-g_{b\left[ c\right.}R_{\left. d\right] a}}+\frac{2}{\xkuo{n-1}\xkuo{n-2}}Rg_{a\left[ c\right.}g_{\left. d\right] b}\)
+\subsection{李导数，killing场和超曲面}
+\subsubsection{流形间的映射}
+\[\text{由M流形到N流形的映射}\phi:M\rightarrow N\]
+\[\phi^*: \mathscr{F}_N\rightarrow\mathscr{F}_M: \xkuo{\phi^*f}|_p\triangleq f|_{\phi\xkuo{p}}, \text{即}\phi^*f=f\circ\phi\]
+\[\phi_*:V_p\rightarrow V_{\phi\xkuo{p}}: \xkuo{\phi_*v}\xkuo{f}\triangleq v\xkuo{\phi^*f}\]
+\subsubsection{李导数}
+\(\mathscr{L}_v\utensors{T}\triangleq\lim\limits_{t\rightarrow 0}\frac{\phi_t^*\utensors{T}-\utensors{T}}{t}, \text{其中}\phi_t\)为v诱导出的单参微分同胚群\(\phi\)的群元\\
+%\(\mathscr{L}_vf=v\xkuo{f}\)\(\mathscr\)
+\end{document}
