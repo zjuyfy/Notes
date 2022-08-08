@@ -5,11 +5,39 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>笔记css</title>
+
+    <link rel="stylesheet" href="css/css.css">
     <style>
         p{/*修改p的默认样式*/
             color: red;
             text-align: center;
-            font-family: ;
+        }
+        img{
+            width: 70%;
+            align-content: center;
+            margin-left: 15%;
+            margin-right: 15%;
+        }
+        #x1{/*对id指定样式*/
+            background-color: blueviolet;
+            width: 50%;
+            height: 2cm;
+            margin-left: 25%;
+            margin-right: 25%;
+            text-align: center;
+            color: beige;
+            font-size: x-large;
+            
+        }
+        .des{
+            text-align: center;
+            background-color: antiquewhite;
+            width:50%;
+            margin-left: 25%;
+            margin-right: 25%;
+        }
+        em.code{
+            color: darkblue;
         }
     </style>
 </head>
@@ -17,6 +45,29 @@
     <br><br>
     <p>CSS规则可以写在head里面style元素当中</p>
     <br><br>
-    <p>CSS 规则由两个主要的部分构成：选择器{属性:值},选择器通常是需要改变样式的 HTML 元素。</p>
+    <p>CSS 规则由两个主要的部分构成：<em class="code">选择器</em>{<em class="code">属性名</em>:<em class="code">值</em>},选择器通常是需要改变样式的 HTML 元素。</p>
+    <div style="width: 100%"><img src="./scr/cssrule.jpg" ></div>
+    <div id="x1">x1</div>
+    <div class="des">
+        <h1>选择器</h1>
+        <p>CSS中id选择器以#开头，接id名（和链接一样）</p>
+        <p>CSS中class选择器以.开头，接class名</p>
+        <p>CSS中class选择器可以指定适用元素，写为<em class="code">元素名</em>.<em class="code">类名</em></p>
+        <p>一个标签内多个class选择器可以用空格分开</p>
+    </div>
+
+    <div>
+        <h1 class="c">外部样式表</h1>
+        <p>写好CSS的外部文件后，在html中用link来引用样式：</p>
+        <p>&lt;link rel="stylesheet" href="<em class="code">css文件(相对)位置</em>"&gt;</p>
+        <p>优先级：内部style="" 高于 头部&lt;style&gt; 高于 外部样式文件</p>
+    </div>
+    <div id="cssatt">
+        <h1 class="c">CSS各种属性</h1>
+        <div class="attributes">
+            <h1 class="c2">CSS背景设置</h1>
+            <p></p>
+        </div>
+    </div>
 </body>
 </html>
