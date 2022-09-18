@@ -1,0 +1,212 @@
+\documentclass[15pt, a4paper, oneside]{ctexbook}
+        \usepackage{amsmath, amsthm, amssymb, amsfonts, bm, graphicx, hyperref, mathrsfs}
+        \usepackage{tcolorbox}
+        \usepackage{tikz, xcolor, environ, xparse, zhnumber}
+        
+        %设置页眉
+        \usepackage{fancyhdr}
+        \pagestyle{fancy}
+        
+        
+        
+        
+        
+        
+        \usetikzlibrary{shapes, decorations}
+        
+        %定义颜色
+        \definecolor{dedcol}{RGB}{150,150,30}%推论环境的主色
+        \definecolor{theocol}{RGB}{40,150,30}%定力环境的主色
+        \definecolor{thrmcol}{RGB}{18,29,80}%默认定理等环境的背景色
+        \definecolor{thrmedge}{RGB}{12,133,211}%默认定理等环境的边界颜色
+        \definecolor{hyperlinkcol}{RGB}{32,112,102}%链接颜色
+        \definecolor{hyperfilecol}{RGB}{135,206,235}%文件颜色
+        \definecolor{hyperurlcol}{RGB}{3,168,158}%网址颜色
+        \definecolor{hypercitecol}{RGB}{150,140,130}%引用颜色
+        \definecolor{hlback}{RGB}{207,255,207}%高亮颜色
+        \definecolor{opcol}{RGB}{235,125,75}%op颜色
+        \definecolor{facecol}{RGB}{122,180,245}%封面颜色
+        \definecolor{pscol}{RGB}{44,80,99}%图案颜色
+        
+        %定义hyper的颜色
+        \hypersetup{
+          colorlinks=true,
+          linkcolor=hyperlinkcol,
+          filecolor=hyperfilecol,
+          urlcolor=hyperurlcol,
+          citecolor=hypercitecol,
+        }
+        
+        %定义字体
+        \setCJKfamilyfont{hwxk}{华文行楷}
+        \newcommand{\huawenxingkai}{\CJKfamily{hwxk}}
+        \setCJKfamilyfont{hwkt}{华文楷体}
+        \newcommand{\huawenkaiti}{\CJKfamily{hwkt}}
+        \setCJKfamilyfont{hwhp}{华文琥珀}
+        \newcommand{\huawenhupo}{\CJKfamily{hwhp}}
+        \setCJKfamilyfont{hwls}{华文隶书}
+        \newcommand{\huawenlishu}{\CJKfamily{hwls}}
+        \setmainfont{华文楷体}
+        
+        %定义高亮
+        \newtcbox{\hlbox}[1][red]{on line, arc = 2pt, outer arc = 0pt,
+          colback = hlback, colframe = #1!50!black,
+          boxsep = 0pt, left = 1pt, right = 1pt, top = 2pt, bottom = 2pt,
+          boxrule = 0pt, bottomrule = 1pt, toprule = 1pt}
+        \newcommand{\hl}[1]{\hlbox{#1}}
+        \newcommand{\optxt}[1]{\textcolor{opcol}{#1}}
+        
+        
+        
+        
+        
+        %定义公式环境
+        \newcommand{\newfancytheoremstyle}[5]{%
+          \tikzset{#1/.style={draw=#3, fill=#2,very thick,rectangle,
+              rounded corners, inner sep=10pt, inner ysep=20pt}}
+          \tikzset{#1title/.style={fill=#3, text=#2}}
+          \expandafter\def\csname #1headstyle\endcsname{#4}
+          \expandafter\def\csname #1bodystyle\endcsname{#5}
+        }
+        
+        \newfancytheoremstyle{fancythrm}{thrmcol!5}{thrmedge}{\bfseries\huawenhupo}{\huawenxingkai}
+        
+        \makeatletter
+        \DeclareDocumentCommand{\newfancytheorem}{ O{\@empty} m m m O{fancythrm} }{
+          %% 定义计数器
+          \ifx#1\@empty
+            \newcounter{#2}
+          \else
+            \newcounter{#2}[#1]
+            \numberwithin{#2}{#1}
+          \fi
+          %% 定义 "newthem" 环境
+          \NewEnviron{#2}[1][{}]{%
+            \noindent\centering
+            \begin{tikzpicture}
+              \node[#5] (box){
+                \begin{minipage}{0.93\columnwidth}
+                  \csname #5bodystyle\endcsname \BODY~##1
+                \end{minipage}};
+              \node[#5title, right=10pt] at (box.north west){
+                {\csname #5headstyle\endcsname #3 \stepcounter{#2}\csname the#2\endcsname\; ##1}};
+              \node[#5title, rounded corners] at (box.east) {#4};
+            \end{tikzpicture}
+          }[\par\vspace{.5\baselineskip}]
+        }
+        
+        
+        \makeatother
+        
+         % 定义各个环境的的样式
+         % \newfancytheoremstyle{<name>}{inner color}{outer color}{head style}{body style}
+        \newfancytheoremstyle{fancytheo}{theocol!5}{theocol}{\bfseries\huawenhupo}{\huawenxingkai}
+        \newfancytheoremstyle{fancyded}{dedcol!5}{dedcol}{\bfseries\huawenhupo}{\huawenxingkai}
+        
+         % 定义各个新环境
+         % \newfancytheorem[<number within>]{<name>}{<head>}{<symbol>}[<style>]
+        \newfancytheorem[chapter]{define}{定义}{$\clubsuit$}
+        \newfancytheorem[section]{deduce}{推论}{$\heartsuit$}[fancyded]
+        \newfancytheorem[section]{theorem}{定理}{$\spadesuit$}[fancytheo]
+        
+        \title{{\Huge{\textbf{线性代数}}}\\——笔记}
+        \author{何逸阳}
+        \date{\today}
+        \linespread{1.5}
+        
+        %设置章节标题\usepackage[english]{babel}
+        \usepackage{blindtext}
+        
+        \usepackage[sc,compact,explicit]{titlesec} % Titlesec for configuring the header
+        
+        
+        \usepackage{auto-pst-pdf} % Vectorian 装饰图案的 XeTeX 辅助 (见: https://tex.stackexchange.com/questions/253477/how-to-use-psvectorian-with-pdflatex)
+        \usepackage{psvectorian} % Vectorian 中的装饰图案
+        
+        \let\clipbox\relax % PSTricks 已经定义了 \clipbox, 所以要去掉
+        \usepackage{adjustbox} % 调整图案大小的
+        
+        \newcommand{\otherfancydraw}{% 定义图案
+        \begin{adjustbox}{max height=0.5\baselineskip}% 根据行距设定高度，自己定
+          \raisebox{-0.25\baselineskip}{
+          \rotatebox[origin=c]{0}{% 旋转，自己定
+            \psvectorian{84}% 图案，编号见 (http://melusine.eu.org/syracuse/pstricks/vectorian/psvectorian.pdf)
+          }}%
+        \end{adjustbox}%
+        }
+        
+        % 画一条中间为图案的线 (见: https://tex.stackexchange.com/questions/15119/draw-horizontal-line-left-and-right-of-some-text-a-single-line/15122#15122)
+        \newcommand*\ruleline[1]{\par\noindent\raisebox{.8ex}{\makebox[\linewidth]{\hrulefill\hspace{1ex}\raisebox{-.8ex}{#1}\hspace{1ex}\hrulefill}}}
+        
+
+        \titleformat% 设置样式
+          {\chapter} % 章节
+          [block] % shape - Only managed to get it working with block
+          {\normalfont\huawenlishu\huge} % format - Change here as needed
+          {\centering 第\zhnum{chapter}章\\\vspace{-0.6em}} % The Chapter N° label
+          {0pt} % sep
+          {\centering \ruleline{\otherfancydraw}\\ % The horizontal rule
+          \vspace{-0.6em}\centering #1} % And the actual title
+        
+          \titleformat{\section}[block]{\huawenlishu\Large}{\thesection}{0pt}{\centering #1}
+        
+
+          %设置autoref引用格式
+        \def\defineautorefname{定义}
+        
+        \begin{document}
+          \renewcommand*{\psvectorianDefaultColor}{pscol}%设定图案颜色
+        
+            \maketitle
+        
+            \pagenumbering{roman}
+            \setcounter{page}{1}
+        
+            \begin{center}
+                \Huge\huawenlishu{前言}
+            \end{center}~\
+        
+            线性代数是基础，但是其中许多知识许久不用便不太记得，因此在这里做一些笔记。由于是后来做的笔记，因此默认学过一点抽象代数的知识
+            ~\\
+            \begin{center}
+                \Huge\huawenlishu{符号说明}
+            \end{center}
+        
+            \newpage
+            \pagenumbering{alph}
+            \setcounter{page}{1}
+            \tableofcontents
+            \newpage
+            \setcounter{page}{1}
+            \pagenumbering{arabic}
+        
+            \chapter{线性空间}
+        
+            \begin{define}
+              \label{def:linspace}
+                一个\href{../../../dic/index/cxds.lnk}{域}\(\mathbb F\)上的\hl{线性空间}\(\mathcal{V}\)定义为一个拥有两种运算\optxt{\(\times\)}和\optxt{\(+\)}的满足下列性质的集合：
+                \begin{itemize}
+                    \item 交换律：\(\forall \vec u,\vec v\in\mathcal V\)有\(\vec u+\vec v=\vec v+\vec u\).
+                    \item 结合律：\(\forall \vec u,\vec v,\vec w\in\mathcal V\)有\((\vec u+\vec v)+\vec w=\vec u+(\vec v+\vec w)\)
+                    \item 兼容性：\(\forall a,b\in \mathbb F,\vec v\in \mathcal V\)有\((ab)\vec v=a(b\vec v)\)
+                    \item 加法元：\(\exists \vec 0\in \mathcal V,\,\,s.t.\,\,\forall \vec v\in \mathcal V\)有\(\vec 0+\vec v=\vec v\)
+                    \item 乘法元：\(\exists 1\in\mathbb F,\,\,s.t.\,\,\forall \vec v\in \mathcal V\)有\(1\vec v=\vec v\)
+                    \item 分配率：\(\forall \vec u,\vec v\in\mathcal V,\,a,b\in \mathbb F\)有\(\begin{cases}
+                            (a+b)\vec u=a\vec u+b\vec u\\
+                            a(\vec u+\vec v)=a\vec u+a\vec v
+                        \end{cases}\)
+                \end{itemize}
+            \end{define}
+            \begin{define}
+              \label{def:linspace2}
+              实线性空间/复线性空间定义为\hyperref[def:linspace]{域\(\mathbb F\)}为实数域或复数域的线性空间
+            \end{define}
+            
+            
+            \section{子空间}
+        
+            这是笔记的正文部分.
+        
+            
+        
+        \end{document}

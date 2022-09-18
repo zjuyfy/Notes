@@ -1,0 +1,323 @@
+\documentclass[12pt, a4paper, oneside]{ctexbook}
+        \usepackage{amsmath, amsthm, amssymb, amsfonts, bm, graphicx, hyperref, mathrsfs}
+        \usepackage{tcolorbox}
+        \usepackage{tikz, xcolor, environ, xparse, zhnumber}
+        
+        %设置页眉
+        \usepackage{fancyhdr}
+        \renewcommand{\headrulewidth}{1pt}
+        \makeatletter
+        \def\headrule{{\if@fancyplain\let\headrulewidth\plainheadrulewidth\fi
+        \hrule\@height 1.0pt \@width\headwidth\vskip1pt%上面线为1pt粗  
+        \hrule\@height 0.5pt\@width\headwidth  %下面0.5pt粗            
+        \vskip-2\headrulewidth\vskip-1pt}      %两条线的距离1pt        
+         \vspace{6mm}} 
+        \pagestyle{fancy}
+        
+        
+        
+        
+        
+        
+        \usetikzlibrary{shapes, decorations}
+        
+        %定义颜色
+        \definecolor{lawcol}{RGB}{180,100,70}%推论环境的主色
+        \definecolor{theocol}{RGB}{40,150,30}%定理环境的主色
+        \definecolor{claimcol}{RGB}{150,170,20}
+        \definecolor{thrmcol}{RGB}{18,29,80}%默认定理等环境的背景色
+        \definecolor{thrmedge}{RGB}{12,133,211}%默认定理等环境的边界颜色
+        \definecolor{hyperlinkcol}{RGB}{32,112,102}%链接颜色
+        \definecolor{hyperfilecol}{RGB}{135,206,235}%文件颜色
+        \definecolor{hyperurlcol}{RGB}{3,168,158}%网址颜色
+        \definecolor{hypercitecol}{RGB}{150,140,130}%引用颜色
+        \definecolor{hlback}{RGB}{207,255,207}%高亮颜色
+        \definecolor{opcol}{RGB}{235,125,75}%op颜色
+        \definecolor{facecol}{RGB}{122,180,245}%封面颜色
+        \definecolor{pscol}{RGB}{44,80,99}%图案颜色
+
+        
+        %定义hyper的颜色
+        \hypersetup{
+          colorlinks=true,
+          linkcolor=hyperlinkcol,
+          filecolor=hyperfilecol,
+          urlcolor=hyperurlcol,
+          citecolor=hypercitecol,
+        }
+        
+        %定义字体
+        \setCJKfamilyfont{hwxk}{华文行楷}
+        \newcommand{\huawenxingkai}{\CJKfamily{hwxk}}
+        \setCJKfamilyfont{hwkt}{华文楷体}
+        \newcommand{\huawenkaiti}{\CJKfamily{hwkt}}
+        \setCJKfamilyfont{hwhp}{华文琥珀}
+        \newcommand{\huawenhupo}{\CJKfamily{hwhp}}
+        \setCJKfamilyfont{hwls}{华文隶书}
+        \newcommand{\huawenlishu}{\CJKfamily{hwls}}
+        \setmainfont{华文楷体}
+        
+        %定义高亮
+        \newtcbox{\hlbox}[1][red]{on line, arc = 2pt, outer arc = 0pt,
+          colback = hlback, colframe = #1!50!black,
+          boxsep = 0pt, left = 1pt, right = 1pt, top = 2pt, bottom = 2pt,
+          boxrule = 0pt, bottomrule = 1pt, toprule = 1pt}
+        \newcommand{\hl}[1]{\hlbox{#1}}
+        \newcommand{\optxt}[1]{\textcolor{opcol}{#1}}
+        
+        %定义小标题
+        \newcommand{\tit}[1]{\begin{center}
+          \large\hl{#1}
+        \end{center}}
+        
+        
+        
+        
+        %定义公式环境
+        \newcommand{\newfancytheoremstyle}[5]{%
+          \tikzset{#1/.style={draw=#3, fill=#2,very thick,rectangle,
+              rounded corners, inner sep=10pt, inner ysep=20pt}}
+          \tikzset{#1title/.style={fill=#3, text=#2}}
+          \expandafter\def\csname #1headstyle\endcsname{#4}
+          \expandafter\def\csname #1bodystyle\endcsname{#5}
+        }
+        
+        \newfancytheoremstyle{fancythrm}{thrmcol!5}{thrmedge}{\bfseries\huawenhupo}{\huawenxingkai}
+        
+        \makeatletter
+        \DeclareDocumentCommand{\newfancytheorem}{ O{\@empty} m m m O{fancythrm} }{
+          %% 定义计数器
+          \ifx#1\@empty
+            \newcounter{#2}
+          \else
+            \newcounter{#2}[#1]
+            \numberwithin{#2}{#1}
+          \fi
+          %% 定义 "newthem" 环境
+          \NewEnviron{#2}[1][{}]{%
+            \noindent\centering
+            \begin{tikzpicture}
+              \node[#5] (box){
+                \begin{minipage}{0.93\columnwidth}
+                  \csname #5bodystyle\endcsname \BODY~##1
+                \end{minipage}};
+              \node[#5title, right=10pt] at (box.north west){
+                {\csname #5headstyle\endcsname #3 \stepcounter{#2}\csname the#2\endcsname\; ##1}};
+              \node[#5title, rounded corners] at (box.east) {#4};
+            \end{tikzpicture}
+          }[\par\vspace{.5\baselineskip}]
+        }
+        
+        
+        \makeatother
+        
+         % 定义各个环境的的样式
+         % \newfancytheoremstyle{<name>}{inner color}{outer color}{head style}{body style}
+        \newfancytheoremstyle{fancytheo}{theocol!5}{theocol}{\huawenhupo}{\huawenxingkai}
+        \newfancytheoremstyle{fancylaw}{lawcol!5}{lawcol}{\huawenhupo}{\huawenxingkai}
+        \newfancytheoremstyle{fancyclaim}{claimcol!5}{claimcol}{\huawenhupo}{\huawenxingkai}
+        
+         % 定义各个新环境
+         % \newfancytheorem[<number within>]{<name>}{<head>}{<symbol>}[<style>]
+        \newfancytheorem[chapter]{define}{定义}{$\clubsuit$}
+        \newfancytheorem[section]{deduce}{推论}{$\heartsuit$}[fancytheo]
+        \newfancytheorem[section]{theorem}{定理}{$\spadesuit$}[fancytheo]
+        \newfancytheorem[chapter]{law}{定律}{$\clubsuit$}[fancylaw]
+        \newfancytheorem[chapter]{claim}{声明}{\(\spadesuit\) }[fancyclaim]
+        \newfancytheorem[chapter]{concept}{概念}{\(\spadesuit\)}[fancyclaim]
+        
+        \title{{\Huge{热力学笔记}}}
+        \author{wave}
+        \date{\today}
+        \linespread{1.5}
+        
+        %设置章节标题样式\usepackage[english]{babel}
+        \usepackage{blindtext}
+        
+        \usepackage[sc,compact,explicit]{titlesec} % Titlesec for configuring the header
+        
+        
+        \usepackage{auto-pst-pdf} % Vectorian 装饰图案的 XeTeX 辅助 (见: https://tex.stackexchange.com/questions/253477/how-to-use-psvectorian-with-pdflatex)
+        \usepackage{psvectorian} % Vectorian 中的装饰图案
+        
+        \let\clipbox\relax % PSTricks 已经定义了 \clipbox, 所以要去掉
+        \usepackage{adjustbox} % 调整图案大小的
+        
+        \newcommand{\otherfancydraw}{% 定义图案
+        \begin{adjustbox}{max height=0.5\baselineskip}% 根据行距设定高度，自己定
+          \raisebox{-0.25\baselineskip}{
+          \rotatebox[origin=c]{0}{% 旋转，自己定
+            \psvectorian{84}% 图案，编号见 (http://melusine.eu.org/syracuse/pstricks/vectorian/psvectorian.pdf)
+          }}%
+        \end{adjustbox}%
+        }
+        
+        % 画一条中间为图案的线 (见: https://tex.stackexchange.com/questions/15119/draw-horizontal-line-left-and-right-of-some-text-a-single-line/15122#15122)
+        \newcommand*\ruleline[1]{\par\noindent\raisebox{.8ex}{\makebox[\linewidth]{\hrulefill\hspace{1ex}\raisebox{-.8ex}{#1}\hspace{1ex}\hrulefill}}}
+        
+        \titleformat% Formatting the header
+          {\chapter} % command
+          [block] % shape - Only managed to get it working with block
+          {\normalfont\huawenlishu\huge} % format - Change here as needed
+          {\centering 第\zhnum{chapter}章\\ \vspace{-0.6em}} % The Chapter N° label
+          {0pt} % sep
+          {\centering \ruleline{\otherfancydraw}\\ \vspace{-0.6em} % The horizontal rule
+          \centering #1} % And the actual title
+        
+          \titleformat{\section}[block]{\huawenlishu\Large}{\thesection}{0pt}{\centering #1}
+        
+          %更改autoref的形式
+          \def\equationautorefname{式}
+          \def\footnoteautorefname{脚注}%
+          \def\itemautorefname{项}%
+          \def\figureautorefname{图}%
+          \def\tableautorefname{表}%
+          \def\partautorefname{篇}%
+          \def\appendixautorefname{附录}%
+          \def\chapterautorefname{章}%
+          \def\sectionautorefname{节}%
+          \def\subsectionautorefname{小小节}%
+          \def\subsubsectionautorefname{subsubsection}%
+          \def\paragraphautorefname{段落}%
+          \def\subparagraphautorefname{子段落}%
+          \def\FancyVerbLineautorefname{行}%
+          \def\theoremautorefname{定理}%
+          
+
+
+        \begin{document}
+          \renewcommand*{\psvectorianDefaultColor}{pscol}%设定图案颜色
+      
+          \maketitle
+      
+          \pagenumbering{roman}
+          \setcounter{page}{1}
+      
+          \begin{center}
+              \Huge\huawenlishu{前言}
+          \end{center}~\
+      
+          基础概念部分默认已经学过，就不加赘述，只给出简易的定义概念。
+          ~\\
+          \begin{flushright}
+              \begin{tabular}{c}
+                  何逸阳 \\
+                  \today
+              \end{tabular}
+          \end{flushright}
+          \begin{center}
+              \Huge\huawenlishu{符号说明}
+          \end{center}~\
+      
+      
+          \newpage
+          \pagenumbering{alph}
+          \setcounter{page}{1}
+          \tableofcontents
+          \newpage
+          \setcounter{page}{1}
+          \pagenumbering{arabic}
+      
+          \chapter{热力学定律}
+      
+          \section{基础概念}
+          \begin{concept}
+            \hl{热力学系统}指代任何宏观系统。
+          \end{concept}
+          \begin{concept}
+            \hl{热力学参数}指可测量的热力学系统宏观参数。\optxt{它们由实验定义}。
+          \end{concept}
+          \begin{concept}
+            \hl{热力学状态}由一组描述系统所需所有热力学参数的值的集合。\optxt{若不加说明，热力学状态指热力学平衡下的状态}
+          \end{concept}
+          \begin{concept}
+            \hl{热力学平衡}指热力学状态不随时间变化。
+          \end{concept}
+          \begin{concept}
+            \hl{状态方程}指描述热力学平衡下热力学系统的一组热力学参数之间的关系的方程。
+          \end{concept}
+          \begin{concept}
+            \hl{热力学变化}指热力学状态的改变。
+          \end{concept}
+          \begin{concept}
+            \hl{准静态}的热力学变化指极其缓慢以至于每个时刻可以近似看做热力学平衡的热力学变化。
+          \end{concept}
+          \begin{concept}
+            当外部条件在时间上回溯它的历史时，如果热力学变化在时间上回溯它的历史，那么它就是\hl{可逆的}。
+          \end{concept}
+          \begin{concept}
+            系统的\hl{P-V图}是状态方程的表面在P-V平面上的投影。特定类型的可逆变换会产生具有特定名称的路径，如等温线、绝热线等。
+          \end{concept}
+          \begin{concept}
+            \hl{热}是均匀系统在不做功的情况下温度升高所吸收的热量。
+          \end{concept}
+          \begin{concept}
+            \hl{热源}是一个大到任何有限热量的获得或损失都不会改变其温度的系统。
+          \end{concept}
+          \begin{concept}
+            如果一个系统与外界之间不发生热交换，那么这个系统就是\hl{绝热}的。
+          \end{concept}
+          \begin{concept}
+            如果一个热力学量与所考虑系统中的物质量成正比，则称为\hl{广度量};如果它与所考虑系统中的物质量无关，则称为\hl{强度量}。\optxt{对于一个很好的近似，热力学量要么是广度量，要么是强度量。}
+          \end{concept}
+          \begin{concept}
+            \hl{理想气体}的参数是压强P、体积V、温度T和分子数n。状态方程由\hl{波义耳定律}给出:
+            \begin{equation}
+              \frac{P V}{N}= const.\quad \text{当温度恒定时}
+            \end{equation}
+          \end{concept}
+          \begin{concept}
+            由理想气体的状态方程可以定义一个温标——\hl{理想气体温度T}:
+            \begin{equation}
+              PV=NkT
+            \end{equation}
+          \end{concept}
+
+          \section{热力学第一定律}
+          热力学第零定律允许我们去定义温标这个状态函数，而热力学第一定律则允许我们去定义内能这个状态函数。
+
+          \begin{law}
+            \tit{热力学第一定律}
+            在任意系统中，设$\Delta Q$代表系统吸收的净热量，\(\Delta W\)代表系统做的净功，则 \(\Delta U\):
+            \begin{equation}
+              \Delta U\triangleq \Delta Q-\Delta W
+            \end{equation}
+            对于给定了初始状态和最终状态的任何热力学变化都是相同的。
+          \end{law}
+          \begin{define}
+            由热力学第一定律，我们可以定义给定热力学状态的\hl{内能}\(U\)(\optxt{由一个参照的初始状态沿任意方法变换得到给定状态}):
+            \begin{equation*}
+              U=U_0+\Delta Q-\Delta W
+            \end{equation*}
+            其\optxt{微分形式}为：
+            \begin{equation}
+              dU=dQ-dW
+            \end{equation}
+          \end{define}
+          \begin{deduce}
+            \label{ded:dQ}
+            为求得热容的表达式，我们先写出\(dQ\)在各个参数下的表达式：
+            \begin{align}
+              \label{eq:dQPV}&d Q=\left(\frac{\partial U}{\partial P}\right)_V d P+\left[\left(\frac{\partial U}{\partial V}\right)_P+P\right] d V \\
+              \label{eq:dQPT}&d Q=\left[\left(\frac{\partial U}{\partial T}\right)_P+P\left(\frac{\partial V}{\partial T}\right)_P\right] d T+\left[\left(\frac{\partial U}{\partial P}\right)_T+P\left(\frac{\partial V}{\partial P}\right)_T\right] d P \\
+              \label{eq:dQVT}&d Q=\left(\frac{\partial U}{\partial T}\right)_V d T+\left[\left(\frac{\partial U}{\partial V}\right)_T+P\right] d V
+              \end{align}
+              由\autoref{eq:dQPT},可以得到定容热容和等压热容:
+              \begin{equation}
+                C_V\equiv \left(\frac{\Delta Q}{\Delta T}\right)_V=\left(\frac{\partial U}{\partial T}\right)_V
+              \end{equation}
+              \begin{equation}
+                C_P\equiv \left(\frac{\Delta Q}{\Delta T}\right)_P=\left(\frac{\partial (U+PV)}{\partial T}\right)
+              \end{equation}
+          \end{deduce}
+          \begin{define}
+            由推导出的\hyperref[ded:dQ]{等压热容公式}，我们定义\hl{焓}H:
+            \begin{equation}
+              H=U+PV
+            \end{equation}
+            于是有
+            \begin{equation}
+              C_P=\left(\frac{\partial H}{\partial T}\right)_P
+            \end{equation}
+          \end{define}
+        \end{document}
