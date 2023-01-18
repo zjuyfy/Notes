@@ -2,6 +2,8 @@
         \usepackage{amsmath, amsthm, amssymb, amsfonts, bm, graphicx, hyperref, mathrsfs}
         \usepackage{tcolorbox}
         \usepackage{tikz, xcolor, environ, xparse, zhnumber}
+        \usepackage{mathpazo}
+
         
         %设置页眉
         \usepackage{fancyhdr}
@@ -122,6 +124,7 @@
         \newfancytheorem[chapter]{define}{定义}{$\clubsuit$}
         \newfancytheorem[section]{deduce}{推论}{$\heartsuit$}[fancytheo]
         \newfancytheorem[section]{theorem}{定理}{$\spadesuit$}[fancytheo]
+        \newfancytheorem[section]{attribute}{性质}{}[fancytheo]
         \newfancytheorem[chapter]{law}{定律}{$\clubsuit$}[fancylaw]
         \newfancytheorem[chapter]{claim}{声明}{\(\spadesuit\) }[fancyclaim]
         \newfancytheorem[chapter]{concept}{概念}{\(\spadesuit\)}[fancyclaim]
@@ -185,6 +188,73 @@
           
 
 
+
+
+
+          \newcommand{\xkuo}[1]{\left(#1\right)}
+          \newcommand{\dkuo}[1]{\left\lbrace#1\right\rbrace}
+          \newcommand{\akuo}[1]{\left[#1\right]}
+          \newcommand{\jkuo}[1]{\left\langle#1\right\rangle}
+          \newcommand{\daa}[1]{\par\textcolor{blue}{\huawenxingkai #1}}
+          \newcommand{\wen}[1]{\mbox{#1}}
+          \newcommand{\you}{\mbox{又}}
+          \newcommand{\dang}{\mbox{当}}
+          \newcommand{\yyou}{\mbox{有}}
+          \newcommand{\qie}{\mbox{且}}
+          \newcommand{\jishu}[2]{\sum #1_n(#2)}
+          \newcommand{\jjishu}[2][x]{\sum |#2_n(#1)|}
+          \newcommand{\xti}[3]{\[(#1)#2\]\da{#3}}
+          \newcommand{\pian}[2]{\frac{\partial #1}{\partial #2}}
+          \newcommand{\ppian}[2]{\frac{\partial^2 #1}{\partial #2^2}}
+          \newcommand{\dao}[2]{\frac{d#1}{d#2}}
+          \newcommand{\ddao}[2]{\frac{d^2#1}{d#2^2}}
+          \newcommand{\cen}{^\circ C}
+          \newcommand{\fah}{^\circ F}
+          \newcommand{\ji}[2]{\int_{#1}^{#2}}
+          \newcommand{\qh}[1]{\sum\limits_{#1}}
+          \newcommand{\jji}[1]{\iint\limits_{#1}}
+          \newcommand{\ppi}{\frac\pi2}
+          \newcommand{\ege}{\frac{\sqrt2}{2}}
+          \newcommand{\e}[1]{\times10^{#1}}
+          \newcommand{\ti}[1]{\textbf{#1}}
+
+
+          \newcommand{\ldotfill}[2]{\leavevmode\xleaders\hbox{\rule{2pt}{0.4pt}\ }\hfill\null}
+
+          %作业用
+          \newcounter{que}
+          \setcounter{que}{1}
+          \newenvironment{question}[1][\theque]{\vspace*{2cm}\par\noindent\hrule\vspace*{2pt}\hrule\vspace*{10pt}\noindent\bfseries\large Ex#1.}{\stepcounter{que}}
+          \definecolor{anscolor}{RGB}{50,120,170}
+          \newenvironment{answer}[1][答]{\par\centerline{\makebox[10cm]{\dotfill}}\par\hangafter1\hangindent2em\noindent\textbf{#1.}\huawenxingkai\color{anscolor}\\}{\par}
+
+          %数学分析
+          \newcommand{\ya}[4]{\frac{\partial(#1,#2)}{\partial(#3,#4)}}
+          \newcommand{\zkya}[4]{\pd #1#3#4\pd #2#4#3-\pd #1#4#3\pd #2#3#4}
+
+          %复变函数
+          \newcommand{\wqji}{\int_{-\infty}^{\infty}}
+
+          %热学
+          \newcommand{\pd}[3]{\xkuo{\frac{\partial#1}{\partial#2}}_#3}
+
+          %原子物理
+          \newcommand{\bra}[1]{\left\langle #1 \right|}
+          \newcommand{\ket}[1]{\left| #1 \right\rangle}
+          \newcommand{\p}[1]{\partial_{#1}}%对下标的偏导
+          \newcommand{\ep}[1]{\epsilon_{#1}}%全反对称张量
+          \newcommand{\dt}[1]{\delta_{#1}}%delta张量
+
+          %理论力学
+          \newcommand{\keq}[2]{\pian{\mathscr{#1}}{#2}}
+          \newcommand{\zkps}[3]{\pian{#1}{q_#3}\pian{#2}{p_#3}-\pian{#1}{p_#3}\pian{#2}{q_#3}}
+
+          %正文
+          \newcommand{\sub}[1]{\(_{#1}\)}
+          \newcommand{\sps}[1]{\(^{#1}\)}
+
+
+
         \begin{document}
           \renewcommand*{\psvectorianDefaultColor}{pscol}%设定图案颜色
       
@@ -217,6 +287,8 @@
           \newpage
           \setcounter{page}{1}
           \pagenumbering{arabic}
+
+          \part{热力学}
       
           \chapter{热力学定律}
       
@@ -320,4 +392,1039 @@
               C_P=\left(\frac{\partial H}{\partial T}\right)_P
             \end{equation}
           \end{define}
+
+          \section{热力学第二定律}
+          \begin{law}
+            \hl{热力学第二定律的开尔文表述}不存在一个能自发地把吸收的热量完全转化为功的热机
+          \end{law}
+          \begin{law}
+            \hl{热力学第二定律的克劳修斯表述}不存在一个能自发从低温热源把热量传给高温热源的热机
+          \end{law}
+          \begin{theorem}
+            热力学第二定律的开尔文表述和克劳修斯表述互为充要条件。
+          \end{theorem}
+          \begin{define}
+            \hl{卡诺热机}卡诺热机由四个不走组成：ab等温膨胀吸热，bc绝热膨胀，cd等温压缩，da绝热压缩。
+          \end{define}
+          \begin{define}
+            热机的\hl{效率}定义为：
+            \begin{equation}
+              \eta=\frac{W}{Q_2}=1-\frac{Q_1}{Q_2}
+            \end{equation}
+          \end{define}
+          \begin{theorem}
+            \hl{卡诺定理}：给定两个温度之间，不存在比卡诺热机效率更高的热机。
+          \end{theorem}
+          \begin{deduce}
+            两个给定温度下，所有卡诺热机拥有相同效率
+          \end{deduce}
+          \begin{define}
+            由上一个推论，可以得到\hl{绝对温标}：\\
+            取任意两个固定温度，卡诺热机的效率为\(\eta\)，因此定义温标\(\theta_1,\theta_2\)满足：
+            \begin{equation}
+              \frac{\theta_1}{\theta_2}=1-\eta
+            \end{equation}
+            由于\(1-\eta\)总大于零，因此温度\(\theta\)总大于零。由于\(\frac{Q_1}{Q^2}=\frac{\theta_{n+1}}{\theta_n}\)，因此我们假设有一组卡诺热机，每个对外做功\(W\)，且上一个卡诺热机完全吸收下一个卡诺热机输出的热量\(Q^{n+1}_1=Q^n_2\triangleq Q_n\)，于是有：
+            \begin{equation}
+              Q_{n+1}-Q_n=W,\quad \frac{Q_{n+1}}{Q_n}=\frac{\theta_{n+1}}{\theta_n}
+            \end{equation}
+            借此可以定义绝对温标。
+          \end{define}
+          
+          \section{熵}
+          与热力学第零定律和热力学第一定律一样，热力学第二定律允许我们定义一个新的状态函数——熵。
+
+          \begin{theorem}\label{thrm:Clausius}
+            \hl{克劳修斯定理}：
+            对任意循环的热力学变化有
+            \begin{equation}
+              \oint \frac{dQ}{T}\leqslant 0
+            \end{equation}
+            当变化可逆时（即在相空间表现为一个闭合曲线），取等号。
+          \end{theorem}
+          \begin{define}\label{def:entropy}
+            \hyperref[thrm:Clausius]{克劳修斯定理}告诉我们可以定义一个状态量\hl{熵}：
+            \begin{equation}
+              S(A)\equiv \int_O^A\frac{dQ}{T}
+            \end{equation}
+            其中\(O\)为原点状态，而\(A\)为相空间中任意状态。\\
+            有定义显然有\(dS=\frac{dQ}{T}\)
+          \end{define}
+          \begin{deduce}\label{ded:deduce141}
+            由\hyperref[thrm:Clausius]{克劳修斯定理}和\hyperref[def:entropy]{熵}的定义可知，对任意热力学变化有
+            \begin{equation}
+              \int_A^B\frac{dQ}{T}\leqslant S(B)-S(A)
+            \end{equation}
+          \end{deduce}
+          \begin{deduce}
+            由\hyperref[ded:deduce141]{上一个推论}可知，对任意孤立热力学系统（即dQ=0），熵永远增加：
+            \begin{equation}
+              S(B)-S(A)\geqslant 0
+            \end{equation}
+          \end{deduce}
+          \begin{deduce}
+            由\(dQ\)的表达式\autoref{eq:dQVT}可得
+            \begin{equation}\label{eq:dSVT}
+              dS=\frac{dQ}{T}=\xkuo{\frac{C_V}{T}}dT+\frac1T\akuo{\pd UVT+P}dV
+            \end{equation}
+            由于dS是全微分，可以得到
+            \begin{equation}
+              \left(\frac{\partial U}{\partial V}\right)_T=T\left(\frac{\partial P}{\partial T}\right)_V-P
+            \end{equation}
+            代回\autoref{eq:dSVT}得到
+            \begin{equation}
+              T d S=C_V d T+T\left(\frac{\partial P}{\partial T}\right)_V d V
+            \end{equation}
+            同样的方法利用\(dQ\)的另一个表达式\autoref{eq:dQPT}可得
+            \begin{equation}
+              T d S=C_P d T-T\left(\frac{\partial V}{\partial T}\right)_P d P
+            \end{equation}
+          \end{deduce}
+
+          \section{热力学势能}
+          我们引入两个辅助态函数，亥姆霍兹自由能A和吉布斯热力学势G(或吉布斯自由能)，它们用来确定非孤立系统的平衡态。它们的定义如下：
+          \begin{define}
+            \hl{亥姆霍兹自由能}
+            \begin{equation}
+              A=U-TS
+            \end{equation}
+            其微分形式为
+            \begin{equation}
+              dA=-PdV-SdT
+            \end{equation}
+          \end{define}
+          \begin{theorem}
+            等温变换中，亥姆霍兹自由能A的变化等于系统所做的最大可能功的负值。
+            \begin{equation}
+              W\leqslant -\Delta A
+            \end{equation}
+          \end{theorem}
+          \begin{deduce}
+            对于\hl{保持恒定温度的力学孤立系统}，亥姆霍兹自由能永不增加。因此其平衡状态是亥姆霍兹自由能最小的状态。
+          \end{deduce}
+          \begin{define}
+            \hl{吉布斯自由能}
+            \begin{equation}
+              G=A+PV
+            \end{equation}
+            其微分形式为
+            \begin{equation}\label{eq:dGPT}
+              dG=VdP-SdT
+            \end{equation}
+          \end{define}
+          \begin{theorem}
+            在\hl{恒定的温度和压强}下，吉布斯势从不增加。因此其平衡状态是吉布斯自由能最小的状态
+          \end{theorem}
+
+          \section{热力学第三定律}
+
+          \begin{law}
+            \hl{热力学第三定律}：绝对零度时系统的熵是一个普适常数，可以取为零。
+          \end{law}
+
+          \chapter{热力学定律的应用}
+          \section{相变的热力学描述}
+          \begin{law}
+            相变时，压强和温度不变
+          \end{law}
+          \begin{define}
+            当一定质量的液体转化为气体时，尽管P和T保持不变，但系统的总体积会扩大。这样的转变被称为\hl{一阶转变}。
+          \end{define}
+          \begin{deduce}
+            由于吉布斯势能必须最小：在改变占比\(\delta r_1=-\delta r_2=\delta r\)时，\(\delta G=0\)。设总质量为m，液态、气态单位质量吉布斯自由能（又被称为\hl{化学势}）分别为\(g_1,g_2\)，于是有
+            \begin{equation}
+              \delta G=\delta m\xkuo{r_1g_1+r_2g_2}=m\xkuo{g_1-g_2}\delta r=0
+            \end{equation}
+            于是得到一阶转变的平衡状态下有
+            \begin{equation}
+              g_1=g_2
+            \end{equation}
+            由吉布斯自由能的定义\autoref{eq:dGPT}得到
+            
+            \begin{equation}
+              \left(\frac{\partial g}{\partial T}\right)_P=-s,\,\,\,\left(\frac{\partial g}{\partial P}\right)_T=v
+            \end{equation}
+            其中小写的\(v,s\)分别代表每单位质量的体积和熵。于是\(g_1\)的一阶导数与\(g_2\)在转变温度和压力下的一阶偏导是不同的(这就是为什么称为“一阶转变”)
+          \end{deduce}
+          \begin{deduce}
+            \hl{克拉伯龙方程}：进一步推导可得\(\dao{P(T)}{T}=\frac{\Delta s}{\Delta v}\)
+
+            定义\hl{转化潜热}\(l\):
+            \begin{equation}
+              l=T\Delta s
+            \end{equation}
+            于是克拉伯龙方程写为
+            \begin{equation}
+              \dao{P(T)}{T}=\frac{l}{T\Delta v}
+            \end{equation}
+          \end{deduce}
+          \begin{define}
+            \hl{n阶相变}:\\
+            若\(\Delta s,\Delta v\)均为零（即两相密度一样，单位质量的熵也一样），则克拉伯龙方程失效。
+            我们定义n阶相变：
+            \begin{equation}
+              \frac{\partial^n g_1}{\partial T^n} \neq \frac{\partial^n g_2}{\partial T^n} \quad \text { 并且 } \quad \frac{\partial^n g_1}{\partial P^n} \neq \frac{\partial^n g_2}{\partial P^n}
+            \end{equation}
+            同时其低阶偏导全部相同。
+
+            现代一般只区分一阶和高阶转换，后者通常被不加区分地称为“二阶”转换。
+          \end{define}
+          \chapter{动力学}
+          \begin{define}
+            定义\(f(\vec r,\vec p,t)\)为t时刻下r,p范围dr,dp中的粒子数。则有
+            \begin{equation}
+              \int f(\vec r,\vec p,t)d\vec rd\vec p\equiv N
+            \end{equation}
+          \end{define}
+          \begin{deduce}
+            由动力学可知在外力\(\vec F\)下，不考虑碰撞时分布函数\(f\)满足
+            \begin{equation}
+              f(\vec r+\vec v\delta t,\vec p+\vec F\delta t,t+\delta t)=f(\vec r,\vec p,t)
+            \end{equation}
+          \end{deduce}
+          \begin{deduce}
+            考虑碰撞时，设
+            \begin{equation}
+              f(\vec{r}+\vec{v} \delta t, \vec{p}+\vec{F} \delta t, t+\delta t)=f(\vec{r}, \vec{p}, t)+\left(\frac{\partial f}{\partial t}\right)_{\mathrm{coll}} \delta t
+            \end{equation}
+            对\(\delta t\)展开后得到
+            \begin{equation}
+              \left(\frac{\partial}{\partial t}+\frac{\vec{p}}{m} \cdot \nabla_{\vec{r}}+\vec{F} \cdot \nabla_{\vec{p}}\right) f(\vec{r}, \vec{p}, t)=\left(\frac{\partial f}{\partial t}\right)_{\text {coll }}
+            \end{equation}
+          \end{deduce}
+          \begin{deduce}
+            \hl{玻耳兹曼输运方程}
+            \begin{equation}
+              \left(\frac{\partial}{\partial t}+\frac{\vec{p}_1}{m} \cdot \nabla_r+\vec{F} \cdot \nabla_{p_1}\right) f_1=\int d^3 p_2 d^3 p_1^{\prime} d^3 p_2^{\prime} \delta^4\left(P_{\mathrm{f}}-P_{\mathrm{i}}\right)\left|T_{\mathrm{fi}}\right|^2\left(f_2^{\prime} f_1^{\prime}-f_2 f_1\right)
+            \end{equation}
+          \end{deduce}
+          \section{吉布斯系综}
+          \begin{define}
+            \hl{系综}指宏观条件完全相同的不同状态的系统的集合，由\(\Gamma\)空间中点的分布表示，一般是连续分布，可以由密度函数\(\rho(p,q,t)\)表示
+          \end{define}
+          \begin{theorem}
+            \hl{刘维尔定理}：
+            \begin{equation}
+              \frac{\partial \rho}{\partial t}+\sum_{i=1}^{3 N}\left(\frac{\partial \rho}{\partial p_i} \dot{p}_i+\frac{\partial \rho}{\partial q_i} \dot{q}_i\right)=0
+            \end{equation}
+            也可以写成
+            \begin{equation}
+              \dao \rho t=0
+            \end{equation}
+            其几何意义是：如果我们关注\(\Gamma\)空间中一个代表点的运动，我们发现其邻域中的点的密度是恒定的。因此，代表性点的分布就像不可压缩的流体一样在\(\Gamma\)空间中移动。
+          \end{theorem}
+          \begin{define}
+            系统的一个动态物理量\(O\)的\hl{观测值}定义为他在一个系综上的平均值：
+            \begin{equation}
+              \langle O\rangle=\frac{\int d^{3 N} p d^{3 N} q O(p, q) \rho(p, q, t)}{\int d^{3 N} p d^{3 N} q \rho(p, q, t)}
+            \end{equation}
+            称为物理量的\hl{系综平均值}
+          \end{define}
+          \section{BBGKY方程组}
+          \begin{define}
+            定义\hl{单粒子分布函数}
+            \begin{align}
+              f_{1}(\vec z, t) &\triangleq\left\langle\sum_{i=1}^N \delta^6\left(\vec{z}-\vec{z}_i\right) \right\rangle\\
+              &=N \int d \vec z_2 \cdots d \vec z_N \rho(\vec z,\vec z_2, \ldots, \vec z_N, t)
+            \end{align}
+            其中，\(\vec z_i\triangleq(\vec p_i,\vec q_i)\)，\(d\vec z_i\triangleq dp_xdp_ydp_zdxdydz\)，\(\rho\)是概率密度函数\\
+            因此，\(\int f_1 dz_1=1\)
+          \end{define}
+          \begin{define}
+            \hl{s个粒子的分布函数}由以下公式导出：
+            \begin{align}
+              f_s(1, \ldots, z, t) \equiv \frac{N !}{(N-s) !} \int d z_{s+1} \cdots d z_N \rho(1, \ldots, N, t) \quad(s=1, \ldots, N)            \end{align}
+          \end{define}
+          \begin{define}
+            定义\hl{\(h_s\)}:
+            \begin{align}
+              h_N(1, \ldots, N) & =\sum_{i=1}^N S_i+\frac{1}{2} \sum_{\substack{i, j=1 \\
+              (i \neq j)}}^N P_{i j} \\
+              S_i & \equiv \frac{\mathbf{p}_i}{m} \cdot \nabla_{r_i}+\mathbf{F}_i \cdot \nabla_{p_i} \\
+              P_{i j} & \equiv \mathbf{K}_{i j} \cdot \nabla_{p_i}+\mathbf{K}_{j i} \cdot \nabla_{p_j}=\mathbf{K}_{i j} \cdot\left(\nabla_{p_i}-\nabla_{p_j}\right)
+            \end{align}
+            则有
+            \begin{align}
+              h_N& =\sum_{i=1}^s S_i+\sum_{s+1}^N S_i+\frac{1}{2} \sum_{\substack{i, j=1 \\
+              (i \neq j)}}^s P_{i j}+\frac{1}{2} \sum_{\substack{i, j=s+1 \\
+              (i \neq j)}}^N P_{i j}+\sum_{i=1}^s \sum_{j=s+1}^N P_{i j} \nonumber\\
+              & =h_s(1, \ldots, s)+h_{N-s}(s+1, \ldots, N)+\sum_{i=1}^s \sum_{j=s+1}^N P_{i j}
+            \end{align}
+          \end{define}
+          \begin{deduce}
+            \hl{BBGKY递推公式}\(f_s(1,\ldots,s)\)
+            \begin{equation}
+              \begin{array}{r}
+                \left(\frac{\partial}{\partial t}+h_s\right) f_s=-\sum_{i=1}^s \int d z_{s+1} \mathbf{K}_{i, s+1} \cdot \nabla_{p_t} f_{s+1} ,\quad
+                (s=1, \ldots, N)
+                \end{array}
+            \end{equation}
+          \end{deduce}
+          \chapter{稀疏气体的平衡态}
+
+          \part{统计物理}
+          \chapter{经典统计力学}
+          \begin{define}
+            虽然我们有粒子相互作用的运动方程，但它们数量太多，自由度太多。符合相同方程，可以通过统计力学的方式来解决宏观的问题，以概率密度函数作为研究对象：
+            \begin{equation}
+              \rho(p_i,q_i,t)dp_1dq_1\ldots dp_ndq_n
+            \end{equation}
+            代表系统位于\(p_i,q_i\)位置的概率
+          \end{define}
+          \begin{define}
+            \hl{系综}定义为
+            平衡状态下，概率密度函数\begin{equation}
+              \rho(p_i,q_i,t)\equiv\rho(p,q)
+            \end{equation}
+            
+          \end{define}
+          \begin{define}
+            \hl{\(\Gamma\)空间}定义为由(p,q)张成的空间。\\
+            系综当中的一个系统可以用\(\Gamma\)中的一个点来表示。
+          \end{define}
+          \begin{define}
+            统计力学中，一个可测量物理量\(f(p,q)\)的\hl{系综平均值}定义为
+            \begin{equation}
+              \langle f\rangle\equiv\frac{\int f(p,q)\rho(p,q)dpdq}{\int\rho(p,q)dpdq}
+            \end{equation}
+          \end{define}
+          \begin{claim}
+            热力学极限下，系综平均值和最可能值相等。
+          \end{claim}
+          \section{微正则系综}
+          \begin{define}
+            \hl{微正则系综}的概率密度函数满足
+            \begin{equation}
+              \rho(p, q)= \begin{cases}\text { const. } & \text { if } E<H(p, q)<E+\Delta \\ 0 & \text { otherwise }\end{cases}
+            \end{equation}
+          \end{define}
+          \begin{define}
+            定义在\(\Gamma\)空间中的\hl{体积}为：
+            \begin{equation}
+              \Gamma(E)\equiv\int_{E<H(p,q)<E+\Delta}dpdq
+            \end{equation}
+          \end{define}
+          \begin{define}
+            \hl{熵}定义为
+            \begin{equation}
+              S(E,V)\triangleq k\ln\Gamma(E)
+            \end{equation}
+            其中\(k\)是玻耳兹曼常数。
+          \end{define}
+          \begin{attribute}
+            熵是一个广延量：\(S=S_1+S_2\)
+          \end{attribute}
+          \begin{define}
+            \hl{温度}定义为
+            \begin{equation}
+              \frac1T\triangleq \pian{S}{E}
+            \end{equation}
+          \end{define}
+          \begin{define}
+            \begin{equation}
+              \Sigma(E)=\int_{H(p,q)<E}dpdq
+            \end{equation}
+          \end{define}
+          \begin{define}
+            \begin{equation}
+              \omega(E)=\pian{\Sigma(E)}{E}
+            \end{equation}
+          \end{define}
+          \begin{attribute}
+            在近似下有：
+            \begin{gather}
+              \Gamma(E)=\omega(E)\Delta\\
+              \Gamma(E)=\Sigma(E+\Delta)-\Sigma(E)\\
+              S=k\ln\Gamma(E)\\
+              S=k\ln\omega(E)\\
+              S=k\ln\Sigma(E)
+            \end{gather}
+          \end{attribute}
+          \begin{define}
+            定义\hl{压强}\(P\)：
+            \begin{equation}
+              P\triangleq T\xkuo{\pian SV}_E
+            \end{equation}
+          \end{define}
+          \begin{attribute}
+            \begin{equation}
+              dE=TdS-PdV
+            \end{equation}
+          \end{attribute}
+
+          \section{均分定理}
+          \begin{claim}
+            理想气体的粒子哈密顿量不考虑不同自由度之间的相互作用：
+            \begin{equation}
+              H=\frac1{2m}\sum p_i^2
+            \end{equation}
+            或对于谐振子
+            \begin{equation}
+              H=\frac1{2m}\sum p_i^2+\frac12\omega^2\sum q_i^2
+            \end{equation}
+          \end{claim}
+          \begin{theorem}
+            \hl{哈密顿量的均分定理}：设\(x_i\)等于\(p_i\)或\(q_i\)，有
+            \begin{equation}
+              \jkuo{x_i\pian{H}{x_j}}=\delta_{ij}kT
+            \end{equation}
+            而对于形如\(H=\sum\limits_iA_ip_i^2+\sum\limits_iB_iq_i^2\)这样的哈密顿量，有
+            \begin{equation}
+              \jkuo{2H}=\jkuo{\sum_{i=1}^n p_i\pian{H}{p_i}+\sum_{i=1}^ma_i\pian{H}{q_i}}=(m+n)kT
+            \end{equation}
+          \end{theorem}
+          \begin{theorem}
+            \hl{理想气体能量均分定理}对自由度为\(f\)理想气体，
+            \begin{equation}
+              \jkuo{H}=\frac12fkT
+            \end{equation}
+          \end{theorem}
+          \section{经典理想气体}
+          \begin{claim}
+            这个部分理想气体粒子的哈密顿量为\(H=\frac1{2m}\sum p_i^2\)
+          \end{claim}
+          \begin{deduce}
+            \begin{equation}
+              \Sigma(E)=V^N\Omega_{3N}(R)=C_{3N}\akuo{V(2mE)^{3/2}}^N
+            \end{equation}
+            其中，\(R=\sqrt[]{2mE}\)，N为粒子数，\(\Omega_n(R)=\frac{2\pi^{n/2}}{\Gamma(n/2+1)}R^n\)为n维球体体积（动量小于\(R\)的球体）
+          \end{deduce}
+          \begin{deduce}
+            理想气体的熵：
+            \begin{equation}
+              S(E,V)=k\ln\Sigma(E)\approx N k \ln \left[V\left(\frac{4 \pi m E}{3 N}\right)^{3 / 2}\right]+\frac{3}{2} N k
+            \end{equation}
+            于是求解得到
+            \begin{equation}
+              U(S, V) \equiv E=\frac{3 N}{4 \pi m V^{2 / 3}} \quad \exp \left(\frac{2 S}{3 N k}-1\right)
+            \end{equation}
+            以此得到剩下热力学量：
+            \begin{align}
+              T & =\left(\frac{\partial U}{\partial S}\right)_V=\frac{2 U}{3 N k}, \quad\text{即} U=\frac{3}{2} N k T \\
+              C_V & =\frac{3}{2} N k \\
+              P & =-\left(\frac{\partial U}{\partial V}\right)_S=\frac{N k T}{V}
+              \end{align}
+          \end{deduce}
+          \begin{define}
+            为了使两个相同的理想气体相互扩散时熵不增加，引入一个\hl{吉布斯因子}：
+            \begin{equation}
+              \Sigma(E)=\frac1{N!}\int_{H<E}d^Npd^Nq
+            \end{equation}
+            此因子与量子力学原理有关。
+          \end{define}
+          \section{麦克斯韦-玻耳兹曼分布}
+          \begin{claim}
+            此部分气体粒子能量相互独立，类似微正则分布。
+          \end{claim}
+          \begin{define}
+            \hl{\(\mu\)空间}定义为单个粒子的自由度张成的相空间\(\xkuo{p,q}\)
+          \end{define}
+          \begin{theorem}
+            \begin{center}
+              \hl{玻耳兹曼统计理论}
+            \end{center}
+            将总粒子数分为\(K\)个部分之和
+            \begin{equation}\label{eqn:N}
+              N=\sum_{l=1}^Kn_l
+            \end{equation}
+            于是
+            \begin{equation}\label{eqn:E}
+              E=\sum_{l-1}^K \epsilon_ln_l
+            \end{equation}
+            则系统在\(\Gamma\)空间中占据的体积为
+            \begin{equation}
+              \Omega\xkuo{n_1,\ldots,n_K}\propto \frac{N!}{n_1!\ldots n_K!}\prod_{l=1}^Kg_l^{n_l}
+            \end{equation}
+            其中\(g_l\)是引入的乘子，最终需要使它等于1\\
+            通过变分法可以求得最可能的\(n_l\)分布：
+            \begin{equation}
+              \bar n_l=g_le^{-\alpha-\beta\epsilon_l}
+            \end{equation}
+            其中\(\alpha\)、\(\beta\)是拉格朗日乘子，由\autoref{eqn:N}和\autoref{eqn:E}确定（即由总的粒子数和能量确定）。
+          \end{theorem}
+          \begin{define}
+            定义\hl{配分函数}：
+            \begin{equation}
+              Z(\beta, y)=\sum_l e^{-\beta \epsilon_l}=\int_{\epsilon \leq E} d p d q e^{-\beta \epsilon(p, q, y)}
+            \end{equation}
+          \end{define}
+          \begin{deduce}
+            代入可得
+            \begin{align}
+                N & =e^{-\alpha} Z(\beta, y) \quad \text { 即 } \quad \alpha=\ln \frac{Z(\beta, y)}{N} \\
+                E & =-N \frac{\partial \ln Z(\beta, y)}{\partial \beta}
+            \end{align}
+            由\autoref{eqn:N}可以得到系统能量变化有两部分组成：
+            \begin{equation}
+              dE=\sum \bar n_ld\epsilon_l+\sum e_ld\bar n_l
+            \end{equation}
+            先分析前一部分，设\(y_k\)是与外部环境相互作用的自由度，则
+            \begin{equation}
+              \begin{aligned}
+                \sum_l \bar{n}_l \mathrm{~d} \epsilon_l & =\sum_{l, k} \bar{n}_l \frac{\partial \epsilon_l}{\partial y_k} \mathrm{~d} y_k \\
+                & =\sum_k\left(\sum_l \bar{n}_l \frac{\partial \epsilon_l}{\partial y_k}\right) \mathrm{d} y_k\\
+                &=-\sum_k Y_k \mathrm{d} y_k
+                \end{aligned}
+            \end{equation}
+            其中\(Y_k\)是作用力
+            \begin{equation}
+              Y_k \equiv-\sum_l \bar{n}_l \frac{\partial \epsilon_l}{\partial y_k}=\frac{N}{\beta} \frac{\partial \ln Z(\beta, y)}{\partial y_k}
+            \end{equation}
+            因此，\hl{压力}
+            \begin{equation}
+              P=\frac{N}{\beta} \frac{\partial \ln Z(\beta, V)}{\partial V}
+            \end{equation}
+            因此另一部分是\hl{热量}
+            \begin{equation}
+              dQ=\sum_l \epsilon_ld\bar n_l
+            \end{equation}
+            计算得
+            \begin{equation}
+              \mathrm{d} Q=\frac{N}{\beta} \mathrm{d}\left(\ln Z(\beta, y)-\beta \frac{\partial \ln Z(\beta, y)}{\partial \beta}\right)
+            \end{equation}
+          \end{deduce}
+          \begin{deduce}
+            因此可以得到\hl{温度}：
+            \begin{equation}
+              \beta=\frac{1}{kT}
+            \end{equation}
+            于是\hl{熵}
+            \begin{equation}
+              \begin{aligned}
+                \mathrm{d} S & =N k \mathrm{~d}\left(\ln Z(\beta, y)-\beta \frac{\partial \ln Z(\beta, y)}{\partial \beta}\right) \\
+                \text{即}S & =N k\left(\ln Z(\beta, y)-\beta \frac{\partial \ln Z(\beta, y)}{\partial \beta}\right)+\text { const }
+                \end{aligned}
+            \end{equation}
+          \end{deduce}
+
+          \chapter{正则系综和巨正则系综}
+          \section{正则系综}
+          \begin{deduce}
+            设系统分为两部分，\(E_1<<E_2,N_1<<N_2\)\\
+            那么系统1处于\((p_1,q_1)\)状态的概率为
+            \begin{equation}
+              \rho(p,q)\propto \int_{E_2=E-E_1}d_2dq_2=\Gamma_2(E-E_1)
+            \end{equation}
+            泰勒展开可以得到
+            \begin{equation}
+              \begin{aligned}
+                k \ln \Gamma_2\left(E-E_1\right) & =k \ln \Gamma_2(E)-\left.E_1 \frac{\partial k \ln \Gamma_2\left(E_2\right)}{\partial E_2}\right|_{E_2=E}+\cdots \\
+                & =S_2(E)-\frac{E_1}{T}
+                \end{aligned}
+            \end{equation}
+            于是有 
+            \begin{equation}
+              \rho(p, q) \propto e^{-H(p, q) / k T}
+            \end{equation}
+          \end{deduce}
+          \begin{define}
+            \hl{正则系综的概率分布函数}定义为 
+            \begin{equation}
+              \rho(p, q) \propto e^{-H(p, q) / k T}
+            \end{equation}
+            其宏观条件为：
+            \begin{enumerate}
+              \item N固定
+              \item 与恒温热源T保持平衡
+            \end{enumerate}
+          \end{define}
+          \begin{define}
+            定义正则系综的\hl{配分函数}：
+            \begin{equation}
+              Q_N(V, T) \equiv \frac{1}{N !} \int \mathrm{d}^{3 N} p \mathrm{~d}^{3 N} q e^{-H / k T}=e^{-A(V,T)/kT}
+            \end{equation}
+            其中，\(A\)是\hl{自由能}
+          \end{define}
+          \begin{theorem}
+            物理量的\hl{观测值}：
+            \begin{equation}
+              \jkuo{O}=\frac{1}{Q_N N !} \int  e^{-\beta H} O\mathrm{d} p \mathrm{~d} q
+            \end{equation}
+          \end{theorem}
+          \begin{theorem}
+            \begin{equation}
+              \begin{aligned}
+                <H^2>-<H>^2 & =-\frac{\partial U}{\partial \beta}=k T^2 \frac{\partial U}{\partial T} \\
+                & =k T^2 C_V
+              \end{aligned}
+            \end{equation}
+          \end{theorem}
+          \begin{deduce}
+            \hl{玻耳兹曼统计理论}
+            配分函数与自由能的关系可由\(Q_N(V,T)\)得到：
+            \begin{equation}
+              \frac{1}{N !}[Z(\beta, V)]^N=e^{-\beta A(V, T)}
+            \end{equation}
+            于是有
+            \begin{equation}
+              A(V, T)  =-N k T \ln \frac{Z(\beta, V)}{N}
+            \end{equation}
+            因此
+            \begin{equation}
+              \begin{aligned}
+                S & =-\left(\frac{\partial A}{\partial T}\right)_V \\
+                & =N k \ln \frac{Z(\beta, V)}{N}+\frac{N}{\beta} \frac{\partial \ln Z(\beta, V)}{\partial \beta} \frac{\partial \beta}{\partial T} \\
+                & =N k\left(\ln \frac{Z(\beta, V)}{N}-\beta \frac{\partial \ln Z(\beta, V)}{\partial \beta}\right)
+                \end{aligned}
+            \end{equation}
+          \end{deduce}
+          \section{正则系综的应用}
+          \begin{theorem}
+            \hl{能均分定理}
+            若
+            $$
+            H=\frac{1}{2} \sum_i a_i p_i^2+U\left(\left\{q_i\right\}\right)
+            $$
+            则
+            $$
+            <\frac{1}{2} a_i p_i^2>=\frac{1}{2} k T
+            $$
+          \end{theorem}
+          \begin{theorem}
+            \hl{理想气体}
+            \begin{equation}
+              H=\frac{1}{2 m} \sum_i p_i^2
+            \end{equation}
+            代入可得
+            \begin{align}
+                Q_N(V, T) & =\frac{1}{N !} \int \mathrm{d}^{3 N} p \mathrm{~d}^{3 N} q e^{-\beta \sum_i p_i^2 / 2 m} \\
+                & =\frac{V^N}{N !}\left(\int \mathrm{d}^3 p e^{-\beta p^2 / 2 m}\right)^N \\
+                & =\frac{V^N}{N !}[q(\beta)]^N \\
+                q(\beta) & =\int_0^{\infty} \mathrm{d} p p^2 e^{-p^2 / 2 m k T} \int \mathrm{d} \Omega \\
+                & =(\pi 2 m k T)^{3 / 2}\\
+                \Rightarrow A(V, T) & =-k T \ln Q_N(V, T) \\
+                  & =-N k T\left(\ln V / N+\frac{3}{2} \ln \pi 2 m k T+1\right)
+            \end{align}
+            进而可以导出\(S\)、\(P\)、\(U\)
+          \end{theorem}
+
+          \section{Ising模型}
+
+          \section{巨正则系综}
+          \begin{define}
+            \begin{equation}
+              \rho\left(p_1, q_1, N_1\right)=\frac{Q_{N_2}\left(V_2, T\right)}{Q_N(V, T)} \frac{e^{-\beta H\left(p_1, q_1, N_1\right)}}{N_{1} !}
+            \end{equation}
+            在\(N_2>>N_1,\,V_2>>V_1\)的近似下对\(A\)泰勒展开可以得到
+            \begin{equation}
+              \rho(p, q, N)=\frac{e^{-\beta P V}}{N !} e^{\beta \mu N-\beta H(p, q, N)}
+            \end{equation}
+          \end{define}
+          \begin{define}
+            定义配分函数
+            \begin{equation}
+              Z(\mu, V, T) \equiv \sum_{N=0}^{\infty} e^{\beta \mu N} Q_N(V, T)
+            \end{equation}
+          \end{define}
+          \begin{deduce}
+            \begin{equation}
+              \beta P V=\ln Z(\mu, V, T)
+            \end{equation}
+            \begin{equation}
+              \begin{aligned}
+                \bar{N} & =\langle N\rangle=\frac{1}{Z(\mu, V, T)} \sum_{N=0}^{\infty} N e^{\beta \mu N} Q_N(V, T) \\
+                & =k T \frac{\partial}{\partial \mu} \ln Z(\mu, V, T)
+                \end{aligned}
+            \end{equation}
+          \end{deduce}
+          \begin{deduce}
+            \begin{equation}
+              \mathrm{d} A=-P \mathrm{~d} V-S \mathrm{~d} T+\mu \mathrm{d} \bar{N}
+            \end{equation}
+          \end{deduce}
+          \begin{deduce}
+            \begin{equation}
+              -\beta \mu=-\beta \frac{\partial A}{\partial N}=\ln (Z(\beta, V) / N)
+            \end{equation}
+          \end{deduce}
+          \chapter{量子统计}
+          \section{复习量子力学}
+          \begin{define}
+            \hl{希尔伯特空间} 
+          \end{define}
+          \begin{define}
+            微观系统在\(t\)时刻的一个\hl{状态}对应于希尔伯特空间中的一个点：
+            \begin{equation}
+              \psi=\sum_n C_n(t) \phi_n
+            \end{equation}
+          \end{define}
+          \begin{define}
+            \hl{内积}
+          \end{define}
+          \begin{define}
+            \hl{物理可观测值平均值}
+          \end{define}
+          \begin{define}
+            \hl{薛定谔方程}
+          \end{define}
+          \begin{define}
+            \hl{算符的矩阵表示}
+          \end{define}
+          \begin{define}
+            \hl{狄拉克符号}
+          \end{define}
+          \begin{claim}
+            自然界中有两种粒子：
+            \begin{enumerate}
+              \item \hl{玻色子}\\
+              波函数在任意一对粒子坐标的交换下都是对称的
+              \item \hl{费米子}\\
+              波函数在任意一对粒子坐标的交换下是反对称的
+            \end{enumerate}
+            因此费米子有\hl{泡利不相容原理}
+          \end{claim}
+          \section{量子统计的假设}
+          \begin{claim}
+            设在\(\dkuo{\phi_n}\)表象下可观测量为
+            \begin{equation}
+              \overline{\langle O(x)\rangle}=\overline{(\psi, O(x) \psi)}=\sum_{n, m} \overline{C_n^*(t) C_m(t)}\left(\phi_n, \hat{O} \phi_m\right)
+            \end{equation}
+            微正则系综：
+            $$\overline{C_n^*(t) C_m(t)}=0 \quad n \neq m$$
+            $$\overline{C_n^*(t) C_n(t)}= \begin{cases}|b_n|^2 & E<E_n<E+\Delta \\ 0 & \text { otherwise }\end{cases}$$
+          \end{claim}
+          \begin{define}
+            定义\hl{密度矩阵}：
+            \begin{equation}
+              \rho_{n m} \equiv\left(\phi_n, \rho \phi_m\right) \equiv \delta_{n m}\left|b_n\right|^2
+            \end{equation}
+            在狄拉克符号中，
+            \begin{equation}
+              \rho=\sum_n\left|\phi_n\right\rangle\left|b_n\right|^2\left\langle\phi_n\right| .
+            \end{equation}
+          \end{define}
+          \begin{deduce}
+            \begin{equation}
+              \langle O\rangle=\frac{\sum_n\left\langle\phi_n|O \rho| \phi_n\right\rangle}{\sum_n\left\langle\phi_n|\rho| \phi_n\right\rangle}=\frac{T_r(O \rho)}{T_r \rho}
+            \end{equation}
+          \end{deduce}
+          \section{系综}
+          \begin{define}
+            \hl{微正则系综}：\(|b_n|^2=1\)
+            \begin{equation}
+              \rho=\sum_{E<E_n<E+\Delta}\left|\phi_n\right\rangle\left\langle\phi_n\right|
+            \end{equation}
+            定义体积：
+            \begin{equation}
+              \Gamma(E)=T_r \rho
+            \end{equation}
+            即能量在\(E\)到\(E+\Delta\)之间的特征态数量
+          \end{define}
+          \begin{define}
+            定义\hl{熵}：
+            \begin{equation}
+              S(E, V)=k \ln \Gamma(E)
+            \end{equation}
+          \end{define}
+          \begin{define}
+            \hl{正则系综}
+            \begin{equation}
+              \rho_{n m}=\delta_{n m} e^{-\beta E_n} \quad \beta=\frac{1}{k T}
+            \end{equation}
+            \begin{equation}
+              \hat\rho=e^{-\beta \hat H}
+            \end{equation}
+          \end{define}
+          \begin{define}
+            \hl{配分函数}
+            \begin{equation}
+              \begin{aligned}
+                Q_N(V, T) & =T_r \rho \\
+                & =\sum_n e^{-\beta E_n}
+                \end{aligned}
+            \end{equation}
+          \end{define}
+          \begin{deduce}
+            对于可观测量，
+            \begin{equation}
+              \langle O\rangle=\frac{T_r(O \rho)}{T_r \rho}=\frac{1}{Q_N} T_r\left(O e^{-\beta H}\right)
+            \end{equation}
+            在能量表象下，
+            \begin{equation}
+              \langle O\rangle=\frac{1}{Q_N} \sum_n O_{n n} e^{-\beta E_n}
+            \end{equation}
+          \end{deduce}
+          \begin{define}
+            \hl{巨正则配分函数}
+            \begin{equation}
+              Z(\mu, V, T)=\sum_{N=0}^{\infty} e^{\beta \mu N} \cdot Q_N(V, T)
+            \end{equation}
+            \begin{equation}
+              \langle O\rangle=\frac{1}{Z(\mu, V, T)} \sum_{N=0}^{\infty} e^{\beta \mu N}\langle O\rangle_N
+            \end{equation}
+            \begin{equation}
+              \rho=e^{-\beta(H-\mu N)}
+            \end{equation}
+          \end{define}
+          \begin{deduce}
+            由N个准独立的双能级子系统组成的系统，其内能
+            \begin{equation}
+              U=\langle E\rangle=\frac{N \epsilon \exp (-\beta \epsilon)}{1+\exp (-\beta \epsilon)}
+            \end{equation}
+            由
+            \begin{equation}
+              Q_N=Z^N,\,A=-k T \ln Q_N
+            \end{equation}
+            得到
+            \begin{equation}
+              \mu=\left(\frac{\partial A}{\partial N}\right)_T=-k T \ln [1+\exp (-\beta \epsilon)]
+            \end{equation}
+          \end{deduce}
+          \section{理想气体的微正则系综}
+
+          \begin{deduce}
+            粒子能量\(\epsilon_p=\frac{p^2}{2 m}\)，其中
+            \begin{equation}
+              \begin{gathered}
+                \vec{p}=\frac{2 \pi \hbar}{L} \vec{m} \Leftrightarrow\left\{\begin{array}{l}
+                p_x=2 \pi \hbar m_x / L \\
+                p_y=2 \pi \hbar m_y / L \\
+                p_z=2 \pi \hbar m_z / L
+                \end{array}\right. \\
+                m_x, m_y, m_z=0, \pm 1, \pm 2, \cdots
+                \end{gathered}
+            \end{equation}
+          \end{deduce}
+          \begin{deduce}
+            对于\hl{玻色子}，考虑将系统等效为\(i\)个具有\(g_i\)个简并度的能级，每个状态\(n_i\)个粒子。
+            则状态数
+            \begin{equation}
+              W\left\{n_i\right\}=\prod_i \omega_i=\prod_i \frac{\left(n_i+g_i-1\right) !}{n_{i} !\left(g_i-1\right) !}
+            \end{equation}
+            \begin{equation}
+              \omega_i=\frac{\left(n_i+g_i-1\right) !}{n_{i} !\left(g_i-1\right) !}
+            \end{equation}
+
+          \end{deduce}
+          \begin{deduce}
+            对于\hl{费米子}每个状态最多仅有一个粒子，即\(n_i=0,1\)，于是
+            \begin{equation}
+              \omega_i=\frac{g_{i} !}{n_{i} !\left(g_i-n_i\right) !} \quad W\left\{n_i\right\}=\prod_i \omega_i
+            \end{equation}
+          \end{deduce}
+          \begin{deduce}
+            \begin{equation}
+              \begin{aligned}
+                S & =k \ln \Gamma(E) \\
+                & =k \ln \sum_{\left\{n_i\right\}} W\left\{n_i\right\}\\
+                &=k\ln W{\bar n_i}
+                \end{aligned}
+            \end{equation}
+            其中，\(\bar n_i\)为占据主导地位的粒子数分布
+          \end{deduce}
+          \begin{deduce}
+            通过变分法求得\(W{n_i}\)的最大值，再把\(g_1,\epsilon_i\)替换成\(1,\epsilon_{\vec p}\)：
+            \begin{enumerate}
+              \item 玻色子
+              \begin{equation}
+                \bar{n}_{\vec{p}}=\frac{1}{e^{\alpha+\beta \epsilon_{\vec{p}}}-1}
+              \end{equation}
+              \item 费米子
+              \begin{equation}
+                \bar{n}_{\vec{p}}=\frac{1}{e^{\alpha+\beta \epsilon_{\vec{p}}}+1}  
+              \end{equation}
+            \end{enumerate}
+            其中，\(\beta=1/kT,\quad\alpha=-\beta \mu\)
+          \end{deduce}
+          
+          \section{理想玻耳兹曼气体}
+          \begin{deduce}
+            假设粒子是可区分的，并且不遵循泡利原理，同上的方法可导出
+            \begin{equation}
+              W\left\{n_i\right\}=\prod_i \frac{g_i^{n_i}}{n_{i} !}
+            \end{equation}
+            \begin{equation}
+              \bar{n}_{\vec{p}}=e^{-\alpha-\beta \epsilon_{\vec{p}}}
+            \end{equation}
+          \end{deduce}
+          \begin{deduce}
+            \begin{equation}
+              \begin{aligned}
+                N&=e^{-\alpha} \sum_{\vec{p}} e^{-\beta \epsilon_{\vec{p}}}
+                & =e^{-\alpha} \frac{V}{h^3} \int_{-\infty}^{+\infty} \mathrm{d}^3 p e^{-\beta p^2 / 2 m} \\
+                & =e^{-\alpha} \frac{V}{h^3} \int \mathrm{d} \Omega \int_0^{+\infty} \mathrm{d} p \cdot p^2 e^{-\beta p^2 / 2 m}\\
+                &=e^{-\alpha}\frac{V}{\lambda^3}
+              \end{aligned}
+            \end{equation}
+            其中
+            \begin{equation*}
+              \lambda=\sqrt{\frac{2 \pi \hbar^2}{m k T}}
+            \end{equation*}
+          \end{deduce}
+          \begin{deduce}
+            用同样方法可以得到
+            \begin{equation}
+              E=\frac{3N}{2\beta}
+            \end{equation}
+            \begin{equation}
+              S=\frac{3}{2}kN-N\ln\akuo{\frac NV\xkuo{\frac{2\pi\hbar^2}{mkT}}^{3/2}}
+            \end{equation}
+            这些结果与经典相同
+          \end{deduce}
+
+          \section{理想气体巨正则系综}
+          \begin{deduce}
+            由于
+            \begin{equation}
+              Z(\mu, V, T)= \begin{cases}\prod_{\vec{p}}\left(1-e^{\beta \mu-\beta \epsilon_{\vec{p}}}\right)^{-1} & \text { 玻色子 } \\ \prod_{\vec{p}} 1+e^{\beta \mu-\beta \epsilon_{\vec{p}}} & \text { 费米子 }\end{cases}
+            \end{equation}
+          \end{deduce}
+          
+          \begin{deduce}
+            \begin{equation}
+              \begin{aligned}
+                \bar{N} & =\frac{1}{Z(\mu, V, T)} \sum_{N=0}^{\infty} \sum_{\substack{\left\{n_{\vec{p}}\right\}}} N e^{\beta \mu N} e^{-\beta \sum \epsilon_{\vec{p}} n_{\vec{p}}} \\
+                & =\frac{1}{\beta} \frac{\partial}{\partial \mu} \log Z(\mu, V, T) 
+                \end{aligned}
+            \end{equation}
+            \begin{equation}
+              \begin{aligned}
+                \bar{n}_{\vec{p}} & =\frac{1}{Z(\mu, V, T)} \sum_{N=0} e^{\beta \mu N} \sum_{\left\{n_{\vec{p}}\right\}} n_{\vec{p}} e^{-\beta \sum \epsilon_{\vec{p}} n_{\vec{p}}} \\
+                & =-\frac{1}{\beta} \frac{\partial}{\partial \epsilon_{\vec{p}}=N} \log Z(\mu, V, T) \\
+                & =\frac{1}{e^{-\beta \mu+\beta \epsilon_{\vec{p}}} \mp 1}
+              \end{aligned}
+            \end{equation}
+          \end{deduce}
+          \begin{deduce}
+            对于费米子
+            \begin{equation}
+              \begin{aligned}
+                \frac{P V}{k T} & =\sum_{\vec{p}} \log \left(1+e^{\beta \mu-\beta \epsilon_{\vec{p}}}\right) \\
+                & =\frac{V}{h^3} \int \mathrm{d} \Omega \int \mathrm{d} p p^2 \log \left(1+e^{\beta \mu-\beta p^2 / 2 m}\right) \\
+                \frac{P}{k T} & =\frac{4 \pi}{h^3} \int_0^{\infty} \mathrm{d} p p^2 \log \left(1+e^{\beta \mu-\beta p^2 / 2 m}\right) \\
+                \frac{\bar{N}}{V} & =\frac{4 \pi}{h^3} \int_0^{\infty} \mathrm{d} p p^2\left(e^{-\beta \mu+\beta p^2 / 2 m}+1\right)^{-1}
+                \end{aligned}
+            \end{equation}
+            对于玻色子，当\(\mu\rightarrow0\)时\(\ln(1-e^{\beta\mu})\)发散，因此分离\(\vec p=0\)的情况
+            \begin{equation}
+            \begin{aligned}
+              & \frac{P}{k T}=-\frac{4 \pi}{h^3} \int_0^{\infty} \mathrm{d} p p^2 \log \left(1-e^{\beta \mu-\beta p^2 / 2 m}\right)-\frac{1}{V} \log \left(1-e^{\beta \mu}\right) \\
+              & \qquad \frac{\bar{N}}{V}=\frac{4 \pi}{h^3} \int_0^{\infty} \mathrm{d} p p^2 \frac{1}{e^{-\beta \mu+\beta p^2 / 2 m}-1}+\frac{1}{V} \frac{e^{\beta \mu}}{1-e^{\beta \mu}}
+              \end{aligned}
+            \end{equation}
+          \end{deduce}
+
+          \chapter{量子统计力学的应用}
+
+          \section{光子}
+
+          \begin{claim}
+            对光子而言，电场
+            \begin{equation}
+              \vec{E}(\vec{r}) =\vec{\epsilon} e^{i(\vec{k} \cdot \vec{r}-\omega t)} 
+            \end{equation}
+            因此有
+            \begin{equation}
+              \begin{aligned}
+                \text { energy } & =\hbar \omega \\
+                \text { momentum } & =\hbar \vec{k}, \quad \omega=c|\vec{k}| \\
+                \text { polarization } & =\vec{\epsilon}, \quad|\vec{\epsilon}|=1, \vec{k} \cdot \vec{\epsilon}=0
+                \end{aligned}
+            \end{equation}
+          \end{claim}
+          \begin{deduce}
+            
+            \begin{equation}
+              \begin{aligned}
+                Z & =\prod_{\vec{k}, \vec{\epsilon}} \sum_{n=0}^{\infty} e^{-\beta \hbar \omega n}=\prod_{\vec{k}, \vec{\epsilon}} \frac{1}{1-e^{-\beta \hbar \omega}} \\
+                \log Z & =-2 \sum_{\vec{k}} \log \left(1-e^{-\beta \hbar \omega}\right)
+                \end{aligned}
+            \end{equation}
+            其中因子2来自\(\epsilon\)的和
+            \begin{equation}
+              \left\langle n_{\vec{k}}\right\rangle=-\frac{\partial}{\partial(\beta \hbar \omega)} \log Z=\frac{2}{e^{\beta \hbar \omega}-1}
+            \end{equation}
+            \begin{equation}
+              U=\sum_{\vec k}\hbar\omega\jkuo{n_{\vec k}}
+            \end{equation}
+            \begin{equation}
+              P=-\left(\frac{\partial A}{\partial V}\right)_T=k T\left(\frac{\partial \log Z(V, T)}{\partial V}\right)_T=\frac{1}{3V}\sum_{\vec k}\hbar\omega\jkuo{n_{\vec k}}
+            \end{equation}
+            因此 
+            \begin{equation}
+              PV=\frac13U
+            \end{equation}
+          \end{deduce}
+          \begin{deduce}
+            \begin{equation}
+              \begin{aligned}
+                & U=\frac{2 V}{(2 \pi)^3} \int_0^{\infty} \mathrm{d} k 4 \pi k^2 \frac{\hbar \omega}{e^{\beta \hbar \omega}-1} \\
+                &=\frac{V \hbar}{\pi^2 c^3} \int_0^{\infty} \mathrm{d} \omega \frac{\omega^3}{e^{\beta \hbar \omega}-1} \\
+                & \frac{U}{V}=\int_0^{\infty} \mathrm{d} \omega u(\omega, T) \\
+                & u(\omega, T)=\frac{\hbar}{\pi^2 c^3} \frac{\omega^3}{e^{\beta \hbar \omega}-1}
+                \end{aligned}
+            \end{equation}
+            此即黑体辐射的普朗克辐射定律。
+          \end{deduce}
+          \begin{deduce}
+            通过经典力学，同样可以得到\(PV=U/3\)（一个方向的辐射能是三分之一总能量）
+            
+              $$
+              \left(\frac{\partial U}{\partial V}\right)_T=3 P=U / V \equiv u(T)
+              $$
+              $$
+              \begin{aligned}
+              \left(\frac{\partial U}{\partial V}\right)_T & =T\left(\frac{\partial P}{\partial T}\right)_V-P \\
+              u(T) & =\frac{T}{3} \frac{\partial u}{\partial T}-u / 3 \\
+              u & =C T^4
+              \end{aligned}
+              $$
+          \end{deduce}
+          \section{固体中的声子}
+          \begin{claim}
+            粒子能量
+            \begin{equation}
+              \epsilon=\frac{1}{2 m} p^2+\frac{1}{2} m \omega^2 q^2
+            \end{equation}
+            量子力学当中，一个谐振子的能量为
+            \begin{equation}
+              \epsilon_n=(n+1/2)\hbar\omega
+            \end{equation}
+          \end{claim}
+          \begin{deduce}
+            假设粒子之间相互独立
+            \begin{equation}
+              Z=\sum e^{-\beta\epsilon_n}=\frac{1}{1-e^{-\beta\hbar\omega}}
+            \end{equation}
+            \begin{equation}
+              \jkuo{\epsilon}=-\pian{\ln Z}{\beta}=\frac{\hbar\omega}{e^{\beta\hbar\omega}-1}
+            \end{equation}
+            由于有\(3N\)个谐振子，\(U=3N\jkuo{\epsilon}\)
+            \begin{equation}
+              C_V=\pian{U}{T}=3Nk(\beta\hbar\omega)^2\frac{e^{\beta\hbar\omega}}{\xkuo{e^{\beta\hbar\omega}-1}^2}
+            \end{equation}
+            与实验不符，因此还需假设声子存在
+          \end{deduce}
+          \begin{claim}
+            声波方程
+            \begin{equation}
+              \vec \epsilon e^{i(\vec k\cdot\vec r-\omega t)},|\vec k|=\frac\omega v
+            \end{equation}
+            \(\vec\epsilon\)有三个方向。声子是玻色子。声子能量与\(\dkuo{\omega_i}\)对应
+          \end{claim}
+          \begin{theorem}
+            \hl{德拜理论}
+            与之前相同，得到
+            \begin{equation}
+              f(\omega)=\frac{3V\omega^2}{2\pi^2c^3}
+            \end{equation}
+            得到最大角频率：
+            \begin{equation}
+              \begin{aligned}
+                & \int_0^{\omega_m} f(\omega) \mathrm{d} \omega=3 N \\
+                & \therefore \quad \omega_m=c\left(\frac{6 \pi^2 N}{V}\right)^{1 / 3} \\
+                &
+                \end{aligned}
+            \end{equation}
+            与之前相同，得到 
+            \begin{equation}
+              \ln Z=-\sum_{i=1 }^{3N}\ln(1-e^{-\beta\hbar\omega_i})
+            \end{equation}
+          \end{theorem}
+
+          
+
+
+          
+          
         \end{document}

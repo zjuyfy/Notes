@@ -1,0 +1,437 @@
+\documentclass[12pt, a4paper, oneside]{ctexbook}
+        \usepackage{amsmath, amsthm, amssymb, amsfonts, bm, graphicx, hyperref, mathrsfs}
+        \usepackage{tcolorbox}
+        \usepackage{tikz, xcolor, environ, xparse, zhnumber}
+        
+        %设置页眉
+        \usepackage{fancyhdr}
+        \pagestyle{fancy}
+        
+        
+        
+        
+        
+        
+        \usetikzlibrary{shapes, decorations}
+        
+        %定义颜色
+        \definecolor{dedcol}{RGB}{150,150,30}%推论环境的主色
+        \definecolor{theocol}{RGB}{40,150,30}%定力环境的主色
+        \definecolor{thrmcol}{RGB}{18,29,80}%默认定理等环境的背景色
+        \definecolor{thrmedge}{RGB}{12,133,211}%默认定理等环境的边界颜色
+        \definecolor{examplecol}{RGB}{144,160,20}%例子边界
+        \definecolor{hyperlinkcol}{RGB}{32,112,102}%链接颜色
+        \definecolor{hyperfilecol}{RGB}{135,206,235}%文件颜色
+        \definecolor{hyperurlcol}{RGB}{3,168,158}%网址颜色
+        \definecolor{hypercitecol}{RGB}{150,140,130}%引用颜色
+        \definecolor{hlback}{RGB}{207,255,207}%高亮颜色
+        \definecolor{opcol}{RGB}{235,125,75}%op颜色
+        \definecolor{facecol}{RGB}{122,180,245}%封面颜色
+        \definecolor{pscol}{RGB}{44,80,99}%图案颜色
+        
+        %定义hyper的颜色
+        \hypersetup{
+          colorlinks=true,
+          linkcolor=hyperlinkcol,
+          filecolor=hyperfilecol,
+          urlcolor=hyperurlcol,
+          citecolor=hypercitecol,
+        }
+        
+        %定义字体
+        \setCJKfamilyfont{hwxk}{华文行楷}
+        \newcommand{\huawenxingkai}{\CJKfamily{hwxk}}
+        \setCJKfamilyfont{hwkt}{华文楷体}
+        \newcommand{\huawenkaiti}{\CJKfamily{hwkt}}
+        \setCJKfamilyfont{hwhp}{华文琥珀}
+        \newcommand{\huawenhupo}{\CJKfamily{hwhp}}
+        \setCJKfamilyfont{hwls}{华文隶书}
+        \newcommand{\huawenlishu}{\CJKfamily{hwls}}
+        \setmainfont{华文楷体}
+        
+        %定义高亮
+        \newtcbox{\hlbox}[1][red]{on line, arc = 2pt, outer arc = 0pt,
+          colback = hlback, colframe = #1!50!black,
+          boxsep = 0pt, left = 1pt, right = 1pt, top = 2pt, bottom = 2pt,
+          boxrule = 0pt, bottomrule = 1pt, toprule = 1pt}
+        \newcommand{\hl}[1]{\hlbox{#1}}
+        \newcommand{\optxt}[1]{\textcolor{opcol}{#1}}
+        
+        
+        
+        
+        
+        %定义公式环境
+        \newcommand{\newfancytheoremstyle}[5]{%
+          \tikzset{#1/.style={draw=#3, fill=#2,very thick,rectangle,
+              rounded corners, inner sep=10pt, inner ysep=20pt}}
+          \tikzset{#1title/.style={fill=#3, text=#2}}
+          \expandafter\def\csname #1headstyle\endcsname{#4}
+          \expandafter\def\csname #1bodystyle\endcsname{#5}
+        }
+        
+        \newfancytheoremstyle{fancythrm}{thrmcol!5}{thrmedge}{\huawenhupo}{\huawenxingkai}
+        
+        \makeatletter
+        \DeclareDocumentCommand{\newfancytheorem}{ O{\@empty} m m m O{fancythrm} }{
+          %% 定义计数器
+          \ifx#1\@empty
+            \newcounter{#2}
+          \else
+            \newcounter{#2}[#1]
+            \numberwithin{#2}{#1}
+          \fi
+          %% 定义 "newthem" 环境
+          \NewEnviron{#2}[1][{}]{%
+            \noindent\centering
+            \begin{tikzpicture}
+              \node[#5] (box){
+                \begin{minipage}{0.93\columnwidth}
+                  \csname #5bodystyle\endcsname \BODY~##1
+                \end{minipage}};
+              \node[#5title, right=10pt] at (box.north west){
+                {\csname #5headstyle\endcsname #3 \stepcounter{#2}\csname the#2\endcsname\; ##1}};
+              \node[#5title, rounded corners] at (box.east) {#4};
+            \end{tikzpicture}
+          }[\par\vspace{.5\baselineskip}]
+        }
+        
+        
+        \makeatother
+        
+         % 定义各个环境的的样式
+         % \newfancytheoremstyle{<name>}{inner color}{outer color}{head style}{body style}
+        \newfancytheoremstyle{fancytheo}{theocol!5}{theocol}{\huawenhupo}{\huawenxingkai}
+        \newfancytheoremstyle{fancyded}{dedcol!5}{dedcol}{\huawenhupo}{\huawenxingkai}
+        \newfancytheoremstyle{fancyexamp}{dedcol!5}{examplecol}{\huawenhupo}{\huawenxingkai}
+        
+         % 定义各个新环境
+         % \newfancytheorem[<number within>]{<name>}{<head>}{<symbol>}[<style>]
+        \newfancytheorem[chapter]{define}{定义}{$\clubsuit$}
+        \newfancytheorem[section]{deduce}{推论}{$\heartsuit$}[fancyded]
+        \newfancytheorem[section]{attr}{性质}{}[fancyded]
+        \newfancytheorem[section]{theorem}{定理}{$\spadesuit$}[fancytheo]
+        \newfancytheorem[section]{example}{例子}{}[fancyexamp]
+        
+        \title{{\Huge{微分几何}}}
+        \author{wave}
+        \date{\today}
+        \linespread{1.5}
+        
+        %设置章节标题样式\usepackage[english]{babel}
+        \usepackage{blindtext}
+        
+        \usepackage[sc,compact,explicit]{titlesec} % Titlesec for configuring the header
+        
+        
+        \usepackage{auto-pst-pdf} % Vectorian 装饰图案的 XeTeX 辅助 (见: https://tex.stackexchange.com/questions/253477/how-to-use-psvectorian-with-pdflatex)
+        \usepackage{psvectorian} % Vectorian 中的装饰图案
+        
+        \let\clipbox\relax % PSTricks 已经定义了 \clipbox, 所以要去掉
+        \usepackage{adjustbox} % 调整图案大小的
+        
+        \newcommand{\otherfancydraw}{% 定义图案
+        \begin{adjustbox}{max height=0.5\baselineskip}% 根据行距设定高度，自己定
+          \raisebox{-0.25\baselineskip}{
+          \rotatebox[origin=c]{0}{% 旋转，自己定
+            \psvectorian{84}% 图案，编号见 (http://melusine.eu.org/syracuse/pstricks/vectorian/psvectorian.pdf)
+          }}%
+        \end{adjustbox}%
+        }
+        
+        % 画一条中间为图案的线 (见: https://tex.stackexchange.com/questions/15119/draw-horizontal-line-left-and-right-of-some-text-a-single-line/15122#15122)
+        \newcommand*\ruleline[1]{\par\noindent\raisebox{.8ex}{\makebox[\linewidth]{\hrulefill\hspace{1ex}\raisebox{-.8ex}{#1}\hspace{1ex}\hrulefill}}}
+        
+        \titleformat% Formatting the header
+          {\chapter} % command
+          [block] % shape - Only managed to get it working with block
+          {\normalfont\huawenlishu\huge} % format - Change here as needed
+          {\centering 第\zhnum{chapter}章\\ \vspace{-0.6em}} % The Chapter N° label
+          {0pt} % sep
+          {\centering \ruleline{\otherfancydraw}\\ \vspace{-0.6em} % The horizontal rule
+          \centering #1} % And the actual title
+        
+          \titleformat{\section}[block]{\huawenlishu\Large}{\thesection}{0pt}{\centering #1}
+
+        %更改autoref的形式
+        \def\equationautorefname{式}
+        \def\footnoteautorefname{脚注}
+        \def\itemautorefname{项}
+        \def\figureautorefname{图}
+        \def\tableautorefname{表}
+        \def\appendixautorefname{附录}
+        \def\chapterautorefname{章}
+        \def\sectionautorefname{小节}
+        \def\theoremautorefname{定理}
+
+
+        \newcommand{\xkuo}[1]{\left(#1\right)}
+        \newcommand{\dkuo}[1]{\left\lbrace#1\right\rbrace}
+        \newcommand{\akuo}[1]{\left[#1\right]}
+        \newcommand{\jkuo}[1]{\left\langle#1\right\rangle}
+        \newcommand{\inv}{^{-1}}
+
+        %集合
+        \newcommand{\jiao}[3]{\bigcap_{#1=#2}^{#3}}
+        \newcommand{\bing}[3]{\bigcup_{#1=#2}^{#3}}
+        %微积分
+        \newcommand{\pian}[2]{\frac{\partial #1}{\partial #2}}
+        \newcommand{\ppian}[2]{\frac{\partial^2 #1}{\partial #2^2}}
+        \newcommand{\dao}[2]{\frac{d#1}{d#2}}
+        \newcommand{\ddao}[2]{\frac{d^2#1}{d#2^2}}
+        \newcommand{\ji}[2]{\int_{#1}^{#2}}
+        \newcommand{\jji}[1]{\iint\limits_{#1}}
+        
+
+
+        
+        \begin{document}
+          \renewcommand*{\psvectorianDefaultColor}{pscol}%设定图案颜色
+        
+          %
+            \maketitle
+        
+            \pagenumbering{roman}
+            \setcounter{page}{1}
+        
+            \begin{center}
+                \Huge\huawenlishu{前言}
+            \end{center}~\
+        
+            前置是实变函数
+            采用爱因斯坦求和
+            ~\\
+            \begin{flushright}
+                \begin{tabular}{c}
+                    何逸阳 \\
+                    \today
+                \end{tabular}
+            \end{flushright}
+            \begin{center}
+                \Huge\huawenlishu{符号说明}
+            \end{center}~\
+        
+        
+            \newpage
+            \pagenumbering{alph}
+            \setcounter{page}{1}
+            \tableofcontents
+            \newpage
+            \setcounter{page}{1}
+            \pagenumbering{arabic}
+        
+            \chapter{复习}
+            \section{拓扑}
+            \begin{define}
+              \hl{笛卡尔积}
+              \begin{equation}
+                X\times Y\triangleq\dkuo{\xkuo{x,y}|x\in X,y\in Y}
+              \end{equation}
+            \end{define}
+            \begin{define}
+              \hl{拓扑}\\
+              X的拓扑\(\mathscr{T}\)为X的子集的集合，满足：
+              \begin{align}
+                1\quad&X,\emptyset\in\mathscr{T}\\
+                2\quad&\forall O_i\in\mathscr{T},\jiao i1n O_i\in\mathscr{T} (\text{可列交})\\
+                3\quad&\forall O_\alpha,\alpha \in\Lambda,\bing{\alpha}{\Lambda}{}O_\alpha\in\mathscr{T}(\text{任意并})
+              \end{align}
+            \end{define}
+            \begin{define}
+              \(\mathscr{T}\)中元素称为\hl{开集}
+            \end{define}
+            \begin{define}
+              拓扑的特例：
+              \begin{enumerate}
+                \item \hl{离散拓扑}：\(\mathscr{T}=\){\(X\)的所有子集}
+                \item \hl{凝聚拓扑}：\(\mathscr{T}=\dkuo{X,\emptyset}\)
+              \end{enumerate}
+            \end{define}
+            \begin{define}
+              笛卡尔积\(X=X_1\times X_2\)的\hl{乘积拓扑}：
+              \begin{equation}
+                \mathscr{T}\triangleq\dkuo{O_1\times O_2|O_1\in\mathscr{T}_1,O_2\in\mathscr{T}_2}
+              \end{equation}
+            \end{define}
+            \begin{define}
+              \(X\)子集\(A\)的\hl{诱导拓扑}：
+              \begin{equation}
+                \mathscr{S}\triangleq\dkuo{O\cup A|O\in\mathscr{T}}
+              \end{equation}
+              \(A\)称为\hl{拓扑子空间}
+            \end{define}
+            \begin{define}
+              \(X\)中点\(x\)的\hl{领域}\(N\subset X\)s.t.\(\exists O\in\mathscr{T},x\in O\subset N\)
+            \end{define}
+            \begin{define}
+              \hl{闭集}\(C\subset X\)满足\(X-C\in\mathscr{T}\)
+            \end{define}
+            \begin{attr}
+              闭集的性质：
+              \begin{enumerate}
+                \item \(X,\emptyset\)是闭集，
+                \item 任意交是闭集
+                \item 可列并是闭集
+              \end{enumerate}
+            \end{attr}
+            \begin{define}
+              拓扑空间\(X\)是\hl{连通}的\(\Leftrightarrow\)\(X\)除\(X,\emptyset\)外没有既开又闭的子集。
+            \end{define}
+            \begin{define}
+              \hl{\(T_2\)空间}定义为\((X,\mathscr{T})\)s.t.\(\forall x,y\in X,x\neq y,\exists O_1,O_2\in\mathscr{T},x\in O_1,y\in O_2,O_1\cap O_2=\emptyset\)
+            \end{define}
+            \begin{theorem}
+              若\((X,\mathscr{T})\)为\(T_2\)空间，则\(X\)中任意紧集均为闭集。
+            \end{theorem}
+
+            \section{映射}
+            \begin{define}
+              \hl{连续映射}定义为双射\(f:(X,\mathscr{T})\mapsto (Y,\mathscr{S})\)满足:
+              \begin{equation}
+                \forall O\in\mathscr{S},f^{-1}(O)\in\mathscr{T}
+              \end{equation}
+            \end{define}
+            \begin{define}
+              \hl{同胚映射}\(f\)满足:
+              \begin{enumerate}
+                \item \(f\)是双射
+                \item \(f\)和\(f^{-1}\)是连续映射
+              \end{enumerate}
+            \end{define}
+            \begin{define}
+              在同胚映射下不变的性质称为\hl{拓扑性质}
+            \end{define}
+            \begin{example}
+              紧致性、连通性和\(T_2\)性均为拓扑性质。
+            \end{example}
+            \begin{define}
+              \hl{第二可数}定义为\(\exists\)可数子集\(\dkuo{O_1,O_2,\cdots}\subset\mathscr{T}\)s.t.\(\forall O\in\mathscr{T},O=\bigcup\limits_{i}O_i\)
+            \end{define}
+            \chapter{流形}
+            \begin{define}
+              拓扑空间\(M\)被称为n维\hl{微分流形}，如果\(\exists\)开覆盖\(M=\bigcup\limits_{\alpha}O_\alpha\)s.t.
+              \begin{align}
+                (a)\quad&\forall O_\alpha,\exists \text{同胚}\Psi_\alpha:O_\alpha\mapsto \mathbb R^n\text{的开子集}U_\alpha\\
+                (b)\quad&\forall O_\alpha\cap O_\beta\neq\emptyset,\Psi_\alpha\circ\Psi_\beta\text{是光滑映射(函数)}
+              \end{align}
+            \end{define}
+            \begin{define}
+              微分流形中的有序对\(\xkuo{O_\alpha,\Psi_\alpha}\)称为\hl{坐标系}。
+            \end{define}
+            \begin{define}
+              \(P\in O_\alpha\)的\hl{坐标}定义为\(\Psi_\alpha(p)\in\mathbb{R}^n\)，记为\(\dkuo{x^{\mu}}\)
+            \end{define}
+            \begin{define}
+              若\(O_\alpha\cap O_\beta\neq0\)，则\(\Psi_\beta\circ\Psi_\alpha\inv\)称为\hl{坐标变换}
+            \end{define}
+            \begin{define}
+              全体\(\dkuo{\xkuo{O_\alpha,\Psi_\alpha}}\)称为\hl{图册}，这种意义下\(\xkuo{O_\alpha,\Psi_\alpha}\)又称为\hl{图}
+            \end{define}
+            \begin{define}
+              能用一个坐标域(图)覆盖的流形称为\hl{平凡流形}
+            \end{define}
+            \begin{define}
+              若流形之间的映射\(f:M\mapsto M'\)满足\(\forall p\in M,\Psi'_\beta\circ f\circ \Psi_\alpha\inv\)，则称其为\hl{\(C^r\)类映射}。
+
+            \end{define}
+            \begin{define}
+              \hl{微分同胚映射}\(f:M\mapsto M'\)满足以下性质：
+              \begin{enumerate}
+                \item \(f\)是双射
+                \item \(f\)和\(f\inv\)是\(C^\infty\)
+              \end{enumerate}
+            \end{define}
+            \begin{define}
+              若两个流形之间存在微分同胚映射，则称这两个流形是\hl{微分同胚}的。
+            \end{define}
+            \begin{define}
+              从流形到实数域的映射\(f:M\mapsto \mathbb{R}\)称为\hl{标量场(函数)}
+            \end{define}
+            \begin{define}
+              若\(M\)上的函数是\(C^\infty\)的，则称其为\hl{光滑函数}。\(M\)上全体光滑函数记作\hl{\(\mathscr{F}_M\)}
+            \end{define}
+            \begin{define}
+              从\(\mathscr{F}_M\)到实数域的映射\(v:\mathscr{F}_M\mapsto\mathbb{R}\)若满足
+              \begin{enumerate}
+                \item \(v(\alpha f+\beta g)=\alpha v(f)+\beta v(g)\)(线性)
+                \item \(v(fg)=f|_pv(g)+g|_pv(f)\)(莱布尼兹律)
+              \end{enumerate}
+              则称之为\(p\)点的\hl{矢量}，\(p\)点的全部矢量构成空间\(V_p\).
+            \end{define}
+            \begin{theorem}
+              \(V_p\)是线性空间，且\(\dim(V_p)=dim(M)\)
+            \end{theorem}
+            \begin{define}
+              设\(v,u\in V_p\)，若\(\exists\alpha\in \mathbb{R},\)s.t.\(v=\alpha u\)，则称这两个矢量是\hl{平行}的。
+            \end{define}
+            \begin{theorem}
+              若\(f_1,f_2\in \mathscr{F}_M\)在\(p\in M\)的某邻域内相等，则\(\forall v\in V_p,v(f_1)=v(f_2)\)
+            \end{theorem}
+            \begin{define}
+              坐标域\((O_\alpha,\Psi_\alpha)\)内一点\(p\)的\(V_p\)的\hl{坐标基矢}\(X_\mu\)定义为
+              \begin{equation}
+                X_\mu(f)\triangleq\pian{F\xkuo{x^1,\cdots,x^n}}{x^\mu}\Big|_p,f\in\mathscr{F}_M
+              \end{equation}
+              其中\(F\xkuo{x^1,\cdots,x^n}=f\circ \Psi_\alpha\inv\)为n元函数，\(x^n\)为坐标。
+
+              空间中所有基矢的集合\(\dkuo{X_1,\cdots,x_n}\)称为\(V_p\)的一个\hl{坐标基底}，\(\forall v\in V_p\)，\(v\)可以展开为\(v^\mu X_\mu\)，\(v^\mu\)称为\hl{坐标分量}
+            \end{define}
+            \begin{theorem}
+              \hl{矢量的变换}
+
+              设\(\dkuo{x^\mu}\)和\(\dkuo{x'^\nu}\)是两个交集非空的坐标域的坐标系，\(p\)为交集中的一点，\(v\in V_p\)，\(\dkuo{v^\mu}\)和\(\dkuo{v'^\nu}\)是\(v\)在这两个坐标系下的坐标分量，则
+              \begin{equation}
+                v'^\nu=\pian{x'^\nu}{x^\mu}\Big|_pv^\mu
+              \end{equation}
+              其中，\(\pian{x'^\nu}{x^\mu}\)代表坐标变换函数的偏导数。
+            \end{theorem}
+            \begin{define}
+              设\(I\subset\mathbb R\)，\(C:I\mapsto M\)是\(C^r\)类映射，则\(C\)称为\(M\)上的一条\(C^r\)类\hl{曲线}，以下曲线均指\(C^\infty\)类曲线。
+
+              \(\forall t\in I\)\(C(t)\in M\)对应于流形上唯一一点，因此\(t\)称为曲线的\hl{参数}
+
+              若有两个映射\(C,C'\)的象相等，则\(C'\)称为\(C\)的\hl{重参数化}
+            \end{define}
+            \begin{define}
+              设\(\xkuo{O,\Psi}\)为一个坐标系，若\(C[I]\subset O\)，则映射\(\Psi\circ C\)称为曲线的\hl{参数方程}
+            \end{define}
+            \begin{define}
+              设\(\xkuo{O,\Psi}\)为一个坐标系，\(x^\mu\)为坐标，则\(O\)的子集 
+              \begin{equation}
+                \dkuo{p\in O|x^2(p)=const.,\cdots,x^n(p)=const.}
+              \end{equation}
+              为一条以\(x^1\)为参数的曲线的象，称为\hl{\(x^1\)坐标线}，类似可以定义\hl{\(x^\mu\)坐标线}
+            \end{define}
+            \begin{define}
+              设\(C(t)\)是流形\(M\)上的\(C^1\)曲线，则线上一点\(C(t_0)\)的切于\(C\)的\hl{切矢}\(T\in V_{C(t_0)}\)定义为
+              \begin{equation}
+                T(f)\triangleq\dao{(f\circ C)}{t}\Big|_{t_0},f\in\mathscr F_M
+              \end{equation}
+              切矢\(T\)以下记作\(\pian{}{t}\Big|_{C(t_0)}\)
+            \end{define}
+            \begin{theorem}
+              设曲线\(C\)在某坐标系中参数方程为\(x^\mu=x^\mu(t)\)，则线上任意一点的切矢\(\pian{}{t}\)在该坐标系下的坐标分量为
+              \begin{equation}
+                \pian{}{t}=\dao{x^\mu(t)}{t}\pian{}{x^\mu}
+              \end{equation}
+            \end{theorem}
+            \begin{theorem}
+              设曲线\(C'(t')\)是\(C(t)\)的重参数化，则
+              \begin{equation}
+                \pian{}{t}=\dao{t'(t)}{t}\pian{}{t'}
+              \end{equation}
+            \end{theorem}
+            \begin{define}
+              设\(A\)为\(M\)的子集，\hl{矢量场}定义为对\(A\)中每个点都指定一个矢量。
+            \end{define}
+            \begin{define}
+              设\(v\)是\(M\)上的矢量场，若\(\forall f\in \mathscr{F}_M,v(f)\in\mathscr F_M\)，则称这个矢量场是\hl{光滑}的。
+            \end{define}
+            \begin{theorem}
+              
+            \end{theorem}
+
+        
+            
+        
+        \end{document}

@@ -1,0 +1,311 @@
+\documentclass[12pt, a4paper, oneside]{ctexbook}
+        \usepackage{amsmath, amsthm, amssymb, amsfonts, bm, graphicx, hyperref, mathrsfs}
+        \usepackage{tcolorbox}
+        \usepackage{tikz, xcolor, environ, xparse, zhnumber}
+        \usepackage{booktabs,array}
+        
+        %设置页眉
+        \usepackage{fancyhdr}
+        \pagestyle{fancy}
+        
+        
+        
+        
+        
+        
+        \usetikzlibrary{shapes, decorations}
+        
+        %定义颜色
+        \definecolor{dedcol}{RGB}{150,150,30}%推论环境的主色
+        \definecolor{theocol}{RGB}{40,150,30}%定力环境的主色
+        \definecolor{thrmcol}{RGB}{18,29,80}%默认定理等环境的背景色
+        \definecolor{thrmedge}{RGB}{12,133,211}%默认定理等环境的边界颜色
+        \definecolor{hyperlinkcol}{RGB}{32,112,102}%链接颜色
+        \definecolor{hyperfilecol}{RGB}{135,206,235}%文件颜色
+        \definecolor{hyperurlcol}{RGB}{3,168,158}%网址颜色
+        \definecolor{hypercitecol}{RGB}{150,140,130}%引用颜色
+        \definecolor{hlback}{RGB}{207,255,207}%高亮颜色
+        \definecolor{opcol}{RGB}{235,125,75}%op颜色
+        \definecolor{facecol}{RGB}{122,180,245}%封面颜色
+        \definecolor{pscol}{RGB}{44,80,99}%图案颜色
+        
+        %定义hyper的颜色
+        \hypersetup{
+          colorlinks=true,
+          linkcolor=hyperlinkcol,
+          filecolor=hyperfilecol,
+          urlcolor=hyperurlcol,
+          citecolor=hypercitecol,
+        }
+        
+        %定义字体
+        \setCJKfamilyfont{hwxk}{华文行楷}
+        \newcommand{\huawenxingkai}{\CJKfamily{hwxk}}
+        \setCJKfamilyfont{hwkt}{华文楷体}
+        \newcommand{\huawenkaiti}{\CJKfamily{hwkt}}
+        \setCJKfamilyfont{hwhp}{华文琥珀}
+        \newcommand{\huawenhupo}{\CJKfamily{hwhp}}
+        \setCJKfamilyfont{hwls}{华文隶书}
+        \newcommand{\huawenlishu}{\CJKfamily{hwls}}
+        \setmainfont{华文楷体}
+        
+        %定义高亮
+        \newtcbox{\hlbox}[1][red]{on line, arc = 2pt, outer arc = 0pt,
+          colback = hlback, colframe = #1!50!black,
+          boxsep = 0pt, left = 1pt, right = 1pt, top = 2pt, bottom = 2pt,
+          boxrule = 0pt, bottomrule = 1pt, toprule = 1pt}
+        \newcommand{\hl}[1]{\hlbox{#1}}
+        \newcommand{\optxt}[1]{\textcolor{opcol}{#1}}
+        
+        
+        
+        
+        
+        %定义公式环境
+        \newcommand{\newfancytheoremstyle}[5]{%
+          \tikzset{#1/.style={draw=#3, fill=#2,very thick,rectangle,
+              rounded corners, inner sep=10pt, inner ysep=20pt}}
+          \tikzset{#1title/.style={fill=#3, text=#2}}
+          \expandafter\def\csname #1headstyle\endcsname{#4}
+          \expandafter\def\csname #1bodystyle\endcsname{#5}
+        }
+        
+        \newfancytheoremstyle{fancythrm}{thrmcol!5}{thrmedge}{\huawenhupo}{\huawenxingkai}
+        
+        \makeatletter
+        \DeclareDocumentCommand{\newfancytheorem}{ O{\@empty} m m m O{fancythrm} }{
+          %% 定义计数器
+          \ifx#1\@empty
+            \newcounter{#2}
+          \else
+            \newcounter{#2}[#1]
+            \numberwithin{#2}{#1}
+          \fi
+          %% 定义 "newthem" 环境
+          \NewEnviron{#2}[1][{}]{%
+            \noindent\centering
+            \begin{tikzpicture}
+              \node[#5] (box){
+                \begin{minipage}{0.93\columnwidth}
+                  \csname #5bodystyle\endcsname \BODY~##1
+                \end{minipage}};
+              \node[#5title, right=10pt] at (box.north west){
+                {\csname #5headstyle\endcsname #3 \stepcounter{#2}\csname the#2\endcsname\; ##1}};
+              \node[#5title, rounded corners] at (box.east) {#4};
+            \end{tikzpicture}
+          }[\par\vspace{.5\baselineskip}]
+        }
+        
+        
+        \makeatother
+        
+         % 定义各个环境的的样式
+         % \newfancytheoremstyle{<name>}{inner color}{outer color}{head style}{body style}
+        \newfancytheoremstyle{fancytheo}{theocol!5}{theocol}{\huawenhupo}{\huawenxingkai}
+        \newfancytheoremstyle{fancyded}{dedcol!5}{dedcol}{\huawenhupo}{\huawenxingkai}
+        
+         % 定义各个新环境
+         % \newfancytheorem[<number within>]{<name>}{<head>}{<symbol>}[<style>]
+        \newfancytheorem[chapter]{define}{定义}{$\clubsuit$}
+        \newfancytheorem[section]{deduce}{推论}{$\heartsuit$}[fancyded]
+        \newfancytheorem[section]{theorem}{定理}{$\spadesuit$}[fancytheo]
+        
+        \title{{\Huge{petalinux}}}
+        \author{wave}
+        \date{\today}
+        \linespread{1.5}
+        
+        %设置章节标题样式\usepackage[english]{babel}
+        \usepackage{blindtext}
+        
+        \usepackage[sc,compact,explicit]{titlesec} % Titlesec for configuring the header
+        
+        
+        \usepackage{auto-pst-pdf} % Vectorian 装饰图案的 XeTeX 辅助 (见: https://tex.stackexchange.com/questions/253477/how-to-use-psvectorian-with-pdflatex)
+        \usepackage{psvectorian} % Vectorian 中的装饰图案
+        
+        \let\clipbox\relax % PSTricks 已经定义了 \clipbox, 所以要去掉
+        \usepackage{adjustbox} % 调整图案大小的
+        
+        \newcommand{\otherfancydraw}{% 定义图案
+        \begin{adjustbox}{max height=0.5\baselineskip}% 根据行距设定高度，自己定
+          \raisebox{-0.25\baselineskip}{
+          \rotatebox[origin=c]{0}{% 旋转，自己定
+            \psvectorian{84}% 图案，编号见 (http://melusine.eu.org/syracuse/pstricks/vectorian/psvectorian.pdf)
+          }}%
+        \end{adjustbox}%
+        }
+        
+        % 画一条中间为图案的线 (见: https://tex.stackexchange.com/questions/15119/draw-horizontal-line-left-and-right-of-some-text-a-single-line/15122#15122)
+        \newcommand*\ruleline[1]{\par\noindent\raisebox{.8ex}{\makebox[\linewidth]{\hrulefill\hspace{1ex}\raisebox{-.8ex}{#1}\hspace{1ex}\hrulefill}}}
+        
+        \titleformat% Formatting the header
+          {\chapter} % command
+          [block] % shape - Only managed to get it working with block
+          {\normalfont\huawenlishu\huge} % format - Change here as needed
+          {\centering 第\zhnum{chapter}章\\ \vspace{-0.6em}} % The Chapter N° label
+          {0pt} % sep
+          {\centering \ruleline{\otherfancydraw}\\ \vspace{-0.6em} % The horizontal rule
+          \centering #1} % And the actual title
+        
+          \titleformat{\section}[block]{\huawenlishu\Large}{\thesection}{0pt}{\centering #1}
+
+        %更改autoref的形式
+        \def\equationautorefname{式}
+        \def\footnoteautorefname{脚注}
+        \def\itemautorefname{项}
+        \def\figureautorefname{图}
+        \def\tableautorefname{表}
+        \def\appendixautorefname{附录}
+        \def\chapterautorefname{章}
+        \def\sectionautorefname{小节}
+        \def\theoremautorefname{定理}
+        
+        \begin{document}
+          \renewcommand*{\psvectorianDefaultColor}{pscol}%设定图案颜色
+        
+          %
+            \maketitle
+        
+            \pagenumbering{roman}
+            \setcounter{page}{1}
+        
+            \begin{center}
+                \Huge\huawenlishu{前言}
+            \end{center}~\
+        
+            这是笔记的前言部分.
+            ~\\
+            \begin{flushright}
+                \begin{tabular}{c}
+                    何逸阳 \\
+                    \today
+                \end{tabular}
+            \end{flushright}
+            \begin{center}
+                \Huge\huawenlishu{符号说明}
+            \end{center}~\
+        
+        
+            \newpage
+            \pagenumbering{alph}
+            \setcounter{page}{1}
+            \tableofcontents
+            \newpage
+            \setcounter{page}{1}
+            \pagenumbering{arabic}
+        
+            \chapter{命令行}
+            petalinux-boot   :  启动开发板
+            petalinux-build  :  编译
+            petalinux-config :  配置
+            petalinux-create :  创建项目等
+            petalinux-package:  打包
+            petalinux-util   :
+            \section{配置调试窗口}
+            \subsection{开发板的调试串口}
+            \begin{table}[!ht]
+                \centering
+                \caption{文件操作}
+                \begin{tabular}{m{0.15\textwidth}<{\centering}|m{0.4\textwidth}<{\centering}|m{0.5\textwidth}<{\raggedright}}
+                  \toprule[2pt]
+                  {\bf 命令}&{\bf 参数}&{\bf 意义}\\
+                  \toprule[1pt]
+                  petalinux-config&&配置。\\\midrule
+                  &--get-hw-description <路径>&配置硬件信息。高版本只支持.xsa格式\\\midrule
+                  &-c u-boot&配置u-Boot。\\\midrule
+                  &-c kernel&配置内核。\\\midrule
+                  &-c rootfs&配置根文件系统。\\\midrule
+                  \bottomrule[2pt]
+                \end{tabular}
+              \end{table}
+              \section{编译}
+              \subsection{编译整个petalinux}
+              petalinux-build
+              \subsection{单独编译}
+              petalinux-build -c u-boot|rootfs|kernel
+              \section{制作启动镜像文件}
+              boot.bin是多个镜像文件组合，包括fsbl镜像文件、bitstream文件、用户程序镜像文件。
+              \subsection{BOOT.BIN}
+              包含fsbl，bitstream，u-boot
+              petalinux-package --boot --fsbl --fpga --u-boot --force 
+              \begin{table}[!ht]
+                  \centering
+                  \caption{}
+                  \begin{tabular}{m{0.2\textwidth}<{\centering}|m{0.7\textwidth}<{\raggedright}}
+                    \toprule[2pt]
+                    {\bf 参数}&{\bf 意义}\\
+                    \toprule[1pt]
+                    --boot&生成BOOT.BIN。\\\midrule
+                    --fsbl&指定fsbl镜像文件。\\\midrule
+                    --fpga&指定bitstream文件。\\\midrule
+                    --u-boot&指定u-boot文件（用户程序，bootload）。\\\midrule
+                    --force&强制覆盖原来生成的BOOT.BIN。\\\midrule
+                    -o&指定生成路径。\\\midrule
+                    \bottomrule[2pt]
+                  \end{tabular}
+                \end{table}
+                petalinux-package --boot --fsbl ./zynq\_fsbl.elf --fpga ./system.bit --u-boot ./u-boot.elf --force
+              \subsection{image.ub}
+              包含kernel，设备树，rootfs
+              \subsection{制作SD启动卡}
+              将镜像文件（BOOT.BIN以及image.ub，2020版本以后还有boot.scr）拷贝到SD卡（TF卡）的FAT32分区。
+
+              启动kernel后，默认的用户名和密码均为root。
+
+              
+
+              \chapter{开发应用程序}
+              \section{创建linux应用程序工程}
+              petalinux-create -t apps -n <工程名> --template c|c++
+
+              \section{编译}
+              petalinux-build -c <工程名> -x do\_compile\\
+               
+              编译好的可执行文件在目录
+
+              build/tmp/work/cortexa9t2hf-neon-xilinx-linux-gnueabi/<工程名>/1.0-r0
+
+              \hl{交叉编译工具}
+              arm-linux-gnueabihf
+
+              \chapter{BOOTROM}
+              
+              BOOTROM是一段固化在zynq芯片内部的一段代码，存放在片内的一个ROM当中
+
+              zynq内部包含256K的RAM（SRAM）以及128K的ROM（SROM），SROM在掉电下不会丢失。同时，SROM是Nor Flash，其特点是XIP（在芯片内执行），无需拷贝到ddr
+
+              \chapter{FSBL}
+              是开发板上电运行的第一段代码
+
+              启动文件BOOT.BIN一般包括fsbl和用户裸机程序以及bit
+
+              在静态情况下BOOT.BIN存放在sd卡或QSPI内，系统启动以后，第一个运行fsbl，用来引导、启动裸机程序（首先要读取裸机程序到ddr）
+
+              有sd卡或qspi的驱动程序，并且能够初始化DDR
+
+              \chapter{U-Boot程序}
+              \section{作用}
+              本质上是裸机程序。\\
+              用来引导启动linux内核\\
+              在静态情况下，其镜像文件一般存在sd卡或QSPI等外存设备中
+              \\需要将内核镜像文件拷贝到DDR当中运行\\
+              拥有sd卡、DDR以及QSPI等外设的驱动\\
+              包括了一些文件系统，用于读取\\
+              包括网络协议，支持网络启动\\\\
+              支持多种操作系统和架构
+              \section{获取}
+              \hl{官方源码：}\quad \url{https://ftp.denx.de/pub/u-boot/}
+              \hl{Xilinx}
+
+
+
+              \chapter{设备树}
+              \section{位置}
+              project-spec/meta-user/recipes-bsp/device-tree/files/system-user.dtsi
+            
+            
+        
+            
+        
+        \end{document}

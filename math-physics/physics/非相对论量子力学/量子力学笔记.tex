@@ -1,0 +1,457 @@
+\documentclass[12pt, a4paper, oneside]{ctexbook}
+        \usepackage{amsmath, amsthm, amssymb, amsfonts, bm, graphicx, hyperref, mathrsfs}
+        \usepackage{tcolorbox}
+        \usepackage{tikz, xcolor, environ, xparse, zhnumber}
+        
+        %设置页眉
+        \usepackage{fancyhdr}
+        \pagestyle{fancy}
+        
+        
+        
+        
+        
+        
+        \usetikzlibrary{shapes, decorations}
+        
+        %定义颜色
+        \definecolor{dedcol}{RGB}{150,150,30}%推论环境的主色
+        \definecolor{theocol}{RGB}{40,150,30}%定力环境的主色
+        \definecolor{commutecol}{RGB}{30,120,130}
+        \definecolor{thrmcol}{RGB}{18,29,80}%默认定理等环境的背景色
+        \definecolor{methodcol}{RGB}{49,50,44}
+        \definecolor{lawcol}{RGB}{150,30,150}
+        \definecolor{thrmedge}{RGB}{12,133,211}%默认定理等环境的边界颜色
+        \definecolor{hyperlinkcol}{RGB}{32,112,102}%链接颜色
+        \definecolor{hyperfilecol}{RGB}{135,206,235}%文件颜色
+        \definecolor{hyperurlcol}{RGB}{3,168,158}%网址颜色
+        \definecolor{hypercitecol}{RGB}{150,140,130}%引用颜色
+        \definecolor{hlback}{RGB}{207,255,207}%高亮颜色
+        \definecolor{opcol}{RGB}{235,125,75}%op颜色
+        \definecolor{facecol}{RGB}{122,180,245}%封面颜色
+        \definecolor{pscol}{RGB}{44,80,99}%图案颜色
+        
+        %定义hyper的颜色
+        \hypersetup{
+          colorlinks=true,
+          linkcolor=hyperlinkcol,
+          filecolor=hyperfilecol,
+          urlcolor=hyperurlcol,
+          citecolor=hypercitecol,
+        }
+        
+        %定义字体
+        \setCJKfamilyfont{hwxk}{华文行楷}
+        \newcommand{\huawenxingkai}{\CJKfamily{hwxk}}
+        \setCJKfamilyfont{hwkt}{华文楷体}
+        \newcommand{\huawenkaiti}{\CJKfamily{hwkt}}
+        \setCJKfamilyfont{hwhp}{华文琥珀}
+        \newcommand{\huawenhupo}{\CJKfamily{hwhp}}
+        \setCJKfamilyfont{hwls}{华文隶书}
+        \newcommand{\huawenlishu}{\CJKfamily{hwls}}
+        \setmainfont{华文楷体}
+        
+        %定义高亮
+        \newtcbox{\hlbox}[1][red]{on line, arc = 2pt, outer arc = 0pt,
+          colback = hlback, colframe = #1!50!black,
+          boxsep = 0pt, left = 1pt, right = 1pt, top = 2pt, bottom = 2pt,
+          boxrule = 0pt, bottomrule = 1pt, toprule = 1pt}
+        \newcommand{\hl}[1]{\hlbox{#1}}
+        \newcommand{\optxt}[1]{\textcolor{opcol}{#1}}
+        
+        
+        
+        
+        
+        %定义公式环境
+        \newcommand{\newfancytheoremstyle}[5]{%
+          \tikzset{#1/.style={draw=#3, fill=#2,very thick,rectangle,
+              rounded corners, inner sep=10pt, inner ysep=20pt}}
+          \tikzset{#1title/.style={fill=#3, text=#2}}
+          \expandafter\def\csname #1headstyle\endcsname{#4}
+          \expandafter\def\csname #1bodystyle\endcsname{#5}
+        }
+        
+        \newfancytheoremstyle{fancythrm}{thrmcol!5}{thrmedge}{\huawenhupo}{\huawenxingkai}
+        
+        \makeatletter
+        \DeclareDocumentCommand{\newfancytheorem}{ O{\@empty} m m m O{fancythrm} }{
+          %% 定义计数器
+          \ifx#1\@empty
+            \newcounter{#2}
+          \else
+            \newcounter{#2}[#1]
+            \numberwithin{#2}{#1}
+          \fi
+          %% 定义 "newthem" 环境
+          \NewEnviron{#2}[1][{}]{%
+            \noindent\centering
+            \begin{tikzpicture}
+              \node[#5] (box){
+                \begin{minipage}{0.93\columnwidth}
+                  \csname #5bodystyle\endcsname \BODY~##1
+                \end{minipage}};
+              \node[#5title, right=10pt] at (box.north west){
+                {\csname #5headstyle\endcsname #3 \stepcounter{#2}\csname the#2\endcsname\; ##1}};
+              \node[#5title, rounded corners] at (box.east) {#4};
+            \end{tikzpicture}
+          }[\par\vspace{.5\baselineskip}]
+        }
+        
+        
+        \makeatother
+        
+         % 定义各个环境的的样式
+         % \newfancytheoremstyle{<name>}{inner color}{outer color}{head style}{body style}
+        \newfancytheoremstyle{fancytheo}{theocol!5}{theocol}{\huawenhupo}{\huawenxingkai}
+        \newfancytheoremstyle{fancyded}{dedcol!5}{dedcol}{\huawenhupo}{\huawenxingkai}
+        \newfancytheoremstyle{fancycom}{commutecol!5}{commutecol}{\huawenhupo}{\huawenxingkai}
+        \newfancytheoremstyle{fancymeth}{methodcol!5}{methodcol}{\huawenhupo}{\huawenxingkai}
+        \newfancytheoremstyle{fancylaw}{lawcol!5}{lawcol}{\huawenhupo}{\huawenxingkai}
+        
+         % 定义各个新环境
+         % \newfancytheorem[<number within>]{<name>}{<head>}{<symbol>}[<style>]
+        \newfancytheorem[chapter]{define}{定义}{$\clubsuit$}
+        \newfancytheorem[section]{deduce}{推论}{$\heartsuit$}[fancyded]
+        \newfancytheorem[section]{theorem}{定理}{$\spadesuit$}[fancytheo]
+        \newfancytheorem[section]{attr}{性质}{}[fancyded]
+        \newfancytheorem[chapter]{commute}{对易关系}{}[fancycom]
+        \newfancytheorem[section]{intro}{引入}{}[fancyded]
+        \newfancytheorem[section]{assmp}{假设}{}[fancylaw]
+        \newfancytheorem[chapter]{law}{原理}{}[fancylaw]
+        \newfancytheorem{method}{方法}{}[fancymeth]
+        
+        \title{{\Huge{量子力学笔记}}}
+        \author{wave}
+        \date{\today}
+        \linespread{1.5}
+        
+        %设置章节标题样式\usepackage[english]{babel}
+        \usepackage{blindtext}
+        
+        \usepackage[sc,compact,explicit]{titlesec} % Titlesec for configuring the header
+        
+        
+        \usepackage{auto-pst-pdf} % Vectorian 装饰图案的 XeTeX 辅助 (见: https://tex.stackexchange.com/questions/253477/how-to-use-psvectorian-with-pdflatex)
+        \usepackage{psvectorian} % Vectorian 中的装饰图案
+        
+        \let\clipbox\relax % PSTricks 已经定义了 \clipbox, 所以要去掉
+        \usepackage{adjustbox} % 调整图案大小的
+        
+        \newcommand{\otherfancydraw}{% 定义图案
+        \begin{adjustbox}{max height=0.5\baselineskip}% 根据行距设定高度，自己定
+          \raisebox{-0.25\baselineskip}{
+          \rotatebox[origin=c]{0}{% 旋转，自己定
+            \psvectorian{84}% 图案，编号见 (http://melusine.eu.org/syracuse/pstricks/vectorian/psvectorian.pdf)
+          }}%
+        \end{adjustbox}%
+        }
+        
+        % 画一条中间为图案的线 (见: https://tex.stackexchange.com/questions/15119/draw-horizontal-line-left-and-right-of-some-text-a-single-line/15122#15122)
+        \newcommand*\ruleline[1]{\par\noindent\raisebox{.8ex}{\makebox[\linewidth]{\hrulefill\hspace{1ex}\raisebox{-.8ex}{#1}\hspace{1ex}\hrulefill}}}
+        
+        \titleformat% Formatting the header
+          {\chapter} % command
+          [block] % shape - Only managed to get it working with block
+          {\normalfont\huawenlishu\huge} % format - Change here as needed
+          {\centering 第\zhnum{chapter}章\\ \vspace{-0.6em}} % The Chapter N° label
+          {0pt} % sep
+          {\centering \ruleline{\otherfancydraw}\\ \vspace{-0.6em} % The horizontal rule
+          \centering #1} % And the actual title
+        
+          \titleformat{\section}[block]{\huawenlishu\Large}{\thesection}{0pt}{\centering #1}
+
+        %更改autoref的形式
+        \def\equationautorefname{式}
+        \def\footnoteautorefname{脚注}
+        \def\itemautorefname{项}
+        \def\figureautorefname{图}
+        \def\tableautorefname{表}
+        \def\appendixautorefname{附录}
+        \def\chapterautorefname{章}
+        \def\sectionautorefname{小节}
+        \def\theoremautorefname{定理}
+        
+
+
+
+        \newcommand{\com}[2]{\left[#1,#2\right]}
+        \newcommand{\xkuo}[1]{\left(#1\right)}
+        \newcommand{\dkuo}[1]{\left\lbrace#1\right\rbrace}
+        \newcommand{\akuo}[1]{\left[#1\right]}
+        \newcommand{\jkuo}[1]{\left\langle#1\right\rangle}
+        \newcommand{\wen}[1]{\mbox{#1}}
+        \newcommand{\you}{\mbox{又}}
+        \newcommand{\dang}{\mbox{当}}
+        \newcommand{\yyou}{\mbox{有}}
+        \newcommand{\qie}{\mbox{且}}
+        \newcommand{\pian}[2]{\frac{\partial #1}{\partial #2}}
+        \newcommand{\ppian}[2]{\frac{\partial^2 #1}{\partial #2^2}}
+        \newcommand{\dao}[2]{\frac{d#1}{d#2}}
+        \newcommand{\ddao}[2]{\frac{d^2#1}{d#2^2}}
+        \newcommand{\cen}{^\circ C}
+        \newcommand{\fah}{^\circ F}
+        \newcommand{\ji}[2]{\int_{#1}^{#2}}
+        \newcommand{\qh}[1]{\sum\limits_{#1}}
+        \newcommand{\jji}[1]{\iint\limits_{#1}}
+        \newcommand{\ppi}{\frac\pi2}
+        \newcommand{\ege}{\frac{\sqrt2}{2}}
+        \newcommand{\e}[1]{\times10^{#1}}
+        \newcommand{\ti}[1]{\textbf{#1}}
+
+
+
+        %数学分析
+        \newcommand{\ya}[4]{\frac{\partial(#1,#2)}{\partial(#3,#4)}}
+        \newcommand{\zkya}[4]{\pd #1#3#4\pd #2#4#3-\pd #1#4#3\pd #2#3#4}
+
+        %复变函数
+        \newcommand{\wqji}{\int_{-\infty}^{\infty}}
+
+        %热学
+        \newcommand{\pd}[3]{\xkuo{\frac{\partial#1}{\partial#2}}_#3}
+
+        %原子物理
+        \newcommand{\bra}[1]{\left\langle #1 \right|}
+        \newcommand{\ket}[1]{\left| #1 \right\rangle}
+        \newcommand{\p}[1]{\partial_{#1}}%对下标的偏导
+        \newcommand{\ep}[1]{\epsilon_{#1}}%全反对称张量
+        \newcommand{\dt}[1]{\delta_{#1}}%delta张量
+
+        %理论力学
+        \newcommand{\keq}[2]{\pian{\mathscr{#1}}{#2}}
+        \newcommand{\zkps}[3]{\pian{#1}{q_#3}\pian{#2}{p_#3}-\pian{#1}{p_#3}\pian{#2}{q_#3}}
+
+        %正文
+        \newcommand{\sub}[1]{\(_{#1}\)}
+        \newcommand{\sps}[1]{\(^{#1}\)}
+
+
+
+        \begin{document}
+          \renewcommand*{\psvectorianDefaultColor}{pscol}%设定图案颜色
+        
+          %
+            \maketitle
+        
+            \pagenumbering{roman}
+            \setcounter{page}{1}
+        
+            \begin{center}
+                \Huge\huawenlishu{前言}
+            \end{center}~\
+        
+            这是笔记的前言部分.
+            ~\\
+            \begin{flushright}
+                \begin{tabular}{c}
+                    何逸阳 \\
+                    \today
+                \end{tabular}
+            \end{flushright}
+            \begin{center}
+                \Huge\huawenlishu{符号说明}
+            \end{center}~\
+        
+        
+            \newpage
+            \pagenumbering{alph}
+            \setcounter{page}{1}
+            \tableofcontents
+            \newpage
+            \setcounter{page}{1}
+            \pagenumbering{arabic}
+            \chapter{基本概念}
+            \begin{define}
+              用\(q\)表示量子系统坐标的集合，用\(dq\)表示其微分的乘积。\(dq\)称为该系统\hl{位形空间}中的一个体积元。
+            \end{define}
+            \begin{law}
+              在给定时刻，一个系统的状态可以用一个确定的\hl{波函数}\(\Psi(q)\)来描述，其模量的平方确定了坐标值的\hl{概率分布}。即对系统进行坐标测量时，测量值处于位行空间的q附近dq体积元当中的概率为\(|\Psi|^2dq\)
+            \end{law}
+            \begin{law}
+              一个系统的\hl{其它测量}的概率由双线性表式
+              \begin{equation}
+                \iint\Psi(q)\Psi^*(q')\phi(q,q')dqdq'
+              \end{equation}
+              所确定。
+
+              当\(\phi(q,q')=\delta(q-q_0)\delta(q'-q_0)\)时，就是系统位于坐标\(q_0\)的概率。
+            \end{law}
+            \begin{law}
+              
+            \end{law}
+
+            \chapter{有心力场}
+            \section{库仑力场}
+            \begin{attr}
+                \hl{库仑简并}：库仑力场的性质：每一个本征值对\(l\)是简并的，第\(n\)个能级的简并度为
+                \begin{equation}
+                    \sum_{l=0}^{n-1}(2l+1)=n^2
+                \end{equation}
+            \end{attr}
+            \begin{theorem}
+                算符\(\hat A=\frac{\vec r} r-\frac12(\vec p\times\hat l-\hat l\times \vec p)\)是守恒量
+            \end{theorem}
+            \begin{commute}
+                \begin{align}
+                    \akuo{\hat l_i,\hat A_j}&=i\epsilon_{ijk}\hat A_k\\
+                    \com{\hat A_i}{\hat A_j}&=-2i\hat H\ep{ijk}\hat l_k
+                \end{align}
+            \end{commute} 
+
+            \section{抛物坐标下库仑场中的运动}
+            \begin{intro}
+                抛物坐标下的拉普拉斯算子：
+                \begin{equation}
+                    \Delta=\frac4{\xi+\eta}\akuo{\pian{}{\xi}\xkuo{\xi\pian{}{\xi}}+\pian{}{\eta}\xkuo{\eta\pian{}{\eta}}}+\frac{1}{\xi\eta}\ppian{}{\varphi}
+                \end{equation}
+            \end{intro}
+            \begin{deduce}
+                库仑力场
+                \begin{equation}
+                    U=-\frac1r=-\frac{2}{\xi+\eta}
+                \end{equation}
+                中的单粒子薛定谔方程为：
+                \begin{align}
+                    0&=\frac12\Delta \psi+\hat H\psi\\
+                    \label{eqn:pkl}&=\frac2{\xi+\eta}\akuo{\pian{}{\xi}\xkuo{\xi\pian{\psi}{\xi}}+\pian{}{\eta}\xkuo{\eta\pian{\psi}{\eta}}}+\frac{1}{2\xi\eta}\ppian{\psi}{\varphi}+\xkuo{E+\frac{2}{\xi+\eta}}\psi
+                \end{align}
+            \end{deduce}
+            \begin{deduce}
+                
+                对\autoref{eqn:pkl}利用分离变量法可得
+                \begin{equation}
+                    \label{eqn:pklfl}
+                    \begin{cases}
+                        f_\varphi(\varphi)=e^{im=\varphi}\\
+                        \dao{}{\xi}\xkuo{\xi\dao{f_\xi}{\xi}}+\akuo{\frac12E\xi-\frac{m^2}{4\xi}+\beta_\xi}f_\xi=0\\
+                        \dao{}{\eta}\xkuo{\eta\dao{f_\eta}{\eta}}+\akuo{\frac12E\eta-\frac{m^2}{4\eta}+\beta_\eta}f_\eta=0
+                    \end{cases}
+                \end{equation}
+                其中\(m\in\mathbb Z,\,\beta_\xi+\beta_\eta=1\)
+            \end{deduce}
+            \begin{theorem}
+                由\autoref{eqn:pklfl}可得离散谱的定态由三个整数确定，分别称为\hl{抛物量子数}\(n_1,n_2\)和\hl{磁量子数}\(m\)，其\hl{主量子数的表达式}为
+                \begin{equation}
+                    n=n_1+n_2+|m|+1
+                \end{equation}
+            \end{theorem}
+            \begin{deduce}
+                归一化的波函数为：
+                \begin{equation}
+                    \psi_{n_1n_2m}=\frac{\sqrt[]{2}}{n^2}f_{n_1m}\xkuo{\frac{\xi}{n}}f_{n_2m}\xkuo{\frac{\eta}{n}}\frac{e^{im\varphi}}{\sqrt[]{2\pi}}
+                \end{equation}
+                其中
+                \begin{equation}
+                    f_{pm}(\rho)=\frac{1}{|m|!}\sqrt[]{\frac{(p+|m|)!}{p!}}F(-p,|m|+1,\rho)e^{-\frac12\rho}\rho^{\frac12|m|}
+                \end{equation}
+            \end{deduce}
+            \chapter{微扰论}
+            \begin{method}
+              由于薛定谔方程很难得到精确解，但忽略一些小量即可得到很好的解，于是可以通过\hl{微扰论}的方法把问题分为两步：
+              \begin{enumerate}
+                \item 求出忽略小量的简化问题的精确解
+                \item 计算忽略小量引起的误差
+              \end{enumerate}
+            \end{method}
+            \section{与时间无关的微扰}
+            \begin{assmp}
+              设哈密顿量呈以下形式：
+              \begin{equation}
+                \hat H=\hat H_0+\hat V
+              \end{equation}
+              其中算符\(\hat V\)代表微扰项，而\(\hat H_0\)代表未受扰项，其解已知：
+              \begin{equation}
+                \hat H_0\psi^{(0)}=E^{(0)}\psi^{(0)}
+              \end{equation}
+              假设\(\hat H_0\)无简并。
+            \end{assmp}
+            \begin{theorem}
+              设\(\psi=\sum\limits_mc_m\psi_m^{(0)}\)可得
+              \begin{equation}\label{eqn:disturb}
+                \xkuo{E-E_k^{(0)}}c_k=\sum_mV_{km}c_m
+              \end{equation}
+              将第\(n\)个本征态的本征值的一级近似
+              \begin{equation}
+                E_n=E_n^{(0)}+E_n^{(1)}
+              \end{equation}
+              代入\autoref{eqn:disturb}可得
+              \begin{equation}
+                E_n^{(1)}=V_{nn}=\int\psi_n^{(0)*}\hat V\psi_n^{(0)}dq
+              \end{equation}
+              同时，其本征函数的一级近似
+              \begin{equation}
+                \psi_n=\psi_n^{(0)}+\psi_n^{(1)}
+              \end{equation}
+              代入可得
+              \begin{equation}
+                \psi_n^{(1)}=\sum_{m\neq n}\frac{V_{mn}}{E_n^{(0)}-E_m^{(0)}}\psi_m^{(0)}
+              \end{equation}
+              因此，要使得微扰项足够小（一阶小量）需要满足的条件为：
+              \begin{equation}
+                |V_{mn}|<<|E_n^{(0)}-E_m^{(0)}|
+              \end{equation}
+              进而可以算出物理量\(f\)的微扰：
+              \begin{equation}
+                f_{nm}=f_{nm}^{(0)}+\sum_{k\neq n}\frac{V_{nk}f_{km}^{(0)}}{E_n^{(0)}-E_k^{(0)}}+\sum_{k\neq m}\frac{V_{km}f_{nk}^{(0)}}{E_m^{(0)}-E_k^{(0)}}
+              \end{equation}
+              更高阶的近似同理
+            \end{theorem}
+
+            \section{久期方程}
+            \begin{assmp}
+              假设\(\hat H_0\)具有简并，而\(\psi_{n'},n'\in\Lambda \)代表能级\(E_n^{(0)}\)下的一套本征函数。
+            \end{assmp}
+            \begin{theorem}
+              通过同样的方法可以得到
+              \begin{equation}
+                \sum_{n,n'\in \Lambda }\xkuo{V_{nn'}-E^{(1)}\delta_{nn'}}c_{n'}^{(0)}=0
+              \end{equation}
+              若要此方程有非零解，则需要
+              \begin{equation}\label{eqn:seculareqn}
+                |V_{nn'}-E^{(1)}\delta_{nn'}|=0
+              \end{equation}
+              \autoref{eqn:seculareqn}称为\hl{久期方程}。
+            \end{theorem}
+            \section{与时间有关的微扰}
+            \begin{assmp}
+              若微扰项含时间，而未扰系统的定态波函数为\(\Psi_k^{(0)}\)，设受扰方程的解为
+              \begin{equation}\label{eqn:timedistsol}
+                \Psi=\sum_ka_k(t)\Psi_k^{(0)}
+              \end{equation}
+            \end{assmp}
+
+            \begin{theorem}
+              将\autoref{eqn:timedistsol}代入薛定谔方程后，可求得
+              \begin{equation}
+                i\hslash\dao{a_m}{t}=\sum_kV_{mk}(t)a_k
+              \end{equation}
+              其中
+              \begin{equation}
+                V_{mk}(t)=\int\Psi_m^{(0)*}\hat V\Psi_k^{(0)}dq=V_{mk}e^{i\omega_{mk}t}
+              \end{equation}
+              \begin{equation}
+                \omega_{mk}=\frac{E_m^{(0)}-E_k^{(0)}}{\hslash}
+              \end{equation}
+              当未受扰
+            \end{theorem}
+
+            \section{有限时间作用下的跃迁}
+            \begin{assmp}
+              假定微扰\(V(t)\)作用于有限时间内（或者当\(t\rightarrow\pm \infty\)时，\(V(t)\)足够快地趋于零）。
+            \end{assmp}
+            \begin{assmp}
+              假定微扰作用前，系统处于离散谱的第n个态中，随后由\(\Psi=\sum_ka_{kn}\Psi_k^{(0)}\)确定。
+            \end{assmp}
+            \section{周期微扰作用下的跃迁}
+            朗道P140
+            \section{连续谱中的跃迁}
+            \begin{assmp}
+              在初始时刻，系统处于某一为受扰的态，而后收到恒定微扰，求跃迁到具有同一能量的另一态的概率。
+            \end{assmp}
+            
+
+
+        
+        
+        \end{document}
