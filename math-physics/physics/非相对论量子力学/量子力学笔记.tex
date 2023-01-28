@@ -278,8 +278,84 @@
               当\(\phi(q,q')=\delta(q-q_0)\delta(q'-q_0)\)时，就是系统位于坐标\(q_0\)的概率。
             \end{law}
             \begin{law}
-              
+              \hl{状态叠加原理}
+              设一种测量在给定两态\(\Psi_1,\Psi_2\)中测量分别得到肯定的结果1和2，那么
+              \begin{enumerate}
+                \item 在任意具有\(c_1\Psi_1+c_2\Psi_2\)形式的态（称为\hl{线性叠加}）中，测量结果要么是1要么是2.
+                \item 若以上两个态对时间的依赖关系已知，则其任意线性叠加给出了叠加态的可能的时间依赖关系。
+              \end{enumerate}
+              因此，波函数满足的一切方程必须对\(\Psi\)保持线性。
             \end{law}
+            \section{算符}
+            \begin{define}
+              一个给定物理量所能取的数值称为\hl{本征值}，这些数值的集合称为该量的\hl{值谱}。连续的值谱称为\hl{连续谱}，离散的称为\hl{离散谱}
+            \end{define}
+            \begin{assmp}
+              本节接下来所有推论针对离散谱。
+            \end{assmp}
+            \begin{deduce}
+              任何波函数可以用任意物理量的一套本征函数来展开\(\Psi=\sum_na_n\Psi_n\)，这组函数称为一个\hl{完备组（封闭组）}。这些函数相互\hl{正交}。并且
+              \begin{equation}\label{eqn:an}
+                a_n=\int\Psi\Psi_n^*dq
+              \end{equation}
+            \end{deduce}
+            \begin{define}
+              定义物理量的\hl{平均值}
+              \begin{equation}
+                \bar f=\sum_nf_n|a_n|^2
+              \end{equation}
+              其中\(f_n\)是本征值。
+            \end{define}
+            \begin{define}
+              引入\hl{算符}\(\hat f\)为一种作用于波函数得到波函数的映射，定义为使得
+              \begin{equation}
+                \bar f=\int \Psi^*(\hat f\Psi)dq
+              \end{equation}
+            \end{define}
+            \begin{deduce}
+              对比可得
+              \begin{equation}\label{eqn:fPsi}
+              (\hat f\Psi)=\sum_na_nf_n\Psi_n
+              \end{equation}
+              物理量\(f\)的本征函数为以下方程的解：
+              \begin{equation}
+                \hat f\Psi=f\Psi
+              \end{equation}
+            \end{deduce}
+            \begin{define}
+              将\autoref{eqn:an}代入\autoref{eqn:fPsi}可得
+              \begin{equation}
+                (\hat f\Psi)=\int K(q,q')\Psi(q')dq'
+              \end{equation}
+              其中\(K(q,q')\)称为该算符的\hl{核}，定义为 
+              \begin{equation}
+                K(q,q')=\sum_nf_n\Psi_n^*(q')\Psi_n(q)
+              \end{equation}
+            \end{define}
+            \begin{deduce}
+              由于物理量的本征值及平均值应为实数，这就限制了算符\(\hat f\)为厄米算符：
+              \begin{equation}
+                \hat f=\hat f^\dagger
+              \end{equation}
+              物理量的不同本征值的本征函数互相正交。
+            \end{deduce}
+            \section{算符的加法和乘法}
+            \begin{law}
+              设\(\hat f\)和\(\hat g\)是两个物理量。若两个物理量可以同时测量，两个算符就有共同本征态，算符\(\hat f+\hat g\)的本征值就是二者本征值之和。
+
+              对于没有共同本征态的两个物理量，其算符之和在任意态中的平均值为两者均值之和。
+            \end{law}
+            \begin{theorem}
+              若\(f_0\)和\(g_0\)分别为\(\hat f\)和\(\hat g\)的最小本征值，则
+              \begin{equation}
+                (f+g)_0\geqslant f_0+g_0
+              \end{equation}
+              等号当且仅当\(f\)和\(g\)可以同时测量时成立。
+            \end{theorem}
+            
+
+
+
 
             \chapter{有心力场}
             \section{库仑力场}
