@@ -1,0 +1,4550 @@
+From: <Saved by Blink>
+Snapshot-Content-Location: http://elm-chan.org/fsw/ff/00index_e.html
+Subject: FatFs - Generic FAT Filesystem Module
+Date: Mon, 6 Feb 2023 12:54:00 -0000
+MIME-Version: 1.0
+Content-Type: multipart/related;
+	type="text/html";
+	boundary="----MultipartBoundary--0s3ViURcQpnE7iQjUpolnxEjBTN2SpA5Ag1BC0ZtVu----"
+
+
+------MultipartBoundary--0s3ViURcQpnE7iQjUpolnxEjBTN2SpA5Ag1BC0ZtVu----
+Content-Type: text/html
+Content-ID: <frame-8DB78E07C634B0BD73E67436AC81C1F1@mhtml.blink>
+Content-Transfer-Encoding: quoted-printable
+Content-Location: http://elm-chan.org/fsw/ff/00index_e.html
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/htm=
+l4/strict.dtd"><html lang=3D"en" data-darkreader-mode=3D"dynamic" data-dark=
+reader-scheme=3D"dark"><head><meta http-equiv=3D"Content-Type" content=3D"t=
+ext/html; charset=3DUTF-8"><link rel=3D"stylesheet" type=3D"text/css" href=
+=3D"cid:css-5f0e7504-f508-4704-83d6-e241f24cecbf@mhtml.blink" /><link rel=
+=3D"stylesheet" type=3D"text/css" href=3D"cid:css-e27c8ff8-a197-4941-9393-7=
+d067b0ed3df@mhtml.blink" /><link rel=3D"stylesheet" type=3D"text/css" href=
+=3D"cid:css-a6012d03-9c37-436c-be1a-9eec622e1a1e@mhtml.blink" /><link rel=
+=3D"stylesheet" type=3D"text/css" href=3D"cid:css-6074412d-9a6b-49e2-94a3-9=
+039ccaccb67@mhtml.blink" /><link rel=3D"stylesheet" type=3D"text/css" href=
+=3D"cid:css-b8cfcf75-2fbf-4c32-88d1-29109e2e32fb@mhtml.blink" /><link rel=
+=3D"stylesheet" type=3D"text/css" href=3D"cid:css-df4a21de-8038-44b5-ab18-2=
+2e3b9f1acfc@mhtml.blink" /><link rel=3D"stylesheet" type=3D"text/css" href=
+=3D"cid:css-d835d327-911b-425b-96eb-485576d13294@mhtml.blink" /><link rel=
+=3D"stylesheet" type=3D"text/css" href=3D"cid:css-25f327d3-6af4-41ff-b11c-4=
+d6eb3209273@mhtml.blink" /><link rel=3D"stylesheet" type=3D"text/css" href=
+=3D"cid:css-65041392-5d0c-4077-bd11-898d91b636ff@mhtml.blink" />
+
+<meta http-equiv=3D"Content-Style-Type" content=3D"text/css">
+<meta http-equiv=3D"cache-control" content=3D"no-cache">
+<meta name=3D"description" content=3D"Open source FAT filesystem for embedd=
+ed projects">
+<link rel=3D"start" title=3D"Site Top" href=3D"http://elm-chan.org/">
+<link rel=3D"up" title=3D"Freewares" href=3D"http://elm-chan.org/fsw_e.html=
+">
+<link rel=3D"stylesheet" href=3D"http://elm-chan.org/fsw/ff/css_e.css" type=
+=3D"text/css" media=3D"screen" title=3D"ELM Default">
+<title>FatFs - Generic FAT Filesystem Module</title>
+<meta name=3D"darkreader" content=3D"14e0feda7cf058aee505e14092d1a87c"></he=
+ad>
+
+<body>
+<h1>FatFs - Generic FAT Filesystem Module</h1>
+<hr>
+
+<div class=3D"abst">
+<img src=3D"http://elm-chan.org/fsw/ff/res/layers.png" class=3D"rset" width=
+=3D"245" height=3D"255" alt=3D"layer">
+<p>FatFs is a generic FAT/exFAT filesystem module for small embedded system=
+s. The FatFs module is written in compliance with ANSI C (C89) and complete=
+ly separated from the disk I/O layer. Therefore it is independent of the pl=
+atform. It can be incorporated into small microcontrollers with limited res=
+ource, such as 8051, PIC, AVR, ARM, Z80, RX and etc. Also Petit FatFs modul=
+e for tiny microcontrollers is available <a href=3D"http://elm-chan.org/fsw=
+/ff/00index_p.html">here</a>.</p>
+
+<h4>Features</h4>
+<ul>
+ <li>DOS/Windows Compatible FAT/exFAT Filesystem.</li>
+ <li>Platform Independent. <a href=3D"http://elm-chan.org/fsw/ff/doc/appnot=
+e.html#port">Easy to port</a>.</li>
+ <li>Very Small <a href=3D"http://elm-chan.org/fsw/ff/doc/appnote.html#memo=
+ry">Footprint</a> for Program Code and Work Area.</li>
+ <li>Various <a href=3D"http://elm-chan.org/fsw/ff/doc/config.html">Configu=
+ration Options</a> to Support for:
+  <ul>
+   <li>Long File Name in ANSI/OEM or Unicode.</li>
+   <li>exFAT Filesystem, 64-bit LBA and GPT for Huge Storages.</li>
+   <li>Thread Safe for RTOS.</li>
+   <li>Multiple Volumes. (Physical Drives and Partitions)</li>
+   <li>Variable Sector Size.</li>
+   <li>Multiple Code Pages Including DBCS.</li>
+   <li>Read-only, Optional APIs, I/O Buffer and etc...</li>
+  </ul>
+ </li>
+</ul>
+</div>
+
+
+<div class=3D"para">
+<h3>Application Interface</h3>
+<img src=3D"http://elm-chan.org/fsw/ff/res/layers1.png" class=3D"rset" widt=
+h=3D"245" height=3D"220" alt=3D"layer">
+<p>FatFs provides various filesystem functions for the applications as show=
+n below.</p>
+<ul>
+ <li>File Access
+ <ul>
+  <li><a href=3D"http://elm-chan.org/fsw/ff/doc/open.html">f_open</a> - Ope=
+n/Create a file</li>
+  <li><a href=3D"http://elm-chan.org/fsw/ff/doc/close.html">f_close</a> - C=
+lose an open file</li>
+  <li><a href=3D"http://elm-chan.org/fsw/ff/doc/read.html">f_read</a> - Rea=
+d data from the file</li>
+  <li><a href=3D"http://elm-chan.org/fsw/ff/doc/write.html">f_write</a> - W=
+rite data to the file</li>
+  <li><a href=3D"http://elm-chan.org/fsw/ff/doc/lseek.html">f_lseek</a> - M=
+ove read/write pointer, Expand size</li>
+  <li><a href=3D"http://elm-chan.org/fsw/ff/doc/truncate.html">f_truncate</=
+a> - Truncate file size</li>
+  <li><a href=3D"http://elm-chan.org/fsw/ff/doc/sync.html">f_sync</a> - Flu=
+sh cached data</li>
+  <li><a href=3D"http://elm-chan.org/fsw/ff/doc/forward.html">f_forward</a>=
+ - Forward data to the stream</li>
+  <li><a href=3D"http://elm-chan.org/fsw/ff/doc/expand.html">f_expand</a> -=
+ Allocate a contiguous block to the file</li>
+  <li><a href=3D"http://elm-chan.org/fsw/ff/doc/gets.html">f_gets</a> - Rea=
+d a string</li>
+  <li><a href=3D"http://elm-chan.org/fsw/ff/doc/putc.html">f_putc</a> - Wri=
+te a character</li>
+  <li><a href=3D"http://elm-chan.org/fsw/ff/doc/puts.html">f_puts</a> - Wri=
+te a string</li>
+  <li><a href=3D"http://elm-chan.org/fsw/ff/doc/printf.html">f_printf</a> -=
+ Write a formatted string</li>
+  <li><a href=3D"http://elm-chan.org/fsw/ff/doc/tell.html">f_tell</a> - Get=
+ current read/write pointer</li>
+  <li><a href=3D"http://elm-chan.org/fsw/ff/doc/eof.html">f_eof</a> - Test =
+for end-of-file</li>
+  <li><a href=3D"http://elm-chan.org/fsw/ff/doc/size.html">f_size</a> - Get=
+ size</li>
+  <li><a href=3D"http://elm-chan.org/fsw/ff/doc/error.html">f_error</a> - T=
+est for an error</li>
+ </ul>
+ </li>
+ <li>Directory Access
+ <ul>
+  <li><a href=3D"http://elm-chan.org/fsw/ff/doc/opendir.html">f_opendir</a>=
+ - Open a directory</li>
+  <li><a href=3D"http://elm-chan.org/fsw/ff/doc/closedir.html">f_closedir</=
+a> - Close an open directory</li>
+  <li><a href=3D"http://elm-chan.org/fsw/ff/doc/readdir.html">f_readdir</a>=
+ - Read a directory item</li>
+  <li><a href=3D"http://elm-chan.org/fsw/ff/doc/findfirst.html">f_findfirst=
+</a> - Open a directory and read the first item matched</li>
+  <li><a href=3D"http://elm-chan.org/fsw/ff/doc/findnext.html">f_findnext</=
+a> - Read a next item matched</li>
+ </ul>
+ </li>
+ <li>File and Directory Management
+ <ul>
+  <li><a href=3D"http://elm-chan.org/fsw/ff/doc/stat.html">f_stat</a> - Che=
+ck existance of a file or sub-directory</li>
+  <li><a href=3D"http://elm-chan.org/fsw/ff/doc/unlink.html">f_unlink</a> -=
+ Remove a file or sub-directory</li>
+  <li><a href=3D"http://elm-chan.org/fsw/ff/doc/rename.html">f_rename</a> -=
+ Rename/Move a file or sub-directory</li>
+  <li><a href=3D"http://elm-chan.org/fsw/ff/doc/chmod.html">f_chmod</a> - C=
+hange attribute of a file or sub-directory</li>
+  <li><a href=3D"http://elm-chan.org/fsw/ff/doc/utime.html">f_utime</a> - C=
+hange timestamp of a file or sub-directory</li>
+  <li><a href=3D"http://elm-chan.org/fsw/ff/doc/mkdir.html">f_mkdir</a> - C=
+reate a sub-directory</li>
+  <li><a href=3D"http://elm-chan.org/fsw/ff/doc/chdir.html">f_chdir</a> - C=
+hange current directory</li>
+  <li><a href=3D"http://elm-chan.org/fsw/ff/doc/chdrive.html">f_chdrive</a>=
+ - Change current drive</li>
+  <li><a href=3D"http://elm-chan.org/fsw/ff/doc/getcwd.html">f_getcwd</a> -=
+ Retrieve the current directory and drive</li>
+ </ul>
+ </li>
+ <li>Volume Management and System Configuration
+ <ul>
+  <li><a href=3D"http://elm-chan.org/fsw/ff/doc/mount.html">f_mount</a> - R=
+egister/Unregister the work area of the volume</li>
+  <li><a href=3D"http://elm-chan.org/fsw/ff/doc/mkfs.html">f_mkfs</a> - Cre=
+ate an FAT volume on the logical drive</li>
+  <li><a href=3D"http://elm-chan.org/fsw/ff/doc/fdisk.html">f_fdisk</a> - C=
+reate partitions on the physical drive</li>
+  <li><a href=3D"http://elm-chan.org/fsw/ff/doc/getfree.html">f_getfree</a>=
+ - Get free space on the volume</li>
+  <li><a href=3D"http://elm-chan.org/fsw/ff/doc/getlabel.html">f_getlabel</=
+a> - Get volume label</li>
+  <li><a href=3D"http://elm-chan.org/fsw/ff/doc/setlabel.html">f_setlabel</=
+a> - Set volume label</li>
+  <li><a href=3D"http://elm-chan.org/fsw/ff/doc/setcp.html">f_setcp</a> - S=
+et active code page</li>
+ </ul>
+ </li>
+</ul>
+</div>
+
+
+<div class=3D"para">
+<h3>Media Access Interface</h3>
+<img src=3D"http://elm-chan.org/fsw/ff/res/layers2.png" class=3D"rset" widt=
+h=3D"245" height=3D"220" alt=3D"layer">
+<p>Since FatFs module is the <em>Filesystem Layer</em> independent of platf=
+orms and storage media, it is completely separated from the physical device=
+s, such as memory card, harddisk and any type of storage device. The storag=
+e device control module is <em>not any part of FatFs module</em> and it nee=
+ds to be provided by implementer. FatFs controls the storage devices via a =
+simple media access interface shown below. Also sample implementations for =
+some platforms are available in the downloads. A function checker for stora=
+ge device control module is available <a href=3D"http://elm-chan.org/fsw/ff=
+/res/app4.c">here</a>.</p>
+<ul>
+ <li>Storage Device Controls
+ <ul>
+  <li><a href=3D"http://elm-chan.org/fsw/ff/doc/dstat.html">disk_status</a>=
+ - Get device status</li>
+  <li><a href=3D"http://elm-chan.org/fsw/ff/doc/dinit.html">disk_initialize=
+</a> - Initialize device</li>
+  <li><a href=3D"http://elm-chan.org/fsw/ff/doc/dread.html">disk_read</a> -=
+ Read data</li>
+  <li><a href=3D"http://elm-chan.org/fsw/ff/doc/dwrite.html">disk_write</a>=
+ - Write data</li>
+  <li><a href=3D"http://elm-chan.org/fsw/ff/doc/dioctl.html">disk_ioctl</a>=
+ - Control device dependent functions</li>
+ </ul>
+ </li>
+ <li>Real Time Clock
+ <ul>
+  <li><a href=3D"http://elm-chan.org/fsw/ff/doc/fattime.html">get_fattime</=
+a> - Get current time</li>
+ </ul>
+ </li>
+</ul>
+</div>
+
+
+<div class=3D"para">
+<h3>Resources</h3>
+<p>The FatFs module is a free software opened for education, research and d=
+evelopment. You can use, modify and/or redistribute it for any purpose with=
+out any restriction under your responsibility. For further information, ref=
+er to the application note.</p>
+<ul>
+ <li><em>Getting Started: <a href=3D"http://elm-chan.org/fsw/ff/doc/appnote=
+.html">FatFs Application Note</a></em></li>
+ <li>Download: <a href=3D"http://elm-chan.org/fsw/ff/arc/ff15.zip">FatFs R0=
+.15 (zip)</a> | <a href=3D"http://elm-chan.org/fsw/ff/updates.html">Changes=
+</a> | <a href=3D"http://elm-chan.org/fsw/ff/patches.html">Latest Patch</a>=
+ <span class=3D"mfd">December 4, 2022</span></li>
+ <li>Download: <a href=3D"http://elm-chan.org/fsw/ff/ffsample.zip">FatFs sa=
+mple projects for various platforms</a> <span class=3D"mfd">November 6, 202=
+2</span></li>
+ <li>Download: <a href=3D"http://elm-chan.org/fsw/ff/archives.html">Previou=
+s Releases</a></li>
+ <li>Community: <a href=3D"http://elm-chan.org/fsw/ff/bd/">FatFs User Forum=
+</a></li>
+ <li><a href=3D"https://msdn.microsoft.com/en-us/windows/hardware/gg463080.=
+aspx">FAT32 Specification by Microsoft</a>=E2=86=97 (The authorized documen=
+t on FAT filesystem)</li>
+ <li><a href=3D"http://elm-chan.org/docs/fat_e.html">The basics of FAT file=
+system</a> (FatFs is written based on this documentation)</li>
+ <li><a href=3D"http://elm-chan.org/docs/exfat_e.html">The basics of exFAT =
+filesystem</a> (FatFs is written based on this documentation)</li>
+ <li><a href=3D"http://elm-chan.org/docs/mmc/mmc_e.html">How to use MMC/SDC=
+</a></li>
+ <li><a href=3D"http://elm-chan.org/junk/fa/faff.html">Playing with FlashAi=
+r and FatFs</a></li>
+ <li><a href=3D"http://nemuisan.blog.bai.ne.jp/">Nemuisan's Blog</a>=E2=86=
+=97 (Well written implementations for STM32F/SPI &amp; SDIO and LPC4088/SDM=
+MC)</li>
+ <li><a href=3D"http://stm32f4-discovery.net/2014/07/library-21-read-sd-car=
+d-fatfs-stm32f4xx-devices/">Read SD card with FatFs on STM32F4xx devices by=
+ Tilen Majerle</a>=E2=86=97 (Quick and easy implementation for STM32F4-Disc=
+overy)</li>
+ <li><a href=3D"http://elm-chan.org/fsw/ff/res/rwtest1.png">Benchmark 1</a>=
+ (ATmega1284/20MHz with MMC via USART in SPI, CFC via GPIO)</li>
+ <li><a href=3D"http://elm-chan.org/fsw/ff/res/rwtest2.png">Benchmark 2</a>=
+ (LPC2368/72MHz with MMC via MCI)</li>
+ <li><a href=3D"http://elm-chan.org/fsw/ff/res/fd.mp4">Demo movie of an app=
+lication</a> (this project is in ffsample.zip/lpc23xx)</li></ul>
+</div>
+
+
+<hr>
+<p class=3D"foot"><a href=3D"http://elm-chan.org/fsw_e.html">Return</a></p>
+
+
+<!----></body></html>
+------MultipartBoundary--0s3ViURcQpnE7iQjUpolnxEjBTN2SpA5Ag1BC0ZtVu----
+Content-Type: text/css
+Content-Transfer-Encoding: quoted-printable
+Content-Location: cid:css-5f0e7504-f508-4704-83d6-e241f24cecbf@mhtml.blink
+
+@charset "utf-8";
+=0A
+------MultipartBoundary--0s3ViURcQpnE7iQjUpolnxEjBTN2SpA5Ag1BC0ZtVu----
+Content-Type: text/css
+Content-Transfer-Encoding: quoted-printable
+Content-Location: cid:css-e27c8ff8-a197-4941-9393-7d067b0ed3df@mhtml.blink
+
+@charset "utf-8";
+=0A
+------MultipartBoundary--0s3ViURcQpnE7iQjUpolnxEjBTN2SpA5Ag1BC0ZtVu----
+Content-Type: text/css
+Content-Transfer-Encoding: quoted-printable
+Content-Location: cid:css-a6012d03-9c37-436c-be1a-9eec622e1a1e@mhtml.blink
+
+@charset "utf-8";
+
+.jfk-bubble.gtx-bubble, .captcheck_answer_label > input + img, span#closed_=
+text > img[src^=3D"https://www.gstatic.com/images/branding/googlelogo"], sp=
+an[data-href^=3D"https://www.hcaptcha.com/"] > #icon, #bit-notification-bar=
+-iframe, ::-webkit-calendar-picker-indicator { filter: invert(100%) hue-rot=
+ate(180deg) brightness(85%) grayscale(35%) sepia(15%) !important; }
+------MultipartBoundary--0s3ViURcQpnE7iQjUpolnxEjBTN2SpA5Ag1BC0ZtVu----
+Content-Type: text/css
+Content-Transfer-Encoding: quoted-printable
+Content-Location: cid:css-6074412d-9a6b-49e2-94a3-9039ccaccb67@mhtml.blink
+
+@charset "utf-8";
+
+[data-darkreader-inline-bgcolor] { background-color: var(--darkreader-inlin=
+e-bgcolor)  !important; }
+
+[data-darkreader-inline-bgimage] { background-image: var(--darkreader-inlin=
+e-bgimage)  !important; }
+
+[data-darkreader-inline-border] { border-color: var(--darkreader-inline-bor=
+der)  !important; }
+
+[data-darkreader-inline-border-bottom] { border-bottom-color: var(--darkrea=
+der-inline-border-bottom)  !important; }
+
+[data-darkreader-inline-border-left] { border-left-color: var(--darkreader-=
+inline-border-left)  !important; }
+
+[data-darkreader-inline-border-right] { border-right-color: var(--darkreade=
+r-inline-border-right)  !important; }
+
+[data-darkreader-inline-border-top] { border-top-color: var(--darkreader-in=
+line-border-top)  !important; }
+
+[data-darkreader-inline-boxshadow] { box-shadow: var(--darkreader-inline-bo=
+xshadow)  !important; }
+
+[data-darkreader-inline-color] { color: var(--darkreader-inline-color)  !im=
+portant; }
+
+[data-darkreader-inline-fill] { fill: var(--darkreader-inline-fill)  !impor=
+tant; }
+
+[data-darkreader-inline-stroke] { stroke: var(--darkreader-inline-stroke)  =
+!important; }
+
+[data-darkreader-inline-outline] { outline-color: var(--darkreader-inline-o=
+utline)  !important; }
+
+[data-darkreader-inline-stopcolor] { stop-color: var(--darkreader-inline-st=
+opcolor)  !important; }
+------MultipartBoundary--0s3ViURcQpnE7iQjUpolnxEjBTN2SpA5Ag1BC0ZtVu----
+Content-Type: text/css
+Content-Transfer-Encoding: quoted-printable
+Content-Location: cid:css-b8cfcf75-2fbf-4c32-88d1-29109e2e32fb@mhtml.blink
+
+@charset "utf-8";
+
+:root { --darkreader-neutral-background: #000000; --darkreader-neutral-text=
+: #d7d0c4; --darkreader-selection-background: #002885; --darkreader-selecti=
+on-text: #ece6da; }
+------MultipartBoundary--0s3ViURcQpnE7iQjUpolnxEjBTN2SpA5Ag1BC0ZtVu----
+Content-Type: text/css
+Content-Transfer-Encoding: quoted-printable
+Content-Location: cid:css-df4a21de-8038-44b5-ab18-22e3b9f1acfc@mhtml.blink
+
+@charset "utf-8";
+
+:root { }
+------MultipartBoundary--0s3ViURcQpnE7iQjUpolnxEjBTN2SpA5Ag1BC0ZtVu----
+Content-Type: text/css
+Content-Transfer-Encoding: quoted-printable
+Content-Location: cid:css-d835d327-911b-425b-96eb-485576d13294@mhtml.blink
+
+@charset "utf-8";
+
+html { background-color: rgb(0, 0, 0) !important; }
+
+html { color-scheme: dark !important; }
+
+html, body { background-color: rgb(0, 0, 0); }
+
+html, body { border-color: rgb(86, 79, 67); color: rgb(236, 230, 219); }
+
+a { color: rgb(59, 118, 186); }
+
+table { border-color: rgb(55, 58, 58); }
+
+::placeholder { color: rgb(166, 158, 145); }
+
+input:-webkit-autofill, textarea:-webkit-autofill, select:-webkit-autofill =
+{ background-color: rgb(25, 27, 0) !important; color: rgb(236, 230, 219) !i=
+mportant; }
+
+::-webkit-scrollbar { background-color: rgb(0, 0, 0); color: rgb(157, 149, =
+136); }
+
+::-webkit-scrollbar-thumb { background-color: rgb(35, 38, 38); }
+
+::-webkit-scrollbar-thumb:hover { background-color: rgb(59, 62, 62); }
+
+::-webkit-scrollbar-thumb:active { background-color: rgb(39, 42, 43); }
+
+::-webkit-scrollbar-corner { background-color: rgb(0, 0, 0); }
+
+::selection { background-color: rgb(0, 40, 133) !important; color: rgb(236,=
+ 230, 218) !important; }
+------MultipartBoundary--0s3ViURcQpnE7iQjUpolnxEjBTN2SpA5Ag1BC0ZtVu----
+Content-Type: text/css
+Content-Transfer-Encoding: quoted-printable
+Content-Location: cid:css-25f327d3-6af4-41ff-b11c-4d6eb3209273@mhtml.blink
+
+@charset "utf-8";
+
+body { background-color: rgb(0, 24, 24); }
+
+a:link { color: rgb(51, 98, 179); }
+
+a:visited { color: rgb(206, 106, 197); }
+
+a:hover { background-color: rgb(0, 66, 64); }
+
+a:active { color: rgb(206, 106, 197); outline-color: initial; }
+
+pre { border-color: rgb(55, 58, 58); background-color: rgb(0, 0, 0); }
+
+pre span.c { color: rgb(146, 234, 134); }
+
+pre span.k { color: rgb(51, 98, 179); }
+
+pre span.e { color: rgb(161, 9, 7); }
+
+a.imglnk img { border-color: initial; }
+
+.mfd { border-color: initial; }
+
+h2 { background-color: rgb(0, 0, 0); }
+
+div.doc h3 { border-color: rgb(24, 54, 52); }
+
+table { border-color: rgb(55, 58, 58); }
+
+table th { background-color: rgb(0, 0, 0); border-color: rgb(55, 58, 58); }
+
+table td { background-color: rgb(0, 0, 0); border-color: rgb(55, 58, 58); }
+------MultipartBoundary--0s3ViURcQpnE7iQjUpolnxEjBTN2SpA5Ag1BC0ZtVu----
+Content-Type: text/css
+Content-Transfer-Encoding: quoted-printable
+Content-Location: cid:css-65041392-5d0c-4077-bd11-898d91b636ff@mhtml.blink
+
+@charset "utf-8";
+
+.vimvixen-hint { background-color: rgb(77, 49, 0) !important; border-color:=
+ rgb(190, 160, 51) !important; color: rgb(244, 232, 202) !important; }
+
+::placeholder { opacity: 0.5 !important; }
+
+#edge-translate-panel-body, .MuiTypography-body1, .nfe-quote-text { color: =
+var(--darkreader-neutral-text)  !important; }
+
+gr-main-header { background-color: rgb(0, 14, 23) !important; }
+
+.tou-z65h9k, .tou-mignzq, .tou-1b6i2ox, .tou-lnqlqk { background-color: var=
+(--darkreader-neutral-background)  !important; }
+
+.tou-75mvi { background-color: rgb(0, 0, 0) !important; }
+
+.tou-ta9e87, .tou-1w3fhi0, .tou-1b8t2us, .tou-py7lfi, .tou-1lpmd9d, .tou-1f=
+rrtv8, .tou-17ezmgn { background-color: rgb(0, 0, 0) !important; }
+
+.tou-uknfeu { background-color: rgb(0, 0, 0) !important; }
+
+.tou-6i3zyv { background-color: rgb(7, 47, 60) !important; }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+
+embed[type=3D"application/pdf"][src=3D"about:blank"] { filter: invert(100%)=
+ contrast(90%); }
+------MultipartBoundary--0s3ViURcQpnE7iQjUpolnxEjBTN2SpA5Ag1BC0ZtVu----
+Content-Type: text/css
+Content-Transfer-Encoding: quoted-printable
+Content-Location: http://elm-chan.org/fsw/ff/css_e.css
+
+@charset "utf-8";
+
+* { margin: 0px; padding: 0px; border-width: 0px; }
+
+body { margin: 8px; background-color: rgb(224, 255, 255); font-family: seri=
+f; line-height: 133%; max-width: 1024px; }
+
+a:link { color: blue; }
+
+a:visited { color: darkmagenta; }
+
+a:hover { background-color: rgb(160, 255, 255); }
+
+a:active { color: darkmagenta; overflow: hidden; outline: none; position: r=
+elative; top: 1px; left: 1px; }
+
+abbr { border-width: 1px; }
+
+p { margin: 0px 0px 0.3em 1em; }
+
+i { margin: 0px 0.3em 0px 0px; }
+
+b { margin: 0px 0.1em; }
+
+em { font-style: normal; font-weight: bold; margin: 0px 0.1em; }
+
+strong { }
+
+pre { border: 1px dashed gray; margin: 0.5em 1em; padding: 0.5em; line-heig=
+ht: 1.2em; font-size: 85%; font-family: Consolas, "Courier New", monospace;=
+ background-color: white; }
+
+pre span.c { color: green; }
+
+pre span.k { color: blue; }
+
+pre span.e { color: red; }
+
+pre span.b { font-weight: bold; }
+
+pre span.arg { font-style: italic; }
+
+tt { margin: 0px 0.2em; font-size: 0.85em; font-family: Consolas, "Courier =
+New", monospace; }
+
+tt.arg { font-style: italic; }
+
+ol { margin: 0.5em 2.5em; }
+
+ul { margin: 0.5em 2em; }
+
+ul ul { margin: 0px 2em 0.5em 1em; }
+
+dl { margin: 0.5em 1em; }
+
+dd { margin: 0px 2em; }
+
+dt { font-size: 0.85em; font-family: Consolas, "Courier New", monospace; }
+
+dl.par dt { margin: 0.5em 0px 0px; font-style: italic; }
+
+dl.ret dt { margin: 0.5em 0px 0px; font-size: 0.85em; font-family: Consolas=
+, "Courier New", monospace; font-weight: bold; }
+
+hr { border-width: 1px; margin: 1em; }
+
+div.abst { font-family: sans-serif; }
+
+div.para { clear: both; font-family: serif; }
+
+div.ret a { font-size: 0.85em; font-family: Consolas, "Courier New", monosp=
+ace; }
+
+.equ { text-indent: 0px; margin: 1em 2em; }
+
+.indent { margin-left: 2em; }
+
+.rset { float: right; margin: 0.3em 0px 0.5em 0.5em; }
+
+.lset { float: left; margin: 0.3em 0.5em 0.5em; }
+
+ul.flat li { list-style-type: none; margin: 0px; }
+
+a.imglnk img { border: 1px solid; }
+
+.iequ { white-space: nowrap; font-weight: bold; }
+
+.clr { clear: both; }
+
+.it { font-style: italic; }
+
+.mfd { font-size: 0.7em; padding: 0px 1px; border: 1px solid; white-space: =
+nowrap; }
+
+.ral { text-align: right; }
+
+.lal { text-align: left; }
+
+.cal { text-align: center; }
+
+h1 { line-height: 1em; font-size: 2em; font-family: sans-serif; padding: 0.=
+3em 0px; }
+
+h2 { font-size: 2em; font-family: sans-serif; background-color: rgb(216, 21=
+6, 255); padding: 0.5em; margin: 0px 0px 0.5em; }
+
+h3 { font-size: 1.5em; font-family: sans-serif; margin: 1.5em 0px 0.5em; }
+
+div.doc h3 { border-color: rgb(176, 216, 216); border-style: solid; border-=
+width: 0px 0px 4px 12px; padding: 4px; margin-top: 3em; }
+
+h4 { font-size: 1.2em; font-family: sans-serif; margin: 2em 0px 0.2em; }
+
+h5 { font-size: 1em; font-family: sans-serif; margin: 1em 0px 0em; }
+
+p.hdd { float: right; text-align: right; margin-top: 0.5em; }
+
+hr.hds { clear: both; margin-bottom: 1em; }
+
+kbd { letter-spacing: 0px; }
+
+small { font-size: 80%; }
+
+.indent { margin-left: 2em; }
+
+table { margin: 0.5em 1em; border-collapse: collapse; border: 2px solid gra=
+y; }
+
+table caption { font-family: sans-serif; font-weight: bold; }
+
+table th { background-color: white; border-style: solid; border-width: 1px =
+1px 2px; border-color: gray; padding: 0px 3px; vertical-align: top; white-s=
+pace: nowrap; }
+
+table td { background-color: white; border: 1px solid gray; padding: 0px 3p=
+x; vertical-align: top; line-height: 1.3em; }
+
+table.lst td:first-child { font-size: 0.85em; font-family: Consolas, "Couri=
+er New", monospace; white-space: nowrap; }
+
+table.lst2 td { font-size: 0.85em; font-family: Consolas, "Courier New", mo=
+nospace; white-space: nowrap; }
+
+table.lst3 td { font-family: Consolas, "Courier New", monospace; white-spac=
+e: nowrap; }
+
+tr.lst3 td { border-width: 2px 1px 1px; }
+
+table.lst4 td { padding: 0.3em; }
+
+table.lst4 td:nth-child(2) { width: 45%; }
+
+table.lst4 td:nth-child(3) { width: 45%; }
+
+p.foot { clear: both; text-indent: 0px; margin: 1em 0.5em; }
+------MultipartBoundary--0s3ViURcQpnE7iQjUpolnxEjBTN2SpA5Ag1BC0ZtVu----
+Content-Type: image/png
+Content-Transfer-Encoding: base64
+Content-Location: http://elm-chan.org/fsw/ff/res/layers.png
+
+iVBORw0KGgoAAAANSUhEUgAAAPUAAAD/CAIAAACmSAdUAAAACXBIWXMAAAAAAAAAAAHqZRakAAAV
+Q0lEQVR4nO2dz2sU2drHv3W5/0G8nUhoiNyFCj0GwUVDEFpugxFdGHgvuMlmdKHEZeS6i73zZbKc
+0LPQ2WQTeAfahcNE6IsNg1CLgLQ2TLIQA43E9Ix/Q7+LUz9O/a6un90n3w9ZpLvq/KhT337qeU6d
+p0obj7dBiKL8rewOEJIj1DdRGeqbqAz1TVSG+iYqQ30TlaG+icpQ30RlqG+iMtQ3URnqm6jM3yct
+oGmbefSDkEgSrJWaWN8AxuNxglKEpEHTtASl6J8QlaG+icpQ30RlqG+iMtQ3URnqm6hMkvnBcL69
+++nH7ul88/HDlbksasLyva27F+X/M+lgJlWRaSdz+/3t8OMpgNOPh9+yrjoNR69ar47K7gQpnKzt
+97fDj6dYXl7u9z8efltJa8Ft5lYebq0k7ZNhsC+nr4rMGBnr+9vhx1PMf3f98nK/3/39aMXwAI5e
+tfb6WL53D3t7fQCw3ZeQTY6KXU6FKAZXAelbGPsaBQH091r9+ebjh5cOnVXZe/jUNd+8993HPbE5
+C5+LFEu2/okh70tzFy8vA/0/nB5Bf88S32n3x5/efYu1yQeHjHHa/fHVEYBv736SvgX6e1H1wClu
+UZfTjznt7lmbT7v/F10hmSoytd/C914+NwfMXV5Gv//H0d2LUgxnGEChqVOHAxOyydPKu7d9u8TR
+q9Zev//23fWLK5LfYdTz519YWXn4GA6DLUv06PfuKUxTb5QSlfl37M+/AFrwGSJLfRuhZX+vZZpR
+p8CXbwjVzK3cWO7u9WWxhGzy8NefpwDmv7s0BwAX725t3ZU3O417OEd/iF/KddFHn9bNZubOLQCn
+QfWQaSVDfRvyduC24HnicjUAzP/jXDFNk2klO/9byHu++XjL4N4ynD54/61wX00HQ1JfyCYP5/4x
+D3sC8tu7n1qtVuvVkaP9e8tSgblzCwFVXby8DOC0+7voZJzWyUyRmf025GVczgEhnr7wwY1vTrs/
+trrmZnnX0E1uTC9CKjHfvH4Rh2/d9TjdHGv+RKrr4vXmfL97KrlUtq9EFCAz++2Rt2kdbQu+fM8y
+q+6ptpBNPly8Kxtoo8Dcyr+b81Z1j5vzAL7+9c3uCGAoXmZu5eFjq5gw/7yrqRDapDk/mrY5ef6O
+Ocnto52QTYTYaNrEWgXXVxG1ob6JyhTjnxCSFvonhLihvonKUN9EZahvojLUN1EZ6puoDPVNVIb6
+JipDfROVob6JylDfRGWob6Iy1DdRGeqbqAz1TVSG+iYqQ30TlaG+icpQ30RlqG+iMtQ3URnqm6gM
+9U1UhvomKkN9E5WhvonKUN9EZZI8317TtMz7QUgeJHlmISGzAv0TojIT+yeatplHPwiJJIGvkej9
+Unz+NymeRFEf/ROiMtQ3URnqm6gM9U1UhvomKkN9E5XJSt89aJrPX6+wGo5xyyzyRCrzxPzy1sv4
+XZH6cwvH8dqN209SKGXb7yc5KGPwyfzvGIOsKyczRbb63sR47PhrhOx8jFsa3DekJqrByyo2V7F/
+aDexD2zyhuvZpRD73XsiuRxPAADHuHUB+wCAGzGcB58aArhUA7aNa0LvVwC4dMm9z8tbdm0vj6UN
+kpPz8pP0vdNXEZ0J6vOTZO4ZyYVs9b3tcJ2FH3z8Eje2HfuEqTl1Df+6DQCfjgHg0wDYxL+cO7y8
+hQf79scHF2x//Yn5kwPw4EFwJ4N54rwi3XD9fkjR5G+/l+7bzsbnFwCwfwgs4bfPWAUAvB3jt/th
+NRwfAsDqC7uesP2XsAocHgPA4T5WXca7Z4j7rdSf7f/FMXD8EtsAVvF5jPEYbyf3akQNdj/fAsAv
+/524HpIdefrfPzSkTT1oGi5EGkW/GpYuAcD+A9Ouh89pLKEGbP8K9LAN1P7p2Cg8ltUXhlu/dB+b
+APZxbP2K/gdLAIDGhvHzi4+owe7nDQDY/yVqBobkSP72+/ilfbIFbpsaxdJ9w9Aa7ONCqMRvbwID
+9D4BwO3GZG0Rtchf3//9BQBefPZc9JdQi12J7ORYFjdw50vAPn49BFYNY2zRuA0A+w+MyM/ySZas
+q4Rpbns72HeWtRr9NWAVsqhB9qPGY4x/c/eBFEhR898PLkDTjDDRnr8DEGP+xDF5otmKDGLpnwCw
+vQ3UPLs18GLVaNTylzb/gyXJV7mg2V01azR8lRtWB3zbvY9N2T9Jdl+JZEn++r7fth3ZtyKmHBiG
+8LZpzl2Kd9H4wWn4V/E53Cg2IHbfvO3Xn98MiQtefLbjhB8+2119IXtES2hbH1fxIjj0/GEMR09f
+RITOJGcmzi/WtE3m75AS0JLkwpd9f56QPKG+icpQ30RlqG+iMtQ3URnqm6gM9U1UhvomKkN9E5Wh
+vonKUN9EZahvojLUN1EZ6puoDPVNVIb6JipDfROVob6JylDfRGWob6Iy1DdRGeqbqAz1TVSG+iYq
+Q30TlaG+icpQ30RlqG+iMtQ3URnqm6jM35MU0rSsu0FILiR5pjIhswL9E6IyE/snmsbXXZNySOBr
+JPG/x3w/CSkcLVHUR/+EqAz1TVSG+iYqQ30TlUmv78HuxsbGxu4gg84EMeo+z6+NmJWLw3zeHeXd
+0Gwx7QdF+00AYLA7vRpNQ6L78yQJlebTnWbZnfBj1H3e6gxRv1p2R3Igd30bgwcAqK5tPW1WzO/q
+j3bWa+YHc9Ngd6Otmx+CGOxutHXjf6MW60vrs+cb31Ix+15dW1tM24eKISPXzvLABNccOgiO4n4D
+bu1eXXt07aBtHtPW02bF3l1vb+jVta2nC2822jqq9Tp0fWjVEVBt8KDEHOOcydc/kQcFwLDT2tgd
+AJUr16qA/n4AAKOTIYDhwYcRgNHXLwAWF2KKG4DeNpzi2tU6AHz5anrIg/c6gOraTbe45VIhDHbt
+vg87Hd2xKUkfgo9i2GkZ3kHMfgYVDxhw6Yu2dEw/hwzBUNfFjosLlchqzbblrkNvp4lWMiJX+z14
+0xnC+iGLQdJfd2/WmleuVTvDL19HqOHrF9TrdV0/GQH4cDAE6leDf/aj7mtdNiCD3Y22fvBh1GxW
+ajfXqnpnKD5Y0rp2pRJaKrwhOK4rqfoQXPlgd6Ot66+7N2tXPsTqZ1Dx5ihwwM3yDms8PBmh2Xy6
+BceFZeDYU3QjqlrANFRR196CyVPfLuNVad6pd9r68GQE1BYWAf1khNHXg2H12p3zVf3g6wg4iZC3
+ae07rY2O/aWhp8qVa9XO0PggGq/faVYiSoU2ZEnTEG6KPgRXXlvf2VkXIxavn4HF3wQOuFHcLFNZ
+WASGCEH6UYacR7lXlfNVYGh3fiqUXtb8Se1qHdDfD0YnQywu1BYWMTwZjb5+iZB3OJXmnbrh6hjS
+Sl7XLPehHCrNp1trVfvzsNMq30HJ037Xrtah68POm0FTXNfEVfV8xdr45f17oHqtgtrVOl6/f/Nl
+iPqdUDkIIxFoGkSTBx+6i7rs9kaUCm7I9jTe2P5nsj4EVz6yAs+b8foZVHw9bMBDqosw5qHn0VmT
+PUU02N3wsfGFk5W+9faGHFuIi5NxUXdss67WYtR0oH6nAuB8ddjRhdjDMC6Oziu4JAjRZKczdFxh
+o0oFN+TyFVL0IaLy6trNGiq1WP0MKg6EDXgU1vyJZ0voebRwhcZAjJ9W7uTrn7guWdW1LWnKqHK+
+CpjX78rCIhCoB5na+s6juvTZdfqFfwD3CYgo5d+Q3ffq2lrdsSlJH4KPwi4fs59BxUMHPBBj2gfA
+8MTXoYhVbYIhzp+J89M0bZPrv0nxaFqSXErenycqQ30TlaG+icpQ30RlqG+iMtQ3UZls7u+Mus9b
+HQQt8vSs0nQyyTypczGt/J3v7vaOfgWD8OuksboovK07J622Ptm6UP+2pH5OcHQ+pTPGXGSbef1e
+AWVEJvZ78KYzlO9luE5axEKEYacVN+9r9OFAWkw7AYkLlsMkSzdG3ecbzl+A//LVEolODqo079Qx
+7LzJvNcZ2G+xHkFaRmSuN5NXYjrWwMkGwNhuLm4Ib+nDwVAsppWrk/NixC/LY0H9C4bja4bD2xrs
+xqnYB58EBXPEIo7OXKRufWmYcr29e3UK0gviJweJ5RqeRbdpSa9vYRq9Kw3MBaMRWVmV5vdrB63O
+UH8/WK+Fn4/Rh4MhqtduXq3reqzfQ+qCpWAssY21NskyJdYhVZpPH51svD6/5XeQ/vk1Qak9Yrew
+JKagus2qvclBrrX0UkNi0Vh8+xOP9P6JWIwsp9wYyxmGnVaszGqRzSMlvQQ1JFR6pWKurY3dw0QF
+9faGRIHXe8OXirM2SaQ7uRft1NZ3/PzYiPwa/9SekCQmmfjpUUGZR8YKpIAFMIlJbb+NIXacjNr6
+1toX6YcbKyKJslfitNcXKkDlah16DIOfsmBx+KxSjLXsT9iWmMhXUjt/xx5yT2oPKiFJTI5uBCY0
+uZODRt2f/TOPKqYB//J1hFp2Bjy9vn2HuNJ8utO0r07DTmt3IcIdjLBXhlWT1mjG1GnSguWlx8af
+nxCSmKz2IJH6pfaEJDHJxE+PCso8koplu2Q8z/nvSvPpzs6OsbAyxP3wejg++wiVOojlaSQuWCTV
+ta0de6jiz/IY13TX/oNdX+/AeBSPJO7yl2fnTmr77TUhrknSqOyQwW47Oo3LCGJdE+lxY9IkBcug
+Yl7OY1zuBGZqjb2/6WV7anCMRJARd3coOInJu5v/Zcd5+gMzj6yeZvybS6/vhUXA4clZY+5IQpFj
+IK+7aaVx+U/wGedGqsPI/onSaWhB+E8mpsU3lWkUsy1rOqn9/HwcL6W2/qiut3VPo/VH/g05hj7S
+FwhJYvLZLSztyJo/Cco8incZn5j0/olIw5Hdj9r6jiPRNMKhrK5t+cb7Nl6VmpM0EZ5G4oIlUml+
+v1ZF1ONJbGrrO868mYD0GrNeAKg/Eicocs4qLInJ1Ymg3B1XclBQ5pHvREV6MsjfcTyNKj2j7vOf
+8X0xmU2qtjWLRD25rLT8HZFtmJFBHOy2Dq59X4wIVG1rJhm81yfIhY5NJuurxLxRJvdWa+s7hcV9
+qrY1g4y6r/WAZ2mkg/nFZDZgfjEhbqhvojLUN1EZ6puoDPVNVIb6JipDfROVob6JylDfRGWob6Iy
+SdafaJqWeT8IyYMk9/QJmRXonxCVob6JylDfJAmatll2F2JB/5tMhkvZU66f6bLfs2IV4qDSsQg0
+bdN7UL5fTg/TYr9nyyqEo9KxCGIqeAqPtHx9h4xd6X2bFJWORZDANk/VkZap79m1Cl5UOhZBSq9j
+So60HH3PulWQUelYQog8zOk8qGzevxOfxFZBFJyqQVTpWFSlaH27TuqMWgWBSseiKtM1P0hItlDf
+RGWK9k/IjDKjzhXtN1EZ6puoDPVNVIb+N4lgomn+aXPTi75/qcZdX4FKx+JLgvtQmrY5VcfF+/Np
+UelYZBIrdaokzvVV2aDSsSC1RqdH4lwfmyXKHEt6gU6JxMuPL8UoqJEToMaxTIk0M6F8+y2j1MjO
+5rFk2O1pGIHp0jcpl8wX7pYuceqbGERq0Te68C3i3bMsmZXvf5NykbWY3n6bNbjfICmeWVm8ykvT
+98zdFcv8KQilH1TmWgx5N6r4vniVF6HvgOvaBC+J9X1ibZHDpGmbz549y7zOsiQepGyBpUVX96yP
+vj2P8+LfoJrzIxd9eybI0r7v2LcGl+hLN4eT8uzZs1IkHvMN1OPxOCch5lezlyz1bcm6mBd4u1qx
+5D5DQi9e4jm9Xn1S560wiWej7/DrXYzivu7HZLVZ+5cVyiSjSIknELfom+9j2az/x+Nt88aWGPki
+rFtM0uo7jbIlixvmfiQT+gypvCxHJQTZ4kTaZtcOMVVejAlPpe80FztN08LLyvY4QSvFhzJpKEDi
+MU9W0Mtner1eSKlGoyF/FNrFFNjy5PpOKe5J9y99pPKmdCseR9kuHVubrH/EDpa4S1d5afPfvV4v
+pn/S6/VcwxqfIkP12cUlR4GQbKPRkAdfuiraTqBcRD5Zrt1KUXk5+hZDaf3ofS2HbBKUN95lISvb
+V9wI1aV3CktIHG5DXlr0WZr9lq2Fr29nmYE0I0LjHYRXeYKYyg5CFPQY8k3vHMu0zw+Ox9sp3WLX
+jF7QVpIJ1vlyzSzJsx+yuEOr8vcn5RPqMuRyNzB5AJaYVPGl5UOn1GI+dxz4Elofgqym12wLjyXZ
+qbF+RZYhd4XOM3N/XoxL6WGyjDWy5scGXRSB76IR639L3ELWrnAzRuVj10dX8VJmh7Lxv2WVoySh
+h3vzxIslbmvExImTJZ6mfmsWIc0MWEqyjC+D5kNykrt3csq7T6NB4x2B5Zn4rufJVuLFm/CU8WXD
+V1WuL9OHj+ETiCQB4XfdLe8i5RSC98QVLPG08aU1HxSyp+/WiXy7BFIu64I4WwQZb2Qhcfn+Tlle
+SjbxZRyV+xbMA1dnGF+GI8QdeS858RIgeG7nFUmW8aX16yzlSAprPfNEnswrTICvfGXdz+gSoFzi
+y6BVONkSp5Wc4ssMz3Qp8/TC+Y5zXlwSR+hiochhKT7KLCK+9PW6JhJ9+hpIYlwz2S5DXu6kcCSl
+xZcThRqML6cK+T6/YDrFDcaXZ5yYazP9bkZOJu6yQkzGl2edmEqd9Ha9t/JSYHx51sl1bZyvp14k
+jC9JXLwmfGrdbgvGl2cascI5vkwj7wQFMav3dxhfnjWm32bLML4kKsP48iwiHknVaPiHT/lhplDM
+wvpBxpcknGnI6mJ8edaRQ8xsFSnXWZYxYnx5phEuSi+jPPEgXOFZkTC+PKN4nwpb1FOtZyQ/zQvj
+y9lCjjInnQiPiTXtXXxkKWB8SZCTxF3iLoVU9ltIHFMcX9J4h+P1UrzLuye9T+n76M2ySOufmI/b
+amDK4ksqOw7WJJhlwuHUaLJ0TPluvBzuFx/rZ+N/yypH2fFlASM4JcYpJULc1kdLiD3p0dWJqi3f
+LbHIMr6UHtnYkL8vJr4szDBMQzpwtvSkJzfIhnxSgXrNtlW/9U/BJjyX5yO7DsAld0H6+JIeSBpc
+xhuSLx5iyIPeWSfw/iq8/n3BEi/i+d8BryhvpKyBJEYWtxyuyHKUDblU0JFL7zVSLnEj9iRETpT4
+fHtKtny89wfMUMo25AKhziCNhvuKVnhmVVKYCefrDeKS+fvnvRT2FkzLkQhpMfHxRtYZp/WsoL7P
+HNJrpuOe+qiHcU4moZg/sEwozT8hpWC+j3cyVWWrQssjLwDab6Iyfyu7A4TkCPVNVIb6JipDfROV
+ob6JylDfRGWob6Iy1DdRGeqbqAz1TVSG+iYq8//KYF3BfiDNPQAAAABJRU5ErkJggg==
+
+------MultipartBoundary--0s3ViURcQpnE7iQjUpolnxEjBTN2SpA5Ag1BC0ZtVu----
+Content-Type: image/png
+Content-Transfer-Encoding: base64
+Content-Location: http://elm-chan.org/fsw/ff/res/layers1.png
+
+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
+N0n2f+lIve18uKrHAAAAAElFTkSuQmCC
+
+------MultipartBoundary--0s3ViURcQpnE7iQjUpolnxEjBTN2SpA5Ag1BC0ZtVu----
+Content-Type: image/png
+Content-Transfer-Encoding: base64
+Content-Location: http://elm-chan.org/fsw/ff/res/layers2.png
+
+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
+
+------MultipartBoundary--0s3ViURcQpnE7iQjUpolnxEjBTN2SpA5Ag1BC0ZtVu------
