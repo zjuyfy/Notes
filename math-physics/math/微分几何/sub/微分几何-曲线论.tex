@@ -1,0 +1,371 @@
+\documentclass[12pt, a4paper, oneside]{ctexbook}
+        \usepackage{amsmath, amsthm, amssymb, amsfonts, bm, graphicx, hyperref, mathrsfs}
+        \usepackage{tcolorbox}
+        \usepackage{booktabs,array}
+        \usepackage{tikz, xcolor, environ, xparse, zhnumber}
+        
+        %设置页眉
+        \usepackage{fancyhdr}
+        \pagestyle{fancy}
+        
+        
+        
+        
+        
+        
+        \usetikzlibrary{shapes, decorations}
+        
+        %定义颜色
+        \definecolor{dedcol}{RGB}{150,150,30}%推论环境的主色
+        \definecolor{theocol}{RGB}{40,150,30}%定力环境的主色
+        \definecolor{thrmcol}{RGB}{18,29,80}%默认定理等环境的背景色
+        \definecolor{thrmedge}{RGB}{12,133,211}%默认定理等环境的边界颜色
+        \definecolor{hyperlinkcol}{RGB}{32,112,102}%链接颜色
+        \definecolor{hyperfilecol}{RGB}{135,206,235}%文件颜色
+        \definecolor{hyperurlcol}{RGB}{3,168,158}%网址颜色
+        \definecolor{hypercitecol}{RGB}{150,140,130}%引用颜色
+        \definecolor{hlback}{RGB}{207,255,207}%高亮颜色
+        \definecolor{opcol}{RGB}{235,125,75}%op颜色
+        \definecolor{facecol}{RGB}{122,180,245}%封面颜色
+        \definecolor{pscol}{RGB}{44,80,99}%图案颜色
+        
+        %定义hyper的颜色
+        \hypersetup{
+          colorlinks=true,
+          linkcolor=hyperlinkcol,
+          filecolor=hyperfilecol,
+          urlcolor=hyperurlcol,
+          citecolor=hypercitecol,
+        }
+        
+        %定义字体
+        \setCJKfamilyfont{hwxk}{华文行楷}
+        \newcommand{\huawenxingkai}{\CJKfamily{hwxk}}
+        \setCJKfamilyfont{hwkt}{华文楷体}
+        \newcommand{\huawenkaiti}{\CJKfamily{hwkt}}
+        \setCJKfamilyfont{hwhp}{华文琥珀}
+        \newcommand{\huawenhupo}{\CJKfamily{hwhp}}
+        \setCJKfamilyfont{hwls}{华文隶书}
+        \newcommand{\huawenlishu}{\CJKfamily{hwls}}
+        \setmainfont{华文楷体}
+        
+        %定义高亮
+        \newtcbox{\hlbox}[1][red]{on line, arc = 2pt, outer arc = 0pt,
+          colback = hlback, colframe = #1!50!black,
+          boxsep = 0pt, left = 1pt, right = 1pt, top = 2pt, bottom = 2pt,
+          boxrule = 0pt, bottomrule = 1pt, toprule = 1pt}
+        \newcommand{\hl}[1]{\hlbox{#1}}
+        \newcommand{\optxt}[1]{\textcolor{opcol}{#1}}
+        
+        
+        
+        
+        
+        %定义公式环境
+        \newcommand{\newfancytheoremstyle}[5]{%
+          \tikzset{#1/.style={draw=#3, fill=#2,very thick,rectangle,
+              rounded corners, inner sep=10pt, inner ysep=20pt}}
+          \tikzset{#1title/.style={fill=#3, text=#2}}
+          \expandafter\def\csname #1headstyle\endcsname{#4}
+          \expandafter\def\csname #1bodystyle\endcsname{#5}
+        }
+        
+        \newfancytheoremstyle{fancythrm}{thrmcol!5}{thrmedge}{\huawenhupo}{\huawenxingkai}
+        
+        \makeatletter
+        \DeclareDocumentCommand{\newfancytheorem}{ O{\@empty} m m m O{fancythrm} }{
+          %% 定义计数器
+          \ifx#1\@empty
+            \newcounter{#2}
+          \else
+            \newcounter{#2}[#1]
+            \numberwithin{#2}{#1}
+          \fi
+          %% 定义 "newthem" 环境
+          \NewEnviron{#2}[1][{}]{%
+            \noindent\centering
+            \begin{tikzpicture}
+              \node[#5] (box){
+                \begin{minipage}{0.93\columnwidth}
+                  \csname #5bodystyle\endcsname \BODY~##1
+                \end{minipage}};
+              \node[#5title, right=10pt] at (box.north west){
+                {\csname #5headstyle\endcsname #3 \stepcounter{#2}\csname the#2\endcsname\; ##1}};
+              \node[#5title, rounded corners] at (box.east) {#4};
+            \end{tikzpicture}
+          }[\par\vspace{.5\baselineskip}]
+        }
+        
+        
+        \makeatother
+        
+         % 定义各个环境的的样式
+         % \newfancytheoremstyle{<name>}{inner color}{outer color}{head style}{body style}
+        \newfancytheoremstyle{fancytheo}{theocol!5}{theocol}{\huawenhupo}{\huawenxingkai}
+        \newfancytheoremstyle{fancyded}{dedcol!5}{dedcol}{\huawenhupo}{\huawenxingkai}
+        
+         % 定义各个新环境
+         % \newfancytheorem[<number within>]{<name>}{<head>}{<symbol>}[<style>]
+        \newfancytheorem[chapter]{define}{定义}{$\clubsuit$}
+        \newfancytheorem[chapter]{claim}{声明}{$\clubsuit$}
+        \newfancytheorem[section]{deduce}{推论}{$\heartsuit$}[fancyded]
+        \newfancytheorem[section]{theorem}{定理}{$\spadesuit$}[fancytheo]
+        
+        \title{{\Huge{标题}}}
+        \author{wave}
+        \date{\today}
+        \linespread{1.5}
+        
+        %设置章节标题样式\usepackage[english]{babel}
+        \usepackage{blindtext}
+        
+        \usepackage[sc,compact,explicit]{titlesec} % Titlesec for configuring the header
+        
+        
+        \usepackage{auto-pst-pdf} % Vectorian 装饰图案的 XeTeX 辅助 (见: https://tex.stackexchange.com/questions/253477/how-to-use-psvectorian-with-pdflatex)
+        \usepackage{psvectorian} % Vectorian 中的装饰图案
+        
+        \let\clipbox\relax % PSTricks 已经定义了 \clipbox, 所以要去掉
+        \usepackage{adjustbox} % 调整图案大小的
+        
+        \newcommand{\otherfancydraw}{% 定义图案
+        \begin{adjustbox}{max height=0.5\baselineskip}% 根据行距设定高度，自己定
+          \raisebox{-0.25\baselineskip}{
+          \rotatebox[origin=c]{0}{% 旋转，自己定
+            \psvectorian{84}% 图案，编号见 (http://melusine.eu.org/syracuse/pstricks/vectorian/psvectorian.pdf)
+          }}%
+        \end{adjustbox}%
+        }
+        
+        % 画一条中间为图案的线 (见: https://tex.stackexchange.com/questions/15119/draw-horizontal-line-left-and-right-of-some-text-a-single-line/15122#15122)
+        \newcommand*\ruleline[1]{\par\noindent\raisebox{.8ex}{\makebox[\linewidth]{\hrulefill\hspace{1ex}\raisebox{-.8ex}{#1}\hspace{1ex}\hrulefill}}}
+        
+        \titleformat% Formatting the header
+          {\chapter} % command
+          [block] % shape - Only managed to get it working with block
+          {\normalfont\huawenlishu\huge} % format - Change here as needed
+          {\centering 第\zhnum{chapter}章\\ \vspace{-0.6em}} % The Chapter N° label
+          {0pt} % sep
+          {\centering \ruleline{\otherfancydraw}\\ \vspace{-0.6em} % The horizontal rule
+          \centering #1} % And the actual title
+        
+          \titleformat{\section}[block]{\huawenlishu\Large}{\thesection}{0pt}{\centering #1}
+
+        %更改autoref的形式
+        \def\equationautorefname{式}
+        \def\footnoteautorefname{脚注}
+        \def\itemautorefname{项}
+        \def\figureautorefname{图}
+        \def\tableautorefname{表}
+        \def\appendixautorefname{附录}
+        \def\chapterautorefname{章}
+        \def\sectionautorefname{小节}
+        \def\theoremautorefname{定理}
+
+
+        \newcommand{\xkuo}[1]{\left(#1\right)}
+        \newcommand{\dkuo}[1]{\left\lbrace#1\right\rbrace}
+        \newcommand{\akuo}[1]{\left[#1\right]}
+        \newcommand{\jkuo}[1]{\left\langle#1\right\rangle}
+
+
+        %微积分
+        \newcommand{\pian}[2]{\frac{\partial #1}{\partial #2}}
+        \newcommand{\ppian}[2]{\frac{\partial^2 #1}{\partial #2^2}}
+        \newcommand{\dao}[2]{\frac{d#1}{d#2}}
+        \newcommand{\ddao}[2]{\frac{d^2#1}{d#2^2}}
+        \newcommand{\ji}[2]{\int_{#1}^{#2}}
+        \newcommand{\jji}[1]{\iint\limits_{#1}}
+
+        
+        
+
+        
+        \begin{document}
+          \renewcommand*{\psvectorianDefaultColor}{pscol}%设定图案颜色
+        
+        
+        
+            \newpage
+            \pagenumbering{alph}
+            \setcounter{page}{1}
+            \tableofcontents
+            \newpage
+            \setcounter{page}{1}
+            \pagenumbering{arabic}
+        
+    
+            \chapter{曲线论}
+            \section{正则参数曲线}
+            \begin{claim}
+                本章节用\(E^3\)表示三维欧式空间
+            \end{claim}
+        
+            \begin{define}
+                \(E^3\)中的一条\hl{曲线C}定义为从区间\([a,b]\)到\(E^3\)的连续映射，称为参数曲线。
+
+                若在\(E^3\)中取定一个正交标架\(\dkuo{O;\vec i,\vec j,\vec k}\)，则曲线C上任意点\(p(t),t\in[a,b]\)相当于向量\(\overrightarrow{Op(t)}\)，用\(\vec r(t)\)表示之
+            \end{define}
+
+            \begin{define}
+                若满足以下两个条件
+                \begin{enumerate}
+                    \item \(\vec r(t)\)至少是\(t\)的三次以上连续可微的向量函数
+                    \item \(\vec r'(t)\neq 0\)
+                \end{enumerate}，则称此曲线为\hl{正则参数曲线}
+
+                而以t增大的方向为\hl{正方向}
+            \end{define}
+
+
+            \begin{deduce}
+                正则曲线之间参数变换满足：
+                \begin{enumerate}
+                    \item \(t(u)\)是u的三次以上连续可微函数
+                    \item \(t'(u)\)处处不为零
+                \end{enumerate}
+
+                参数变换在\(r(t)\)和\(r(u)\)之间建立了等价关系。由全体等价的正则参数曲线构成的集合称为一条\hl{正则曲线}。
+
+                若\(t'(u)>0\)，则此映射保持曲线的定向不变。
+            \end{deduce}
+
+            \begin{deduce}
+                曲线还可以用隐函数表示：
+                \begin{equation}\label{eq:implicitfun}
+                    \begin{cases}
+                        f(x,y,z)=0\\
+                        g(x,y,z)=0
+                    \end{cases}
+                \end{equation}
+                当矩阵
+                \begin{equation}
+                    \begin{pmatrix}
+                        \pian fx&\pian fy &\pian fz\\
+                        \pian gx &\pian gy &\pian gz
+                    \end{pmatrix}
+                \end{equation}
+                的秩为2时，由隐函数定理，可以从方程组\autoref{eq:implicitfun}解出其中两个坐标作为另一个坐标的函数，以此得到参数方程。
+            \end{deduce}
+
+            \section{曲线的弧长}
+            \begin{define}
+                设\(\vec r=\vec r(t)\)为\(E^3\)中的一条正则曲线，则
+                \begin{equation}\label{eq:arclength}
+                    s=\ji ab|\vec r'(t)|dt
+                \end{equation}
+                是该曲线的一个不随直角坐标系选择而变化的量（因为\(|\vec r'|\)不变）。
+                
+                同时也和保持定向的参数无关：设\(t=t(u),\,t'(u)>0\)，则有
+                \begin{equation*}
+                    \ji ab\left|\dao{\vec r(t)}{t}\right| dt=\ji{u(a)}{u(b)}\left|\dao{\vec r(t(u))}{t}\right|\cdot \dao tu du =\ji{u(a)}{u(b)}\left|\dao{\vec r(t(u))}{u}\right| du
+                \end{equation*}
+                不变量s的几何意义是该曲线\hl{弧长}
+            \end{define}
+            \begin{define}
+                曲线可以用弧长\(s\)作为参数（参数变换由\autoref{eq:arclength}固定a且b换成t得到，是t的三次以上连续可微函数），称为\hl{弧长参数}
+            \end{define}
+
+            \begin{theorem}
+                设\(\vec r=\vec r(t)\)是\(E^3\)中一条正则曲线，则t是它的弧长参数的充分必要条件为\(|\vec r'(t)|=1\)
+            \end{theorem}
+
+            \section{曲线的曲率和Frenet标架}
+            \begin{claim}
+                命\(\vec\alpha(s)=\vec r'(s)\)，其中s为弧长参数。
+            \end{claim}
+            \begin{theorem}
+                \begin{equation}
+                    \lim_{\Delta s\rightarrow0}\left|\frac{\Delta\theta}{\Delta s}\right|=\left|\frac{d\vec \alpha}{ds}\right|
+                \end{equation}
+                其中\(\Delta \theta\)表示切向量\(\vec \alpha(s+\Delta s)\)与\(\vec \alpha (s)\)之间的夹角。
+            \end{theorem}
+
+            \begin{define}
+                设曲线方程为\(\vec r(s)\)，其中\(s\)是曲线的弧长参数，定义
+                \begin{equation}
+                    \kappa(s)=\left|\frac{d\vec \alpha}{ds}\right|=|\vec r''(s)|
+                \end{equation}
+                为曲线在\(s\)处的\hl{曲率}，并且称\(\dao{\vec \alpha}{s}\)为该曲线的曲率向量。
+            \end{define}
+            \begin{theorem}
+                曲线是一条直线当且仅当它的曲率\(\kappa(s)\equiv0\)
+            \end{theorem}
+            \begin{define}
+                若\(\kappa(s)\neq0\)，则向量\(\vec \alpha'(s)\)有确定的方向，此方向单位向量定义为曲线的\hl{主法向量}\(\vec \beta\)：
+                \begin{equation}
+                    \vec\alpha'(s)=\kappa(s)\vec \beta(s)
+                \end{equation}
+                单位切向量\(\vec \alpha(s)\)和单位主法向量\(\vec \beta(s)\)唯一地确定了最后一个单位向量\hl{次法向量}\(\vec \gamma\)：\begin{equation}
+                    \vec \gamma(s)=\vec \alpha(s)\times\vec\beta(s)
+                \end{equation}
+                这三个单位向量构成\hl{Frenet标架}
+
+                以\(\vec\alpha\)为法向量的平面称为\hl{法平面}，以\(\vec \beta\)为法向量的平面称为\hl{切平面}，以\(\vec \gamma\)为法向量的平面称为\hl{密切平面}
+            \end{define}
+
+            \section{曲线的挠率和Frenet公式}
+
+            \begin{define}
+                设\(\vec\beta(s)\)和\(\vec\gamma(s)\)分别是曲线的主法向量和次法向量，其中s为弧长参数，则定义\(\tau(s)=-\vec\gamma'(s)\cdot\vec\beta(s)\)为曲线的\hl{挠率}
+            \end{define}
+
+
+            \begin{theorem}
+                曲线是平面曲线当且仅当它的挠率为0
+            \end{theorem}
+
+            \begin{deduce}
+                \hl{Frenet公式：}
+                \label{fomular:Frenet}
+                \begin{equation}
+                    \left\{ 
+                    \begin{aligned}
+                        \vec r'(s)= &\vec\alpha(s),\\
+                        \vec \alpha'(s)= &&\kappa(s)\vec\beta(s),\\
+                        \vec \beta '(s)= &-\kappa(s)&&+\tau(s)\vec\gamma(s),\\
+                        \vec\gamma'(s)= &&-\tau(s)\vec\beta(s).
+                    \end{aligned}\right.
+                \end{equation}
+                或者写成矩阵形式：
+                \begin{equation}
+                    \begin{pmatrix}
+                        \vec \alpha'(s)\\
+                        \vec \beta'(s)\\
+                        \vec \gamma'(s)
+                    \end{pmatrix}=\begin{pmatrix}
+                        0&\kappa(s)&0\\
+                        -\kappa(s)&0&\tau(s)\\
+                        0&-\tau(s)&0
+                    \end{pmatrix}\begin{pmatrix}
+                        \vec \alpha(s)\\
+                        \vec\beta(s)\\
+                        \vec\gamma(s)
+                    \end{pmatrix}
+                \end{equation}
+            \end{deduce}
+
+            \begin{theorem}
+                利用\href{fomular:Frenet}{Frenet公式}可以证明，若曲线的曲率\(\kappa(s)\)和挠率\(\tau(s)\)都不为零，s是弧长参数，那么该曲线落在一个球面上仅当他的曲率和挠率满足
+                \begin{equation}
+                    \xkuo{\frac{1}{\kappa(s)}}^2+\xkuo{\frac1{\tau(s)}\dao{}{s}\xkuo{\frac{1}{\kappa(s)}}}^2=\text{常数}
+                \end{equation}
+            \end{theorem}
+
+
+            \begin{deduce}
+                若t不是曲线的弧长参数，则
+            \end{deduce}
+
+            \begin{theorem}
+                
+            \end{theorem}
+
+            \section{曲线论基本定理}
+
+
+
+
+            
+        
+        \end{document}

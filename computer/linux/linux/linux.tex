@@ -1,0 +1,269 @@
+\documentclass[12pt, a4paper, oneside]{ctexbook}
+        \usepackage{amsmath, amsthm, amssymb, amsfonts, bm, graphicx, hyperref, mathrsfs}
+        \usepackage{tcolorbox}
+        \usepackage{tikz, xcolor, environ, xparse, zhnumber}
+        \usepackage{array}
+        \usepackage{booktabs}
+        
+        %设置页眉
+        \usepackage{fancyhdr}
+        \pagestyle{fancy}
+        
+        
+        
+        
+        
+        
+        \usetikzlibrary{shapes, decorations}
+        
+        %定义颜色
+        \definecolor{dedcol}{RGB}{150,150,30}%推论环境的主色
+        \definecolor{theocol}{RGB}{40,150,30}%定力环境的主色
+        \definecolor{thrmcol}{RGB}{18,29,80}%默认定理等环境的背景色
+        \definecolor{thrmedge}{RGB}{12,133,211}%默认定理等环境的边界颜色
+        \definecolor{hyperlinkcol}{RGB}{32,112,102}%链接颜色
+        \definecolor{hyperfilecol}{RGB}{135,206,235}%文件颜色
+        \definecolor{hyperurlcol}{RGB}{3,168,158}%网址颜色
+        \definecolor{hypercitecol}{RGB}{150,140,130}%引用颜色
+        \definecolor{hlback}{RGB}{207,255,207}%高亮颜色
+        \definecolor{opcol}{RGB}{235,125,75}%op颜色
+        \definecolor{facecol}{RGB}{122,180,245}%封面颜色
+        \definecolor{pscol}{RGB}{44,80,99}%图案颜色
+        
+        %定义hyper的颜色
+        \hypersetup{
+          colorlinks=true,
+          linkcolor=hyperlinkcol,
+          filecolor=hyperfilecol,
+          urlcolor=hyperurlcol,
+          citecolor=hypercitecol,
+        }
+        
+        %定义字体
+        \setCJKfamilyfont{hwxk}{华文行楷}
+        \newcommand{\huawenxingkai}{\CJKfamily{hwxk}}
+        \setCJKfamilyfont{hwkt}{华文楷体}
+        \newcommand{\huawenkaiti}{\CJKfamily{hwkt}}
+        \setCJKfamilyfont{hwhp}{华文琥珀}
+        \newcommand{\huawenhupo}{\CJKfamily{hwhp}}
+        \setCJKfamilyfont{hwls}{华文隶书}
+        \newcommand{\huawenlishu}{\CJKfamily{hwls}}
+        \setmainfont{华文楷体}
+        
+        %定义高亮
+        \newtcbox{\hlbox}[1][red]{on line, arc = 2pt, outer arc = 0pt,
+          colback = hlback, colframe = #1!50!black,
+          boxsep = 0pt, left = 1pt, right = 1pt, top = 2pt, bottom = 2pt,
+          boxrule = 0pt, bottomrule = 1pt, toprule = 1pt}
+        \newcommand{\hl}[1]{\hlbox{#1}}
+        \newcommand{\optxt}[1]{\textcolor{opcol}{#1}}
+        
+        
+        
+        
+        
+        %定义公式环境
+        \newcommand{\newfancytheoremstyle}[5]{%
+          \tikzset{#1/.style={draw=#3, fill=#2,very thick,rectangle,
+              rounded corners, inner sep=10pt, inner ysep=20pt}}
+          \tikzset{#1title/.style={fill=#3, text=#2}}
+          \expandafter\def\csname #1headstyle\endcsname{#4}
+          \expandafter\def\csname #1bodystyle\endcsname{#5}
+        }
+        
+        \newfancytheoremstyle{fancythrm}{thrmcol!5}{thrmedge}{\huawenhupo}{\huawenxingkai}
+        
+        \makeatletter
+        \DeclareDocumentCommand{\newfancytheorem}{ O{\@empty} m m m O{fancythrm} }{
+          %% 定义计数器
+          \ifx#1\@empty
+            \newcounter{#2}
+          \else
+            \newcounter{#2}[#1]
+            \numberwithin{#2}{#1}
+          \fi
+          %% 定义 "newthem" 环境
+          \NewEnviron{#2}[1][{}]{%
+            \noindent\centering
+            \begin{tikzpicture}
+              \node[#5] (box){
+                \begin{minipage}{0.93\columnwidth}
+                  \csname #5bodystyle\endcsname \BODY~##1
+                \end{minipage}};
+              \node[#5title, right=10pt] at (box.north west){
+                {\csname #5headstyle\endcsname #3 \stepcounter{#2}\csname the#2\endcsname\; ##1}};
+              \node[#5title, rounded corners] at (box.east) {#4};
+            \end{tikzpicture}
+          }[\par\vspace{.5\baselineskip}]
+        }
+        
+        
+        \makeatother
+        
+         % 定义各个环境的的样式
+         % \newfancytheoremstyle{<name>}{inner color}{outer color}{head style}{body style}
+        \newfancytheoremstyle{fancytheo}{theocol!5}{theocol}{\huawenhupo}{\huawenxingkai}
+        \newfancytheoremstyle{fancyded}{dedcol!5}{dedcol}{\huawenhupo}{\huawenxingkai}
+        
+         % 定义各个新环境
+         % \newfancytheorem[<number within>]{<name>}{<head>}{<symbol>}[<style>]
+        \newfancytheorem[chapter]{define}{定义}{$\clubsuit$}
+        \newfancytheorem[section]{deduce}{推论}{$\heartsuit$}[fancyded]
+        \newfancytheorem[section]{theorem}{定理}{$\spadesuit$}[fancytheo]
+        
+        \title{{\Huge{linux}}}
+        \author{wave}
+        \date{\today}
+        \linespread{1.5}
+        
+        %设置章节标题样式\usepackage[english]{babel}
+        \usepackage{blindtext}
+        
+        \usepackage[sc,compact,explicit]{titlesec} % Titlesec for configuring the header
+        
+        
+        \usepackage{auto-pst-pdf} % Vectorian 装饰图案的 XeTeX 辅助 (见: https://tex.stackexchange.com/questions/253477/how-to-use-psvectorian-with-pdflatex)
+        \usepackage{psvectorian} % Vectorian 中的装饰图案
+        
+        \let\clipbox\relax % PSTricks 已经定义了 \clipbox, 所以要去掉
+        \usepackage{adjustbox} % 调整图案大小的
+        
+        \newcommand{\otherfancydraw}{% 定义图案
+        \begin{adjustbox}{max height=0.5\baselineskip}% 根据行距设定高度，自己定
+          \raisebox{-0.25\baselineskip}{
+          \rotatebox[origin=c]{0}{% 旋转，自己定
+            \psvectorian{84}% 图案，编号见 (http://melusine.eu.org/syracuse/pstricks/vectorian/psvectorian.pdf)
+          }}%
+        \end{adjustbox}%
+        }
+        
+        % 画一条中间为图案的线 (见: https://tex.stackexchange.com/questions/15119/draw-horizontal-line-left-and-right-of-some-text-a-single-line/15122#15122)
+        \newcommand*\ruleline[1]{\par\noindent\raisebox{.8ex}{\makebox[\linewidth]{\hrulefill\hspace{1ex}\raisebox{-.8ex}{#1}\hspace{1ex}\hrulefill}}}
+        
+        \titleformat% Formatting the header
+          {\chapter} % command
+          [block] % shape - Only managed to get it working with block
+          {\normalfont\huawenlishu\huge} % format - Change here as needed
+          {\centering 第\zhnum{chapter}章\\ \vspace{-0.6em}} % The Chapter N° label
+          {0pt} % sep
+          {\centering \ruleline{\otherfancydraw}\\ \vspace{-0.6em} % The horizontal rule
+          \centering #1} % And the actual title
+        
+          \titleformat{\section}[block]{\huawenlishu\Large}{\thesection}{0pt}{\centering #1}
+
+        %更改autoref的形式
+        \def\equationautorefname{式}
+        \def\footnoteautorefname{脚注}
+        \def\itemautorefname{项}
+        \def\figureautorefname{图}
+        \def\tableautorefname{表}
+        \def\appendixautorefname{附录}
+        \def\chapterautorefname{章}
+        \def\sectionautorefname{小节}
+        \def\theoremautorefname{定理}
+
+        \newcommand{\tableitem}[3]{#1&#2&#3。\\\midrule}
+
+        
+
+        
+        \begin{document}
+          \renewcommand*{\psvectorianDefaultColor}{pscol}%设定图案颜色
+        
+          %
+            \maketitle
+        
+            \pagenumbering{roman}
+            \setcounter{page}{1}
+        
+            \begin{center}
+                \Huge\huawenlishu{前言}
+            \end{center}~\
+        
+            这是笔记的前言部分.
+            ~\\
+            \begin{flushright}
+                \begin{tabular}{c}
+                    何逸阳 \\
+                    \today
+                \end{tabular}
+            \end{flushright}
+            \begin{center}
+                \Huge\huawenlishu{符号说明}
+            \end{center}~\
+        
+        
+            \newpage
+            \pagenumbering{alph}
+            \setcounter{page}{1}
+            \tableofcontents
+            \newpage
+            \setcounter{page}{1}
+            \pagenumbering{arabic}
+        
+            \chapter{linux基本命令}
+        
+            \section{文件操作}
+            \begin{table}[!ht]
+                \centering
+                \caption{文件操作}
+                \begin{tabular}{m{0.1\textwidth}<{\centering}|m{0.1\textwidth}<{\centering}|m{0.7\textwidth}<{\raggedright}}
+                    \toprule[2pt]
+                    {\bf 命令}&{\bf 参数}&{\bf 意义}\\
+                    \toprule[1pt]
+                    du&&查看所有文件夹占用空间大小，以KB显示。\\\midrule
+                    &-s&查看\hl{指定}文件夹占用空间大小。\\\midrule
+                    &-m&以\hl{MB}显示。\\\midrule
+                    \tableitem{cp}{}{拷贝}
+                    \tableitem{}{-r}{递归目录}
+                    \tableitem{mkdir}{}{创建目录}
+                    \tableitem{}{-p}{如果已存在则不报错，如果需要则创建父目录}
+                    \tableitem{chmod}{}{给文件权限}
+                    \tableitem{}{-}{}
+                    \bottomrule[2pt]
+                \end{tabular}
+            \end{table}
+
+            \section{硬件设备}
+            \begin{table}[!ht]
+                \centering
+                \caption{文件操作}
+                \begin{tabular}{m{0.1\textwidth}<{\centering}|m{0.2\textwidth}<{\centering}|m{0.7\textwidth}<{\raggedright}}
+                    \toprule[2pt]
+                    {\bf 命令}&{\bf 参数}&{\bf 意义}\\
+                    \toprule[1pt]
+                    fdisk&</dev/sd*>&给磁盘分区。\\\midrule
+                    mkfs.vfat&&格式化fat分区。\\\midrule
+                    &-F&指定FAT大小。\\\midrule
+                    &-n&指定分区名。\\\midrule
+                    \tableitem{mount}{}{挂载}
+                    \bottomrule[2pt]
+                \end{tabular}
+            \end{table}
+            \section{网络}
+            \begin{table}[!ht]
+                \centering
+                \caption{文件操作}
+                \begin{tabular}{m{0.1\textwidth}<{\centering}|m{0.1\textwidth}<{\centering}|m{0.7\textwidth}<{\raggedright}}
+                  \toprule[2pt]
+                  {\bf 命令}&{\bf 参数}&{\bf 意义}\\
+                  \toprule[1pt]
+                  \tableitem{ifconfig}{}{查看IP地址等}
+                  scp&&远程拷贝，利用ssh。\\
+                  \tableitem{}{}{例：scp linux-app root@192.168.2.100:/dev/temp/}
+                  \bottomrule[2pt]
+                \end{tabular}
+              \end{table}
+              \subsection{NFS网络共享文件系统}
+
+              \hl{安装}
+              sudo apt-get install nfs-kernel-server\\
+              \hl{配置NFS}
+              sudo vi /etc/exports\\
+              \hl{设置NFS目录}
+              在打开的文件末尾添加<目录路径> *(rw,sync,no\_root\_squash)\\
+              \hl{重启NFS}sudo service nfs-kernel-server restart\\
+              \hl{在从机挂载文件系统}mount -t nfs -o nolock <主机ip>:<主机目录> <从机目录>
+            
+        
+        \end{document}

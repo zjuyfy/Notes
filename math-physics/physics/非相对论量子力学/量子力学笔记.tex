@@ -198,6 +198,7 @@
         \newcommand{\ege}{\frac{\sqrt2}{2}}
         \newcommand{\e}[1]{\times10^{#1}}
         \newcommand{\ti}[1]{\textbf{#1}}
+        \newcommand{\jdz}[1]{\left|#1\right|}
 
 
 
@@ -445,13 +446,241 @@
             \end{assmp}
             \section{周期微扰作用下的跃迁}
             朗道P140
+            \begin{assmp}
+              设在t=0时刻，系统处于离散谱的第i个定态，且周期微扰的
+            \end{assmp}
             \section{连续谱中的跃迁}
             \begin{assmp}
-              在初始时刻，系统处于某一为受扰的态，而后收到恒定微扰，求跃迁到具有同一能量的另一态的概率。
+              
             \end{assmp}
+
+            \chapter{自旋}
+            \begin{define}
+              由于粒子内部确定的运动，粒子具有一定的量子化的角动量\(L\)，可以有\(2L+1\)种空间取向。因此每个基本粒子被赋予一个与其空间运动无关的\hl{内禀}角动量，称为\hl{自旋}。
+            \end{define}
+
+            \begin{deduce}
+              一个粒子的\hl{总角动量}等于其轨道角动量\(\boldsymbol{j}=\boldsymbol{l}+\boldsymbol{s}\)，其加法与矢量加法模型一致。它满足之前推导得到的所有两个角动量耦合的公式。
+            \end{deduce}
+
+            \section{自旋算符}
+            之后的推导将不包含任何坐标，只包含自旋变量\(\sigma\)。
+            \begin{define}
+              作用在\(\sigma\)的函数上的算符可以表成一个\((2s+1)\)行\((2s+1)\)列的矩阵。自旋算符本身的矩阵元素与之前求得的矩阵\(\hat L_x,\hat L_y,\hat L_z\)
+
+              在自旋为\(\frac12\)的特殊情形下，矩阵是\(2\times2\)的：
+              \begin{equation}\label{eqn:spinOperator}
+                \hat {\boldsymbol{s}}=\frac12\hat{\boldsymbol{\sigma}}
+              \end{equation}\label{eqn:pauliMatrix}
+              其中\(\hat{\boldsymbol{\sigma}}\)为\hl{泡利矩阵}：
+              \begin{equation}
+                \hat{\sigma}_x=\begin{pmatrix}
+                  0&1\\1&0
+                \end{pmatrix},\,\hat{\sigma}_y=\begin{pmatrix}
+                  0&-i\\i&0
+                \end{pmatrix},\,\hat\sigma_z=\begin{pmatrix}
+                  1&0\\0&-1
+                \end{pmatrix}
+              \end{equation}
+            \end{define}
+            \begin{attr}
+              泡利矩阵相乘：
+              \begin{equation}\label{eqn:pauliMatrix-times}
+                \hat\sigma_i\hat\sigma_j=\delta_{ij}+i\varepsilon_{ijk}\sigma_k
+              \end{equation}
+              由此可得\begin{equation}\label{eqn:pauliMatrix-anticommute}
+                \hat\sigma_i\hat\sigma_k+\hat\sigma_k\hat\sigma_i=2\delta_{ik}
+              \end{equation}
+            \end{attr}
+            \begin{attr}
+              泡利矢量的性质：
+              \begin{equation}\label{eqn:pauliVector-times}
+                \hat{\boldsymbol{\sigma}}^2=3,\quad(\hat{\boldsymbol{\sigma}}\cdot\hat{\boldsymbol{a}})(\hat{\boldsymbol{\sigma}}\cdot\hat{\boldsymbol{b}})=\boldsymbol{a}\cdot\boldsymbol{b}+i\hat{\boldsymbol{\sigma}}\cdot\boldsymbol{a}\times\boldsymbol{b}
+              \end{equation}
+            \end{attr}
+            \begin{deduce}
+              假定绕z轴转动无限小角度\(\delta\phi\)，这种转动的算符，可通过角动量算符表成\(1+i\delta\phi\delta\cdot\hat s_z\)，于是有\(d\Psi/d\phi=i\sigma\Psi(\sigma)\)，所以转过一个有限角\(\phi\)后，有 
+              \begin{equation}
+                \Psi'(\sigma)=\Psi(\sigma)e^{i\sigma\phi}
+              \end{equation}
+            \end{deduce}
+
+            \section{旋量}
+            \begin{deduce}
+              自旋为0时，波函数只有一个分量\(\psi(0)\)，即标量。
+
+              自旋为1/2时，波函数有两个分量\(\psi=\begin{pmatrix}
+                \psi^1\\\psi^2
+              \end{pmatrix}\)，称为一个\hl{旋量}
+              
+            \end{deduce}
+            \begin{deduce}
+              
+              在坐标系的转动中，旋量做线性变换：
+              \begin{equation}
+                \psi'=\hat U\psi
+              \end{equation}
+              考虑粒子概率\(\psi^1\phi^{1*}-\psi^2\phi^{2*}\)，其应在变换下不变，于是我们有
+              \begin{equation}
+                \hat U^+=\hat U^{-1}
+              \end{equation}
+            \end{deduce}
+
+            \chapter{准经典情形}
+            \section{准经典下的波函数}
+            \begin{deduce}
+              设波函数
+              \begin{equation}\label{eqn:wavefun-sigma}
+                \psi=e^{\xkuo{i/\hslash}\sigma}
+              \end{equation}
+              代入薛定谔方程可得
+              \begin{equation}\label{eqn:sigma}
+                \sum_a\frac{1}{2m_a}\xkuo{\nabla_a\sigma}^2-\sum_a\frac{i\hslash}{2m_a}\Delta_a\sigma=E-U
+              \end{equation}
+              在准经典近似下展开，\(\sigma=\sigma_0+\xkuo{\frac\hslash i}\sigma_1+\xkuo{\frac\hslash i}^2\sigma_2+\cdots\)
+              
+              一维情况下，\autoref{eqn:sigma}变为
+              \begin{equation}
+                \frac1{2m}\sigma'^2-\frac{i\hslash}{2m}\sigma''=E-U(x)
+              \end{equation}
+              零级近似下，\(\sigma=\sigma_0\)代入并忽略\(\hslash\)项得 
+              \begin{equation}\label{eqn:sigma0}
+                \frac{1}{2m}\sigma'^2_0=E-U(x)
+              \end{equation}
+              由此可见\(\sigma'_0\)刚好是经典动量。
+            \end{deduce}
+            \begin{define}
+              \autoref{eqn:sigma0}成立的条件是第二项远小于第一项（由于是微分方程，所以这个条件不充分）：
+              \begin{equation}\label{eqn:quasi-classical-criterion}
+                \left|\dao{}{x}\xkuo{\frac{\hslash}{\sigma_0'}}\right|\ll1
+              \end{equation}
+              由于此近似下\(\sigma'_0=p\)，上式可化为
+              \begin{equation}
+                \left|\dao{}{x}\xkuo{\frac{\lambda}{2\pi}}\right|\ll1
+              \end{equation}
+              此即\hl{准经典条件}
+            \end{define}
+            \begin{deduce}
+              注意到\(\dao px=\frac{mF}p\), 代入\autoref{eqn:quasi-classical-criterion}可以得到
+              \begin{equation}
+                \frac{m\hslash|F|}{p^3}\ll1
+              \end{equation}
+              其中\(F=-dU/dx\)为粒子在外场所受经典力。
+
+              由此可知，当粒子位于动量太小（即速度接近于0，称为\hl{回点\label{concept:backpoint}}）的点时，准经典近似就不适用了。
+            \end{deduce}
+            \begin{deduce}
+              将\autoref{eqn:sigma}保留到\(\hslash\)的一阶项并代入零阶的\(\sigma_0\)可以得到
+              \begin{equation}
+                \sigma_1=-\frac12\ln p
+              \end{equation}
+            \end{deduce}
+            \begin{deduce}
+              将\(\sigma_0\)和\(\sigma_1\)代入\autoref{eqn:wavefun-sigma}中得到
+              \begin{equation}
+                \psi=\frac{C_1}{\sqrt p}\exp\xkuo{\frac i\hslash\int pdx}+\frac{C_2}{\sqrt p}\exp\xkuo{-\frac i\hslash\int pdx}
+              \end{equation}
+            \end{deduce}
+            \section{准经典下的边界条件}
+            \begin{deduce}
+              设\(x=a\)为一个回点，满足\(U(a)=E\)，其右侧均有\(U(x)>E\)，为经典禁区，则离回点足够远处的两边有
+              \begin{equation}
+                \begin{cases}
+                  \psi=\frac{C}{w\sqrt{|p|}}\exp\xkuo{-\frac1\hslash\jdz{\ji{a}{x}pdx}}, &x>a\\
+                  \psi=\frac{C_1}{\sqrt p}\exp\xkuo{\frac i\hslash\ji ax pdx}+\frac{C_2}{\sqrt p}\exp\xkuo{-\frac i\hslash\ji ax pdx},&x<a
+                \end{cases}
+              \end{equation}
+              x在a附近的行为就无法用准经典近似，因此需要考虑薛定谔方程的精确解。对于小量\(|x-a|\)，一阶展开有：
+              \begin{equation}
+                E-U(x)\approx F_0(x-a),\, F_0=-\left.\dao Ux\right|_{x=a}
+              \end{equation}
+              即线性势的精确解，通过渐进式算得常数之间的关系
+              
+            \end{deduce}
+
+            \begin{deduce}
+              对应规则可以写为
+              \begin{equation}\label{eqn:edge}
+                \begin{cases}
+                  U(x)>E:\quad \frac{C}{2\sqrt{|p|}}\exp\dkuo{-\frac1\hslash\jdz{\ji ax pdx}}\\
+                  U(x)<E:\quad \frac{C}{\sqrt{p}}\cos\dkuo{\frac1\hslash\jdz{\ji ax pdx}-\frac\pi4}
+                \end{cases}
+              \end{equation}
+            \end{deduce}
+
+            \section{波尔-索末菲量子化规则}
+            \begin{deduce}
+              考虑一个一维势阱，其经典通区为\(b\leqslant x\leqslant a\)介于两个回点之间。通过\autoref{eqn:edge}可以得到两个式子。为了使这两个式子兼容，它们的相位差别必须等于一个整数，于是我们得到
+              \begin{equation}\label{eqn:bore-somerfeld}
+                \frac{1}{2\pi\hslash}\oint pdx=n+\frac12
+              \end{equation}
+              将\hl{浸渐不变量}\(I=\frac1{2\pi}\oint p dx\)代入，上式可写成
+              \begin{equation}
+                I(E)=\hslash\xkuo{n+\frac12}
+              \end{equation}
+              又因为积分\(\oint pdx\)等于经典粒子相空间中闭合相迹所包围的面积，由上式它等于\(2\pi\hslash\xkuo{n+\frac12}\)。公式中可以看出能量不高于此相迹的量子态数n就等于面积除以\(2\pi\hslash\)，于是相空间中单位面积所包含的不高于相迹能量的量子数为：
+              \begin{equation}
+                n(E)=\frac{\Delta p\Delta x}{2\pi\hslash}
+              \end{equation}
+            \end{deduce}
+            \begin{deduce}
+              在准经典中，n很大，\autoref{eqn:edge}中的余弦函数是剧变的，所以可以把对余弦函数的平方的积分改成它的平均值的平方，同时可以把积分限制在\([a,b]\)，因此归一化得到
+              \begin{equation*}
+                \int|\psi|^2dx\approx\frac12C^2\ji ba\frac{dx}{p(x)}=\frac{\pi C^2}{2m\omega}=1
+              \end{equation*}
+              其中\(\omega=2\pi/T\)，为经典粒子周期（注意\(p(x)=mdx/dt\)），于是归一化的波函数为
+              \begin{equation}
+                \psi=\sqrt{\frac{2\omega}{\pi v}}\cos\xkuo{\frac1\hslash\ji bx pdx-\frac14\pi}
+              \end{equation}
+            \end{deduce}
+            \begin{deduce}
+              对于相邻两个能级之间的间距，可以从\autoref{eqn:bore-somerfeld}出发。准经典情况下，由于能量差\(\Delta E\)比能量本身小得多，因此可以得到
+              \begin{equation*}
+                \oint \pian pE\Delta Edx=2\pi\hslash
+              \end{equation*}
+              同时由于\(\pian Ep=v\)，因此有
+              \begin{equation*}
+                \oint \pian pEdx=\oint \frac{dx}{v}=T
+              \end{equation*}
+              于是我们得到
+              \begin{equation}\label{eqn:sc-DeltaE}
+                \Delta E=\hslash\omega
+              \end{equation}
+            \end{deduce}
+            \begin{deduce}
+              对于任意物理量在波包的一组基矢\(\Psi=\sum\limits_{n}a_n\Psi_n\)中的矩阵元，其经典量应当对应于其平均值： 
+              \begin{equation*}
+                \bar f=\int\Psi^*\hat f\Psi dx=\sum_n\sum_ma^*_ma_nf_{mn}e^{i\omega_{mn}t}
+              \end{equation*}
+              将m,n的求和用n和\(s=m-n\)来替代，我们得到
+              \begin{equation*}
+                \bar f=\sum_n\sum_s a^*_{n+s}a_nf_{n+s,n}e^{is\omega t}
+              \end{equation*}
+            \end{deduce}
+
+            \section{有心力场中的准经典运动}
+            \begin{deduce}
+              对于球系的微分方程，考虑角部。当m=0时，其正比于勒让德多项式\(P_l(\cos \theta)\)，满足勒让德方程。做替换\(P_l(\cos\theta)=\frac{\chi(\theta)}{\sqrt{\sin\theta}}\)，方程化为
+              \begin{equation}
+                \chi''+\akuo{\xkuo{l+\frac12}^2+\frac{1}{4\sin^2\theta}}\chi=0
+              \end{equation}
+              这与一维薛定谔方程具有相同形式，其德布罗意波长为
+              \begin{equation*}
+                \lambda = 2\pi\akuo{\xkuo{l+\frac12}^2+\frac1{4\sin^2\theta}}^{-\frac12}
+              \end{equation*}
+              根据准经典条件\autoref{eqn:quasi-classical-criterion}，得到下列不等式：
+              \begin{equation}
+                \theta l>>1,\,(\pi-\theta)l>>1
+              \end{equation}
+              此时方括号中的\(\frac1{4\sin^2\theta}\)项可以略去，我们得到二阶常微分方程。
+            \end{deduce}
+
             
 
 
-        
+            
+
+
+
         
         \end{document}
